@@ -6,30 +6,27 @@
 }
 .container {
   margin: auto;
-  max-width: 1240px;
+  max-width: 1280px;
   display: flex;
-  align-items: center;  
+  align-items: center;
+  justify-content: space-between;  
 }
 
-.button_constructor {
-  margin: 0;
-  border: 0;
-  display: flex;
-  background-color: transparent;
-  cursor: pointer;
-  color: #f2f2f3;
-}
-
-.button_order {
+.button {
   margin: 0;
   border: 0;
   display: flex;
   background-color: transparent;
   cursor: pointer;
   color: #8585ad;
+  transition: opacity 0.2s linear;
 }
 
-.button_profile {
-  composes: button_order;
-  margin-left: auto;
+.button:hover {
+  opacity: 0.8;
+}
+
+.button_active {
+  composes: button;
+  color: #f2f2f3;
 }
