@@ -1,0 +1,11 @@
+.container {
+  max-width: 600px;
+}
+
+.container_ingredients {
+  composes: container;
+}
+
+.container_items {
+  composes: container;
+}

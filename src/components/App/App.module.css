@@ -1,4 +1,6 @@
 .main {
-  max-width: 1240px;
   margin: auto;
+  max-width: 1240px;
+  display: flex;
+  justify-content: space-between;
 }

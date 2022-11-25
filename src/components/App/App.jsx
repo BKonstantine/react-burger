@@ -6,9 +6,9 @@ export default function App() {
   return (
     <>
       <AppHeader />
-      {/* <main className={style.main}>
+      <main className={style.main}>
         <BurgerIngredients />
-      </main> */}
+      </main>
     </>
   );
 }
