@@ -1,31 +1,47 @@
 import {
   Logo,
   BurgerIcon,
+  Button,
   ListIcon,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./AppHeader.module.css";
-import CustomButton from "../CustomButton/CustomButton";
 
 export default function AppHeader() {
   return (
     <header className={`${style.header} pt-4 pb-4`}>
       <div className={style.container}>
         <div style={{ display: "flex", gap: "8px" }}>
-          <CustomButton style={style.button_active}>
+          <Button
+            htmlType="button"
+            type="secondary"
+            size="medium"
+            extraClass={`${style.button_active} pt-4 pb-4 pl-5 pr-5`}
+          >
             <BurgerIcon type="primary" />
-            <p className="text text_type_main-default pl-2">Конструктор</p>
-          </CustomButton>
-          <CustomButton style={style.button}>
+            Конструктор
+          </Button>
+          <Button
+            htmlType="button"
+            type="secondary"
+            size="medium"
+            extraClass={`${style.button} pt-4 pb-4 pl-5 pr-5`}
+          >
             <ListIcon type="secondary" />
-            <p className="text text_type_main-default pl-2">Лента заказов</p>
-          </CustomButton>
+            Лента заказов
+          </Button>
         </div>
         <Logo />
-        <CustomButton style={style.button}>
+        <Button
+          htmlType="button"
+          type="secondary"
+          size="medium"
+          style={{ justifySelf: "end" }}
+          extraClass={`${style.button} pt-4 pb-4 pl-5 pr-5`}          
+        >
           <ProfileIcon type="secondary" />
-          <p className="text text_type_main-default pl-2">Личный кабинет</p>
-        </CustomButton>
+          Личный кабинет
+        </Button>
       </div>
     </header>
   );

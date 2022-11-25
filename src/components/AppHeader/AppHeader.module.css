@@ -4,29 +4,29 @@
     0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04),
     0px 0px 1px rgba(0, 0, 0, 0.04);
 }
+
 .container {
   margin: auto;
   max-width: 1280px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7%;
   align-items: center;
-  justify-content: space-between;  
+  justify-items: center;
 }
 
 .button {
   margin: 0;
   border: 0;
-  display: flex;
+  display: flex; 
+  flex: none;
+  gap: 8px;
   background-color: transparent;
   cursor: pointer;
   color: #8585ad;
-  transition: opacity 0.2s linear;
-}
-
-.button:hover {
-  opacity: 0.8;
 }
 
 .button_active {
-  composes: button;
+  composes: button;  
   color: #f2f2f3;
 }
