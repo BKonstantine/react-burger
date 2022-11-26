@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../Card/Card";
-import { data } from "../utils/data";
+import { data } from "../../utils/data";
 import style from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
