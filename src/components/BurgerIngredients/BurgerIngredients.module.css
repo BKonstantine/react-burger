@@ -4,10 +4,26 @@
 
 .container_ingredients {
   composes: container;
+  overflow-y: scroll;
+  height: calc(100vh - 284px);  
+}
+
+.container_ingredients::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container_ingredients::-webkit-scrollbar-track {
+  background-color: #2f2f37;
+}
+
+.container_ingredients::-webkit-scrollbar-thumb {
+  height: 492px;
+  background: #8585ad;
+  border: 3px solid #8585ad;
 }
 
 .container_items {
-  composes: container;
+  composes: container;  
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
