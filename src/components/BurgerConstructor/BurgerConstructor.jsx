@@ -9,19 +9,19 @@ import { data } from "../../utils/data";
 
 export default function BurgerConstructor(props) {
   function filterData(data, type) {}
+  
   return (
-    <div className={`${style.container} pt-25`}>
-      <div
-        style={{ display: "flex", flexDirection: "column", gap: "10px" }}        
-      >
+    <div className={`${style.container} pt-25 pl-4`}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <ConstructorElement
           type="top"
           isLocked={true}
           text="Краторная булка N-200i (верх)"
-          price={200}          
+          price={200}
+          extraClass="ml-8"
           /* thumbnail={img} */
         />
-        <div className={style.container_constructor}>
+        <div className={`${style.container_constructor} pr-4`}>
           <div className={style.element}>
             <DragIcon />
             <ConstructorElement
@@ -35,7 +35,8 @@ export default function BurgerConstructor(props) {
           type="bottom"
           isLocked={true}
           text="Краторная булка N-200i (низ)"
-          price={200}          
+          price={200}
+          extraClass="ml-8"
           /* thumbnail={img} */
         />
       </div>
