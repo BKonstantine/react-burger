@@ -4,13 +4,16 @@
 
 .element {
   display: flex;
-  gap: 13px;
+  gap: 11px;
   align-items: center;
 }
 
-.container_constructor {  
+.container_constructor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   overflow-y: scroll;
-  max-height: calc(100vh - 536px);
+  max-height: calc(100vh - 472px);
 }
 
 .container_constructor::-webkit-scrollbar {
@@ -22,7 +25,6 @@
 }
 
 .container_constructor::-webkit-scrollbar-thumb {
-  height: 292px;
   background: #8585ad;
   border: 3px solid #8585ad;
 }
@@ -32,6 +34,7 @@
   align-items: center;
   justify-content: flex-end;
   gap: 40px;
+  margin-bottom: 51px;
 }
 
 .price {

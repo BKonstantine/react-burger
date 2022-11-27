@@ -9,10 +9,10 @@ import { data } from "../../utils/data";
 
 export default function BurgerConstructor(props) {
   function filterData(data, type) {}
-  
+
   return (
     <div className={`${style.container} pt-25 pl-4`}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         <ConstructorElement
           type="top"
           isLocked={true}
@@ -21,7 +21,7 @@ export default function BurgerConstructor(props) {
           extraClass="ml-8"
           /* thumbnail={img} */
         />
-        <div className={`${style.container_constructor} pr-4`}>
+        <div className={`${style.container_constructor} pr-2`}>
           <div className={style.element}>
             <DragIcon />
             <ConstructorElement
@@ -30,6 +30,46 @@ export default function BurgerConstructor(props) {
               /* thumbnail={img} */
             />
           </div>
+          <div className={style.element}>
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </div>
+          <div className={style.element}>
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </div>
+          <div className={style.element}>
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </div>
+          <div className={style.element}>
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </div>
+          <div className={style.element}>
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </div>          
         </div>
         <ConstructorElement
           type="bottom"
@@ -40,7 +80,7 @@ export default function BurgerConstructor(props) {
           /* thumbnail={img} */
         />
       </div>
-      <div className={`${style.order} mt-10`}>
+      <div className={`${style.order} mt-10 mr-4`}>
         <div className={style.price}>
           <p className="text text_type_digits-medium">60</p>
           <img src={icon} alt="Иконка валюты" />

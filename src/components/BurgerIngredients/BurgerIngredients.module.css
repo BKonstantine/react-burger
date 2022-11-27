@@ -5,7 +5,7 @@
 .container_ingredients {
   composes: container;
   overflow-y: scroll;
-  height: calc(100vh - 336px);  
+  height: calc(100vh - 284px);  
 }
 
 .container_ingredients::-webkit-scrollbar {
@@ -23,7 +23,7 @@
 }
 
 .container_items {
-  composes: container;  
+  composes: container;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;

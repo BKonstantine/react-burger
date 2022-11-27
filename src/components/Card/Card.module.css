@@ -1,13 +1,11 @@
 .card {
+  box-sizing: border-box;
   max-width: 272px;
   min-height: 208px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-}
-
-.card_image {
 }
 
 .card_price {

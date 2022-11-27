@@ -2,5 +2,5 @@
   margin: auto;
   max-width: 1240px;
   display: flex;
-  justify-content: space-between;
+  gap: 40px; 
 }
