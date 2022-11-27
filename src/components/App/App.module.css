@@ -2,5 +2,6 @@
   margin: auto;
   max-width: 1240px;
   display: flex;
-  gap: 40px; 
+  gap: 40px;
+  padding-bottom: 64px; 
 }

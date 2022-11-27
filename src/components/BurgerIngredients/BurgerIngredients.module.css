@@ -5,7 +5,7 @@
 .container_ingredients {
   composes: container;
   overflow-y: scroll;
-  height: calc(100vh - 284px);  
+  max-height: 716px;  
 }
 
 .container_ingredients::-webkit-scrollbar {
@@ -14,6 +14,7 @@
 
 .container_ingredients::-webkit-scrollbar-track {
   background-color: #2f2f37;
+  margin-bottom: 51px;
 }
 
 .container_ingredients::-webkit-scrollbar-thumb {
