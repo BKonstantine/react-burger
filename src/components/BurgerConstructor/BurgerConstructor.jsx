@@ -1,17 +1,15 @@
+import BurgerConstructorOrder from "../BurgerConstructorOrder/BurgerConstructorOrder";
 import style from "./BurgerConstructor.module.css";
-import icon from "../../image/icon.svg";
 import {
   ConstructorElement,
-  Button,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { data } from "../../utils/data";
 
-export default function BurgerConstructor(props) { 
-
+export default function BurgerConstructor(props) {
   return (
     <div className={`${style.container} pt-25 pl-4`}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <ul style={{ display: "flex", flexDirection: "column", gap: "16px", margin: 0, padding: 0 }}>
         <ConstructorElement
           type="top"
           isLocked={true}
@@ -38,16 +36,8 @@ export default function BurgerConstructor(props) {
           extraClass="ml-8"
           /* thumbnail={img} */
         />
-      </div>
-      <div className={`${style.order} mt-10 mr-4`}>
-        <div className={style.price}>
-          <p className="text text_type_digits-medium">60</p>
-          <img src={icon} alt="Иконка валюты" />
-        </div>
-        <Button htmlType="button" type="primary" size="large">
-          Оформить заказ
-        </Button>
-      </div>
+      </ul>
+      <BurgerConstructorOrder />
     </div>
   );
 }

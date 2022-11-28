@@ -1,0 +1,13 @@
+.order {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 40px;
+  margin-bottom: 51px;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

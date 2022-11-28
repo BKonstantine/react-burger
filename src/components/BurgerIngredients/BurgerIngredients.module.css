@@ -22,13 +22,3 @@
   background: #8585ad;
   border: 3px solid #8585ad;
 }
-
-.container_items {
-  max-width: 600px;
-  margin-top: 0;
-  margin-bottom: 40px;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
