@@ -37,7 +37,7 @@ export default function AppHeader() {
           type="secondary"
           size="medium"
           style={{ justifySelf: "end" }}
-          extraClass={`${style.button} pt-4 pb-4 pl-5 pr-5`}          
+          extraClass={`${style.button} pt-4 pb-4 pl-5 pr-5`}
         >
           <ProfileIcon type="secondary" />
           Личный кабинет

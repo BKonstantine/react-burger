@@ -7,8 +7,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { data } from "../../utils/data";
 
-export default function BurgerConstructor(props) {
-  function filterData(data) {}
+export default function BurgerConstructor(props) { 
 
   return (
     <div className={`${style.container} pt-25 pl-4`}>
@@ -22,38 +21,6 @@ export default function BurgerConstructor(props) {
           /* thumbnail={img} */
         />
         <div className={`${style.container_constructor} pr-2`}>
-          <div className={style.element}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              price={50}
-              /* thumbnail={img} */
-            />
-          </div>
-          <div className={style.element}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              price={50}
-              /* thumbnail={img} */
-            />
-          </div>
-          <div className={style.element}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              price={50}
-              /* thumbnail={img} */
-            />
-          </div>
-          <div className={style.element}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              price={50}
-              /* thumbnail={img} */
-            />
-          </div>
           <div className={style.element}>
             <DragIcon />
             <ConstructorElement

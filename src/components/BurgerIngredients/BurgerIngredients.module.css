@@ -3,9 +3,9 @@
 }
 
 .container_ingredients {
-  composes: container;  
+  composes: container;
   overflow-y: scroll;
-  max-height: 716px;  
+  max-height: 716px;
 }
 
 .container_ingredients::-webkit-scrollbar {
@@ -24,10 +24,10 @@
 }
 
 .container_items {
-  composes: container;
+  max-width: 600px;
   margin-top: 0;
   margin-bottom: 40px;
-  list-style: none; 
+  list-style: none;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
