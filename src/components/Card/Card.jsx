@@ -6,7 +6,7 @@ import style from "./Card.module.css";
 
 export default function Card(props) {
   return (
-    <div className={style.card}>
+    <li className={style.card}>
       <Counter count={1} size="default" />
       <img
         className={`${style.card_image} pl-4 pr-4`}
@@ -23,6 +23,6 @@ export default function Card(props) {
       >
         {props.name}
       </p>
-    </div>
+    </li>
   );
 }
