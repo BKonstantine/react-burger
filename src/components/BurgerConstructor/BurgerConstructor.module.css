@@ -2,6 +2,14 @@
   max-width: 600px;
 }
 
+.lists {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
 .element {
   display: flex;
   gap: 11px;
@@ -13,7 +21,9 @@
   flex-direction: column;
   gap: 16px;
   overflow-y: scroll;
-  max-height: 464px;
+  max-height: 464px; 
+  margin: 0;
+  padding: 0 8px 0 0; 
 }
 
 .container_constructor::-webkit-scrollbar {

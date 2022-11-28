@@ -9,32 +9,38 @@ import { data } from "../../utils/data";
 export default function BurgerConstructor(props) {
   return (
     <div className={`${style.container} pt-25 pl-4`}>
-      <ul style={{ display: "flex", flexDirection: "column", gap: "16px", margin: 0, padding: 0 }}>
+      <ul className={style.lists}>
         <ConstructorElement
           type="top"
           isLocked={true}
           text="Краторная булка N-200i (верх)"
-          price={200}
+          price={1255}
           extraClass="ml-8"
-          /* thumbnail={img} */
+          thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
         />
-        <div className={`${style.container_constructor} pr-2`}>
-          <div className={style.element}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i (верх)"
-              price={50}
-              /* thumbnail={img} */
-            />
-          </div>
-        </div>
+        <ul className={style.container_constructor}>
+          {data.map((item) => {
+            if (item.type !== "bun") {
+              return (
+                <li key={item._id} className={style.element}>
+                  <DragIcon />
+                  <ConstructorElement
+                    text={item.name}
+                    price={item.price}
+                    thumbnail={item.image}
+                  />
+                </li>
+              );
+            }
+          })}
+        </ul>
         <ConstructorElement
           type="bottom"
           isLocked={true}
           text="Краторная булка N-200i (низ)"
-          price={200}
+          price={1255}
           extraClass="ml-8"
-          /* thumbnail={img} */
+          thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
         />
       </ul>
       <BurgerConstructorOrder />
