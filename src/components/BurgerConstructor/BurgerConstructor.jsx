@@ -30,6 +30,38 @@ export default function BurgerConstructor(props) {
               /* thumbnail={img} */
             />
           </div>
+          <div className={style.element}>
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </div>
+          <div className={style.element}>
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </div>
+          <div className={style.element}>
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </div>
+          <div className={style.element}>
+            <DragIcon />
+            <ConstructorElement
+              text="Краторная булка N-200i (верх)"
+              price={50}
+              /* thumbnail={img} */
+            />
+          </div>
         </div>
         <ConstructorElement
           type="bottom"
