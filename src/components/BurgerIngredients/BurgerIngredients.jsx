@@ -1,6 +1,5 @@
 import React from "react";
-import Card from "../Card/Card";
-import { data } from "../../utils/data";
+import BurgerIngredientsList from "../BurgerIngredientsList/BurgerIngredientsList";
 import style from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useInView } from "react-intersection-observer";
@@ -27,12 +26,6 @@ export default function BurgerIngredients() {
     document.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth" });
   }
 
-  function filterData(data, type) {
-    if (data.type === type) {
-      return <Card key={data._id} {...data} />;
-    }
-  }
-
   return (
     <div className={style.container}>
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
@@ -52,36 +45,24 @@ export default function BurgerIngredients() {
         </Tab>
       </div>
       <div className={`${style.container_ingredients} mt-10`}>
-        <p
+        <BurgerIngredientsList
+          title="Булки"
+          id="one"          
+          type="bun"
           ref={oneTabRef}
-          id={"one"}
-          className="text text_type_main-medium pb-6"
-        >
-          Булки
-        </p>
-        <ul className={`${style.container_items} pl-4 pr-4`}>
-          {data.map((item) => filterData(item, "bun"))}
-        </ul>
-        <p
+        />
+        <BurgerIngredientsList
+          title="Соусы"
+          id="two"          
+          type="sauce"
           ref={twoTabRef}
-          id={"two"}
-          className="text text_type_main-medium pb-6"
-        >
-          Соусы
-        </p>
-        <ul className={`${style.container_items} mb-10 pl-4 pr-4`}>
-          {data.map((item) => filterData(item, "sauce"))}
-        </ul>
-        <p
+        />
+        <BurgerIngredientsList
+          title="Начинки"
+          id="three"          
+          type="main"
           ref={threeTabRef}
-          id={"three"}
-          className="text text_type_main-medium pb-6"
-        >
-          Начинки
-        </p>
-        <ul className={`${style.container_items} pl-4 pr-4`}>
-          {data.map((item) => filterData(item, "main"))}
-        </ul>
+        />
       </div>
     </div>
   );
