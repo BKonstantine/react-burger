@@ -3,6 +3,7 @@ import {
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./Card.module.css";
+import PropTypes from "prop-types";
 
 export default function Card(props) {
   return (
@@ -26,3 +27,9 @@ export default function Card(props) {
     </li>
   );
 }
+
+Card.propTypes = {
+  image: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+};

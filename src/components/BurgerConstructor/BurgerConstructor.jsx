@@ -6,7 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { data } from "../../utils/data";
 
-export default function BurgerConstructor(props) {
+export default function BurgerConstructor() {
   return (
     <div className={`${style.container} pt-25 pl-4`}>
       <ul className={style.lists}>

@@ -4,7 +4,7 @@ import {
   Button  
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export default function BurgerConstructorOrder(props) {
+export default function BurgerConstructorOrder() {
   return (
     <div className={`${style.order} mt-10 mr-4`}>
       <div className={style.price}>
