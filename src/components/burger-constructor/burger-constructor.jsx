@@ -4,9 +4,8 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { data } from "../../utils/data";
 
-export default function BurgerConstructor() {
+export default function BurgerConstructor({data}) {
   return (
     <div className={style.container}>
       <ul className={style.lists}>

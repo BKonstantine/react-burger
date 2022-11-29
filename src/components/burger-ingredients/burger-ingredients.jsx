@@ -3,10 +3,13 @@ import BurgerIngredientsList from "../burger-ingredients-list/burger-ingredients
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useInView } from "react-intersection-observer";
-import { data } from "../../utils/data";
 
-export default function BurgerIngredients() {
+export default function BurgerIngredients({ data }) {
   const [current, setCurrent] = React.useState("one");
+
+  const [bunTabRef, inViewTabBun] = useInView({ threshold: 0 });
+  const [sauceTabRef, inViewTabSauce] = useInView({ threshold: 0 });
+  const [mainTabRef, inViewTabMain] = useInView({ threshold: 0 });
 
   const { buns, mains, sauces } = React.useMemo(() => {
     return data.reduce(
@@ -28,10 +31,6 @@ export default function BurgerIngredients() {
       { buns: [], mains: [], sauces: [] }
     );
   });
-
-  const [bunTabRef, inViewTabBun] = useInView({ threshold: 0 });
-  const [sauceTabRef, inViewTabSauce] = useInView({ threshold: 0 });
-  const [mainTabRef, inViewTabMain] = useInView({ threshold: 0 });
 
   React.useEffect(() => {
     if (inViewTabBun) {
