@@ -9,39 +9,29 @@ import style from "./app-header.module.css";
 
 export default function AppHeader() {
   return (
-    <header className={`${style.header} pt-4 pb-4`}>
+    <header className={style.header}>
       <div className={style.container}>
-        <div style={{ display: "flex", gap: "8px" }}>
-          <Button
-            htmlType="button"
-            type="secondary"
-            size="medium"
-            extraClass={`${style.button_active} pt-4 pb-4 pl-5 pr-5`}
+        <nav className={style.nav}>
+          <a
+            href="#"
+            className={`text text_type_main-default ${style.button_active}`}
           >
             <BurgerIcon type="primary" />
             Конструктор
-          </Button>
-          <Button
-            htmlType="button"
-            type="secondary"
-            size="medium"
-            extraClass={`${style.button} pt-4 pb-4 pl-5 pr-5`}
-          >
+          </a>
+          <a href="#" className={`text text_type_main-default ${style.button}`}>
             <ListIcon type="secondary" />
             Лента заказов
-          </Button>
-        </div>
+          </a>
+        </nav>
         <Logo />
-        <Button
-          htmlType="button"
-          type="secondary"
-          size="medium"
-          style={{ justifySelf: "end" }}
-          extraClass={`${style.button} pt-4 pb-4 pl-5 pr-5`}
+        <a
+          href="#"
+          className={`text text_type_main-default ${style.button} ${style.button_profile}`}
         >
           <ProfileIcon type="secondary" />
           Личный кабинет
-        </Button>
+        </a>
       </div>
     </header>
   );
