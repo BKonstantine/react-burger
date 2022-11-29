@@ -7,19 +7,19 @@ import { useInView } from "react-intersection-observer";
 export default function BurgerIngredients() {
   const [current, setCurrent] = React.useState("one");
 
-  const [oneTabRef, inViewTabOne] = useInView({ threshold: 0 });
-  const [twoTabRef, inViewTabTwo] = useInView({ threshold: 0 });
-  const [threeTabRef, inViewTabThree] = useInView({ threshold: 0 });
+  const [bunTabRef, inViewTabBun] = useInView({ threshold: 0 });
+  const [sauceTabRef, inViewTabSauce] = useInView({ threshold: 0 });
+  const [mainTabRef, inViewTabMain] = useInView({ threshold: 0 });
 
   React.useEffect(() => {
-    if (inViewTabOne) {
-      setCurrent("one");
-    } else if (inViewTabTwo) {
-      setCurrent("two");
+    if (inViewTabBun) {
+      setCurrent("bun");
+    } else if (inViewTabSauce) {
+      setCurrent("sauce");
     } else {
-      setCurrent("three");
+      setCurrent("main");
     }
-  }, [inViewTabOne, inViewTabTwo, inViewTabThree]);
+  }, [inViewTabBun, inViewTabSauce, inViewTabMain]);
 
   function changeIngredients(id) {
     setCurrent(id);
@@ -30,15 +30,15 @@ export default function BurgerIngredients() {
     <div className={style.container}>
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
       <div className={style.tab}>
-        <Tab value="one" active={current === "one"} onClick={changeIngredients}>
+        <Tab value="bun" active={current === "bun"} onClick={changeIngredients}>
           Булки
         </Tab>
-        <Tab value="two" active={current === "two"} onClick={changeIngredients}>
+        <Tab value="sauce" active={current === "sauce"} onClick={changeIngredients}>
           Соусы
         </Tab>
         <Tab
-          value="three"
-          active={current === "three"}
+          value="main"
+          active={current === "main"}
           onClick={changeIngredients}
         >
           Начинки
@@ -47,21 +47,21 @@ export default function BurgerIngredients() {
       <div className={style.container_ingredients}>
         <BurgerIngredientsList
           title="Булки"
-          id="one"          
+          id="bun"          
           type="bun"
-          ref={oneTabRef}
+          ref={bunTabRef}
         />
         <BurgerIngredientsList
           title="Соусы"
-          id="two"          
+          id="sauce"          
           type="sauce"
-          ref={twoTabRef}
+          ref={sauceTabRef}
         />
         <BurgerIngredientsList
           title="Начинки"
-          id="three"          
+          id="main"          
           type="main"
-          ref={threeTabRef}
+          ref={mainTabRef}
         />
       </div>
     </div>
