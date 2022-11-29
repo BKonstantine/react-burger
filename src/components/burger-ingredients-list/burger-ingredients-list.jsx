@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../card/card";
+import Card from "../card/cardd";
 import { data } from "../../utils/data";
 import style from "./burger-ingredients-list.module.css";
 import PropTypes from "prop-types";
