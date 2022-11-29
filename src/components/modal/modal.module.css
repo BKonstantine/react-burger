@@ -1,0 +1,26 @@
+.container {
+  width: 720px;
+  height: 718px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #1c1c21;
+  border: 1px solid rgba(76, 76, 255, 0.2);
+  box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04),
+    0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04),
+    0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 40px;
+  z-index: 2;
+}
+
+.button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  position: fixed;
+  right: 40px;
+  top: 60px;
+  cursor: pointer;
+}

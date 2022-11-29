@@ -20,10 +20,8 @@ export default function App() {
       <AppHeader />
       <main className={style.main}>
         <BurgerIngredients data={data}/>
-        <BurgerConstructor data={data}/>
-        <Modal/>
+        <BurgerConstructor data={data}/>        
       </main>
-
     </>
   );
 }
