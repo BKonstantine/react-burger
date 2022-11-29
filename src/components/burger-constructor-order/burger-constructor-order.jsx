@@ -6,7 +6,7 @@ import {
 
 export default function BurgerConstructorOrder() {
   return (
-    <div className={`${style.order} mt-10 mr-4`}>
+    <div className={style.order}>
       <div className={style.price}>
         <p className="text text_type_digits-medium">60</p>
         <img src={icon} alt="Иконка валюты" />

@@ -14,3 +14,11 @@
   align-items: center;
   gap: 8px;
 }
+
+.card_image {
+  padding: 0 16px;
+}
+
+.card_name {
+  text-align: center;
+}

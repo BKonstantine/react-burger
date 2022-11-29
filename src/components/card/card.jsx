@@ -10,7 +10,7 @@ export default function Card(props) {
     <li className={style.card}>
       <Counter count={1} size="default" />
       <img
-        className={`${style.card_image} pl-4 pr-4`}
+        className={style.card_image}
         src={props.image}
         alt={props.name}
       />
@@ -18,10 +18,7 @@ export default function Card(props) {
         <p className="text text_type_digits-default mt-2 mb-2">{props.price}</p>
         <CurrencyIcon />
       </div>
-      <p
-        style={{ textAlign: "center" }}
-        className="text text_type_main-default"
-      >
+      <p className={`text text_type_main-default ${style.card_name}`}>
         {props.name}
       </p>
     </li>

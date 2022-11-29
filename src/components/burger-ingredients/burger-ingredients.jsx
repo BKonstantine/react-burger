@@ -29,7 +29,7 @@ export default function BurgerIngredients() {
   return (
     <div className={style.container}>
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
-      <div style={{ display: "flex" }}>
+      <div className={style.tab}>
         <Tab value="one" active={current === "one"} onClick={changeIngredients}>
           Булки
         </Tab>
@@ -44,7 +44,7 @@ export default function BurgerIngredients() {
           Начинки
         </Tab>
       </div>
-      <div className={`${style.container_ingredients} mt-10`}>
+      <div className={style.container_ingredients}>
         <BurgerIngredientsList
           title="Булки"
           id="one"          

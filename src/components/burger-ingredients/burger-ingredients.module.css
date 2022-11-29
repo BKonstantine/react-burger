@@ -2,10 +2,15 @@
   max-width: 600px;
 }
 
+.tab {
+  display: flex;
+}
+
 .container_ingredients {
   composes: container;
   overflow-y: scroll;
   max-height: 716px;
+  margin-top: 40px;  
 }
 
 .container_ingredients::-webkit-scrollbar {

@@ -10,7 +10,7 @@ const BurgerIngredientsList = React.forwardRef((props, ref) => {
       <p ref={ref} id={props.id} className="text text_type_main-medium pb-6">
         {props.title}
       </p>
-      <ul className={`${style.container} pl-4 pr-4`}>
+      <ul className={style.container}>
         {data.map((item) => {
           if (item.type === props.type) {
             return <Card key={item._id} {...item} />;
