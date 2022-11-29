@@ -1,7 +1,7 @@
 import React from "react";
-import Card from "../Card/Card";
+import Card from "../card/card";
 import { data } from "../../utils/data";
-import style from "./BurgerIngredientsList.module.css";
+import style from "./burger-ingredients-list.module.css";
 import PropTypes from "prop-types";
 
 const BurgerIngredientsList = React.forwardRef((props, ref) => {

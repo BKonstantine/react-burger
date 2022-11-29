@@ -1,5 +1,5 @@
-import BurgerConstructorOrder from "../BurgerConstructorOrder/BurgerConstructorOrder";
-import style from "./BurgerConstructor.module.css";
+import BurgerConstructorOrder from "../burger-constructor-order/burger-constructor-order";
+import style from "./burger-constructor.module.css";
 import {
   ConstructorElement,
   DragIcon,

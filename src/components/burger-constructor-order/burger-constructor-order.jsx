@@ -1,4 +1,4 @@
-import style from "./BurgerConstructorOrder.module.css";
+import style from "./burger-constructor-order.module.css";
 import icon from "../../image/icon.svg";
 import {  
   Button  

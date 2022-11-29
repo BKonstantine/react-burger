@@ -1,6 +1,6 @@
 import React from "react";
-import BurgerIngredientsList from "../BurgerIngredientsList/BurgerIngredientsList";
-import style from "./BurgerIngredients.module.css";
+import BurgerIngredientsList from "../burger-ingredients-list/burger-ingredients-list";
+import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useInView } from "react-intersection-observer";
 

@@ -2,7 +2,7 @@ import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import style from "./Card.module.css";
+import style from "./card.module.css";
 import PropTypes from "prop-types";
 
 export default function Card(props) {
