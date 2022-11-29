@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "../card/card";
-import { data } from "../../utils/data";
 import style from "./burger-ingredients-list.module.css";
 import PropTypes from "prop-types";
 
@@ -11,10 +10,8 @@ const BurgerIngredientsList = React.forwardRef((props, ref) => {
         {props.title}
       </p>
       <ul className={style.container}>
-        {data.map((item) => {
-          if (item.type === props.type) {
-            return <Card key={item._id} {...item} />;
-          }
+        {props.data.map((item) => {
+          return <Card key={item._id} {...item} />;
         })}
       </ul>
     </>

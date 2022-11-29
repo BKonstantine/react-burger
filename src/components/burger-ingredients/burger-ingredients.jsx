@@ -3,9 +3,31 @@ import BurgerIngredientsList from "../burger-ingredients-list/burger-ingredients
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useInView } from "react-intersection-observer";
+import { data } from "../../utils/data";
 
 export default function BurgerIngredients() {
   const [current, setCurrent] = React.useState("one");
+
+  const { buns, mains, sauces } = React.useMemo(() => {
+    return data.reduce(
+      (count, item) => {
+        // eslint-disable-next-line default-case
+        switch (item.type) {
+          case "bun":
+            count.buns.push(item);
+            break;
+          case "sauce":
+            count.sauces.push(item);
+            break;
+          case "main":
+            count.mains.push(item);
+            break;
+        }
+        return count;
+      },
+      { buns: [], mains: [], sauces: [] }
+    );
+  });
 
   const [bunTabRef, inViewTabBun] = useInView({ threshold: 0 });
   const [sauceTabRef, inViewTabSauce] = useInView({ threshold: 0 });
@@ -33,7 +55,11 @@ export default function BurgerIngredients() {
         <Tab value="bun" active={current === "bun"} onClick={changeIngredients}>
           Булки
         </Tab>
-        <Tab value="sauce" active={current === "sauce"} onClick={changeIngredients}>
+        <Tab
+          value="sauce"
+          active={current === "sauce"}
+          onClick={changeIngredients}
+        >
           Соусы
         </Tab>
         <Tab
@@ -47,21 +73,24 @@ export default function BurgerIngredients() {
       <div className={style.container_ingredients}>
         <BurgerIngredientsList
           title="Булки"
-          id="bun"          
+          id="bun"
           type="bun"
           ref={bunTabRef}
+          data={buns}
         />
         <BurgerIngredientsList
           title="Соусы"
-          id="sauce"          
+          id="sauce"
           type="sauce"
           ref={sauceTabRef}
+          data={sauces}
         />
         <BurgerIngredientsList
           title="Начинки"
-          id="main"          
+          id="main"
           type="main"
           ref={mainTabRef}
+          data={mains}
         />
       </div>
     </div>
