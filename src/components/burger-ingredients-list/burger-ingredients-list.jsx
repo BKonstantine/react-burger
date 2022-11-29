@@ -11,7 +11,7 @@ const BurgerIngredientsList = React.forwardRef((props, ref) => {
       </p>
       <ul className={style.container}>
         {props.data.map((item) => {
-          return <Card key={item._id} {...item} />;
+          return <Card key={item._id} data={item} />;
         })}
       </ul>
     </>
