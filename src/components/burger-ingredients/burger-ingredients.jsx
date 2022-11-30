@@ -75,21 +75,21 @@ export default function BurgerIngredients({ data }) {
           id="bun"
           type="bun"
           ref={bunTabRef}
-          ingredient={buns}
+          ingredients={buns}
         />
         <BurgerIngredientsList
           title="Соусы"
           id="sauce"
           type="sauce"
           ref={sauceTabRef}
-          ingredient={sauces}
+          ingredients={sauces}
         />
         <BurgerIngredientsList
           title="Начинки"
           id="main"
           type="main"
           ref={mainTabRef}
-          ingredient={mains}
+          ingredients={mains}
         />
       </div>
     </div>
