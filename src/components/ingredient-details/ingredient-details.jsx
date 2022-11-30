@@ -1,4 +1,5 @@
 import style from "./ingredient-details.module.css";
+import cardPropTypes from "../../utils/prop-types";
 
 export default function IngredientDetails({ ingredient }) {
   return (
@@ -17,11 +18,15 @@ export default function IngredientDetails({ ingredient }) {
       <ul className={style.container}>
         <li className={style.item}>
           <p className="text text_type_main-default">Калории,ккал</p>
-          <p className="text text_type_digits-default mt-2">{ingredient.calories}</p>
+          <p className="text text_type_digits-default mt-2">
+            {ingredient.calories}
+          </p>
         </li>
         <li className={style.item}>
           <p className="text text_type_main-default">Белки, г</p>
-          <p className="text text_type_digits-default mt-2">{ingredient.proteins}</p>
+          <p className="text text_type_digits-default mt-2">
+            {ingredient.proteins}
+          </p>
         </li>
         <li className={style.item}>
           <p className="text text_type_main-default">Жиры, г</p>
@@ -37,3 +42,7 @@ export default function IngredientDetails({ ingredient }) {
     </>
   );
 }
+
+IngredientDetails.propTypes = {
+  ingredient: cardPropTypes,
+};

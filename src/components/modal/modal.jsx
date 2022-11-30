@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./modal.module.css";
+import PropTypes from "prop-types";
 
 const modal = document.querySelector("#modal");
 
 export default function Modal({ onCloseModal, children }) {
-
-  function handleEscClose(evt) {    
+  function handleEscClose(evt) {
     if (evt.key === "Escape") {
       onCloseModal();
     }
@@ -24,7 +24,7 @@ export default function Modal({ onCloseModal, children }) {
 
   return ReactDOM.createPortal(
     <>
-      <div className={style.container} onClick={e => e.stopPropagation()}>
+      <div className={style.container} onClick={(e) => e.stopPropagation()}>
         <button type="button" className={style.button} onClick={onCloseModal}>
           <CloseIcon />
         </button>
@@ -35,3 +35,8 @@ export default function Modal({ onCloseModal, children }) {
     modal
   );
 }
+
+Modal.propTypes = {
+  onCloseModal: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
+};

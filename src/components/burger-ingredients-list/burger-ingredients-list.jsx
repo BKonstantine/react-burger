@@ -22,7 +22,7 @@ BurgerIngredientsList.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf(PropTypes.object)
+  ingredients: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default BurgerIngredientsList;

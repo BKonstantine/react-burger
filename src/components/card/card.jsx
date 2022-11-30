@@ -22,9 +22,15 @@ export default function Card({ ingredient }) {
   return (
     <li className={style.card} onClick={openModal}>
       <Counter count={1} size="default" />
-      <img className={style.card_image} src={ingredient.image} alt={ingredient.name} />
+      <img
+        className={style.card_image}
+        src={ingredient.image}
+        alt={ingredient.name}
+      />
       <div className={style.card_price}>
-        <p className="text text_type_digits-default mt-2 mb-2">{ingredient.price}</p>
+        <p className="text text_type_digits-default mt-2 mb-2">
+          {ingredient.price}
+        </p>
         <CurrencyIcon />
       </div>
       <p className={`text text_type_main-default ${style.card_name}`}>
