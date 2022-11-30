@@ -1,21 +1,19 @@
 import React from "react";
 import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
 import style from "./burger-constructor-order.module.css";
 import icon from "../../image/icon.svg";
-import {  
-  Button  
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export default function BurgerConstructorOrder() {
-
   const [modal, setModal] = React.useState(false);
 
   function openModal() {
-    setModal(!modal);    
+    setModal(!modal);
   }
 
-  function closeModal() {    
-    setModal(!modal);    
+  function closeModal() {
+    setModal(!modal);
   }
 
   return (
@@ -27,7 +25,11 @@ export default function BurgerConstructorOrder() {
       <Button htmlType="button" type="primary" size="large" onClick={openModal}>
         Оформить заказ
       </Button>
-      {modal && <Modal onCloseModal={closeModal} />}
+      {modal && (
+        <Modal onCloseModal={closeModal}>
+          <OrderDetails />
+        </Modal>
+      )}
     </div>
   );
 }
