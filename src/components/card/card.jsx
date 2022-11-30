@@ -11,13 +11,11 @@ export default function Card({ data }) {
   const [modal, setModal] = React.useState(false);
 
   function openModal() {
-    console.log("open");
-    setModal(!modal);
+    setModal(!modal);    
   }
 
-  function closeModal() {
-    console.log("close");
-    setModal(!modal);
+  function closeModal() {    
+    setModal(!modal);    
   }
 
   return (
@@ -31,7 +29,7 @@ export default function Card({ data }) {
       <p className={`text text_type_main-default ${style.card_name}`}>
         {data.name}
       </p>
-      {modal && <Modal onClick={closeModal} />}
+      {modal && <Modal onCloseModal={closeModal} />}
     </li>
   );
 }

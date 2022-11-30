@@ -6,11 +6,11 @@ import style from "./modal.module.css";
 
 const modal = document.querySelector("#modal");
 
-export default function Modal({ onClick, children }) {
-  function handleEscClose(evt) {
-    console.log(evt);
-    if (evt.key === "Esc") {
-      onClick();
+export default function Modal({ onCloseModal, children }) {
+
+  function handleEscClose(evt) {    
+    if (evt.key === "Escape") {
+      onCloseModal();
     }
   }
 
@@ -24,13 +24,13 @@ export default function Modal({ onClick, children }) {
 
   return ReactDOM.createPortal(
     <>
-      <div className={style.container}>
-        <button type="button" className={style.button} onClick={onClick}>
+      <div className={style.container} onClick={e => e.stopPropagation()}>
+        <button type="button" className={style.button} onClick={onCloseModal}>
           <CloseIcon />
         </button>
         {children}
       </div>
-      <ModalOverlay onClick={onClick} />
+      <ModalOverlay onCloseModal={onCloseModal} />
     </>,
     modal
   );
