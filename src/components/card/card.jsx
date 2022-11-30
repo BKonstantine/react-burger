@@ -8,7 +8,7 @@ import style from "./card.module.css";
 import cardPropTypes from "../../utils/prop-types";
 import Modal from "../modal/modal";
 
-export default function Card({ data }) {
+export default function Card({ ingredient }) {
   const [modal, setModal] = React.useState(false);
 
   function openModal() {
@@ -22,17 +22,17 @@ export default function Card({ data }) {
   return (
     <li className={style.card} onClick={openModal}>
       <Counter count={1} size="default" />
-      <img className={style.card_image} src={data.image} alt={data.name} />
+      <img className={style.card_image} src={ingredient.image} alt={ingredient.name} />
       <div className={style.card_price}>
-        <p className="text text_type_digits-default mt-2 mb-2">{data.price}</p>
+        <p className="text text_type_digits-default mt-2 mb-2">{ingredient.price}</p>
         <CurrencyIcon />
       </div>
       <p className={`text text_type_main-default ${style.card_name}`}>
-        {data.name}
+        {ingredient.name}
       </p>
       {modal && (
         <Modal onCloseModal={closeModal}>
-          <IngredientDetails ingredient={data} />
+          <IngredientDetails ingredient={ingredient} />
         </Modal>
       )}
     </li>
@@ -40,5 +40,5 @@ export default function Card({ data }) {
 }
 
 Card.propTypes = {
-  data: cardPropTypes,
+  ingredient: cardPropTypes,
 };

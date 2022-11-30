@@ -30,7 +30,7 @@ export default function BurgerIngredients({ data }) {
       },
       { buns: [], mains: [], sauces: [] }
     );
-  });
+  }, [data]);
 
   React.useEffect(() => {
     if (inViewTabBun) {
@@ -75,21 +75,21 @@ export default function BurgerIngredients({ data }) {
           id="bun"
           type="bun"
           ref={bunTabRef}
-          data={buns}
+          ingredient={buns}
         />
         <BurgerIngredientsList
           title="Соусы"
           id="sauce"
           type="sauce"
           ref={sauceTabRef}
-          data={sauces}
+          ingredient={sauces}
         />
         <BurgerIngredientsList
           title="Начинки"
           id="main"
           type="main"
           ref={mainTabRef}
-          data={mains}
+          ingredient={mains}
         />
       </div>
     </div>
