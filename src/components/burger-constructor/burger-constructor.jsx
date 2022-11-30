@@ -4,8 +4,9 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 
-export default function BurgerConstructor({data}) {
+export default function BurgerConstructor({ data }) {
   return (
     <div className={style.container}>
       <ul className={style.lists}>
@@ -46,3 +47,7 @@ export default function BurgerConstructor({data}) {
     </div>
   );
 }
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+};

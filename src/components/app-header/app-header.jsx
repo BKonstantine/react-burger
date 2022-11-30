@@ -1,7 +1,6 @@
 import {
   Logo,
-  BurgerIcon,
-  Button,
+  BurgerIcon,  
   ListIcon,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
