@@ -1,0 +1,29 @@
+.container {
+  max-width: 600px;
+}
+
+.tab {
+  display: flex;
+}
+
+.container_ingredients {
+  composes: container;
+  overflow-y: scroll;
+  max-height: 716px;
+  margin-top: 40px;  
+}
+
+.container_ingredients::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container_ingredients::-webkit-scrollbar-track {
+  background-color: #2f2f37;
+  margin-bottom: 51px;
+}
+
+.container_ingredients::-webkit-scrollbar-thumb {
+  height: 492px;
+  background: #8585ad;
+  border: 3px solid #8585ad;
+}

@@ -1,0 +1,43 @@
+.container {
+  max-width: 600px;
+  padding-top: 100px;
+  padding-left: 16px;
+}
+
+.lists {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.element {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+}
+
+.container_constructor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: scroll;
+  max-height: 464px;
+  margin: 0;
+  padding: 0 8px 0 0;
+}
+
+.container_constructor::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container_constructor::-webkit-scrollbar-track {
+  background-color: #2f2f37;
+}
+
+.container_constructor::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #8585ad;
+  height: 292px;
+}
