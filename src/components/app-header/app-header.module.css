@@ -10,8 +10,7 @@
   margin: auto;
   max-width: 1280px;
   display: flex;
-  align-items: center;
-  /* justify-content: flex-start; */
+  align-items: center;  
 }
 
 .logo {
