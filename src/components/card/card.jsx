@@ -11,8 +11,9 @@ import Modal from "../modal/modal";
 export default function Card({ ingredient }) {
   const [modal, setModal] = React.useState(false);
 
-  function toggleModal() {
-    setModal((prevModal) => !prevModal);
+  function toggleModal(e) {
+    e.stopPropagation();    
+    setModal((prevModal) => !prevModal);    
   }
 
   return (

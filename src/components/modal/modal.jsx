@@ -10,7 +10,7 @@ const modal = document.querySelector("#modal");
 export default function Modal({ onCloseModal, children }) {
   function handleEscClose(evt) {
     if (evt.key === "Escape") {
-      onCloseModal();
+      onCloseModal(evt);
     }
   }
 
