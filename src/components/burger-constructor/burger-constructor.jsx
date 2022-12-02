@@ -5,6 +5,7 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import cardPropTypes from "../../utils/prop-types";
 
 export default function BurgerConstructor({ data }) {
   return (
@@ -49,5 +50,5 @@ export default function BurgerConstructor({ data }) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(cardPropTypes).isRequired,
 };
