@@ -8,12 +8,8 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 export default function BurgerConstructorOrder() {
   const [modal, setModal] = React.useState(false);
 
-  function openModal() {
-    setModal(!modal);
-  }
-
-  function closeModal() {
-    setModal(!modal);
+  function toggleModal() {
+    setModal((prevModal) => !prevModal);
   }
 
   return (
@@ -22,11 +18,11 @@ export default function BurgerConstructorOrder() {
         <p className="text text_type_digits-medium">60</p>
         <img src={icon} alt="Иконка валюты" />
       </div>
-      <Button htmlType="button" type="primary" size="large" onClick={openModal}>
+      <Button htmlType="button" type="primary" size="large" onClick={toggleModal}>
         Оформить заказ
       </Button>
       {modal && (
-        <Modal onCloseModal={closeModal}>
+        <Modal onCloseModal={toggleModal}>
           <OrderDetails />
         </Modal>
       )}

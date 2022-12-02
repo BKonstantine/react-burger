@@ -11,16 +11,12 @@ import Modal from "../modal/modal";
 export default function Card({ ingredient }) {
   const [modal, setModal] = React.useState(false);
 
-  function openModal() {
-    setModal(!modal);
-  }
-
-  function closeModal() {
-    setModal(!modal);
+  function toggleModal() {
+    setModal((prevModal) => !prevModal);
   }
 
   return (
-    <li className={style.card} onClick={openModal}>
+    <li className={style.card} onClick={toggleModal}>
       <Counter count={1} size="default" />
       <img
         className={style.card_image}
@@ -37,7 +33,7 @@ export default function Card({ ingredient }) {
         {ingredient.name}
       </p>
       {modal && (
-        <Modal onCloseModal={closeModal}>
+        <Modal onCloseModal={toggleModal}>
           <IngredientDetails ingredient={ingredient} />
         </Modal>
       )}
