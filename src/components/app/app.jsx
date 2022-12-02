@@ -12,14 +12,13 @@ export default function App() {
   const [err, setErr] = React.useState("");
 
   React.useEffect(() => {
-    getIngridients()
-      .then((res) => res.json())
+    getIngridients()      
       .then((data) => {
         setData(data.data);
       })
       .catch((err) => {
-        console.log(`Ошибка ${err}`);
-        setErr(`Ошибка ${err}`);
+        console.log(err);
+        setErr(err);
       })
       .finally(() => {
         setLoading(!loading);
