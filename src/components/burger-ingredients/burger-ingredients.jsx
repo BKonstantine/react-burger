@@ -4,6 +4,7 @@ import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useInView } from "react-intersection-observer";
 import PropTypes from "prop-types";
+import cardPropTypes from "../../utils/prop-types";
 
 export default function BurgerIngredients({ data }) {
   const [current, setCurrent] = React.useState("one");
@@ -98,5 +99,5 @@ export default function BurgerIngredients({ data }) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(cardPropTypes).isRequired,
 };
