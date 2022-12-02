@@ -9,6 +9,7 @@ const modal = document.querySelector("#modal");
 
 export default function Modal({ onCloseModal, children }) {
   function handleEscClose(evt) {
+    console.log(evt)
     if (evt.key === "Escape") {
       onCloseModal(evt);
     }
@@ -20,7 +21,7 @@ export default function Modal({ onCloseModal, children }) {
     return () => {
       document.removeEventListener("keydown", handleEscClose);
     };
-  });
+  }, []);
 
   return ReactDOM.createPortal(
     <>
