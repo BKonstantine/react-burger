@@ -3,10 +3,15 @@ import BurgerIngredientsList from "../burger-ingredients-list/burger-ingredients
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useInView } from "react-intersection-observer";
-import { data } from "../../utils/data";
+import PropTypes from "prop-types";
+import cardPropTypes from "../../utils/prop-types";
 
-export default function BurgerIngredients() {
+export default function BurgerIngredients({ data }) {
   const [current, setCurrent] = React.useState("one");
+
+  const [bunTabRef, inViewTabBun] = useInView({ threshold: 0 });
+  const [sauceTabRef, inViewTabSauce] = useInView({ threshold: 0 });
+  const [mainTabRef, inViewTabMain] = useInView({ threshold: 0 });
 
   const { buns, mains, sauces } = React.useMemo(() => {
     return data.reduce(
@@ -27,11 +32,7 @@ export default function BurgerIngredients() {
       },
       { buns: [], mains: [], sauces: [] }
     );
-  });
-
-  const [bunTabRef, inViewTabBun] = useInView({ threshold: 0 });
-  const [sauceTabRef, inViewTabSauce] = useInView({ threshold: 0 });
-  const [mainTabRef, inViewTabMain] = useInView({ threshold: 0 });
+  }, [data]);
 
   React.useEffect(() => {
     if (inViewTabBun) {
@@ -76,23 +77,27 @@ export default function BurgerIngredients() {
           id="bun"
           type="bun"
           ref={bunTabRef}
-          data={buns}
+          ingredients={buns}
         />
         <BurgerIngredientsList
           title="Соусы"
           id="sauce"
           type="sauce"
           ref={sauceTabRef}
-          data={sauces}
+          ingredients={sauces}
         />
         <BurgerIngredientsList
           title="Начинки"
           id="main"
           type="main"
           ref={mainTabRef}
-          data={mains}
+          ingredients={mains}
         />
       </div>
     </div>
   );
 }
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.arrayOf(cardPropTypes).isRequired,
+};

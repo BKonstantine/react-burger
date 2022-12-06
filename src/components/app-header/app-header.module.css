@@ -9,11 +9,14 @@
 .container {
   margin: auto;
   max-width: 1280px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 7%;
+  display: flex;
+  align-items: center;  
+}
+
+.logo {
+  display: flex;
   align-items: center;
-  justify-items: center;
+  margin-left: 104px;
 }
 
 .nav {
@@ -33,10 +36,9 @@
 }
 
 .button_active {
-  composes: button;
   color: #f2f2f3;
 }
 
-.button_profile {
-  justify-self: end;
+.button_profile {  
+  margin-left: 280px;
 }

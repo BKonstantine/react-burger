@@ -4,9 +4,10 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { data } from "../../utils/data";
+import PropTypes from "prop-types";
+import cardPropTypes from "../../utils/prop-types";
 
-export default function BurgerConstructor() {
+export default function BurgerConstructor({ data }) {
   return (
     <div className={style.container}>
       <ul className={style.lists}>
@@ -47,3 +48,7 @@ export default function BurgerConstructor() {
     </div>
   );
 }
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(cardPropTypes).isRequired,
+};

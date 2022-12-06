@@ -1,0 +1,33 @@
+.title {
+  align-self: flex-start;
+  margin-top: 52px;
+  margin-left: 41px;
+}
+
+.subtitle {
+  margin-top: 17px;
+}
+
+.image {
+  margin-top: 12px;
+}
+
+.container {
+  margin: 32px 0 60px 0;
+  padding: 0;
+  list-style: none;
+  width: 516px;
+  display: flex;  
+  justify-content: space-between;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #8585ad;
+}
+
+.text {
+  color: #8585ad;
+}
