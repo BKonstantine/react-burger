@@ -1,18 +1,19 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import style from "./app.module.css";
 import getIngridients from "../../utils/api";
 import Preloader from "../preloader/preloader";
+import { BurgerIngredientsContext } from "../../context/burger-ingredients-context";
 
 export default function App() {
-  const [data, setData] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-  const [err, setErr] = React.useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
 
-  React.useEffect(() => {
-    getIngridients()      
+  useEffect(() => {
+    getIngridients()
       .then((data) => {
         setData(data.data);
       })
@@ -32,8 +33,10 @@ export default function App() {
         <>
           <AppHeader />
           <main className={style.main}>
-            <BurgerIngredients data={data} />
-            <BurgerConstructor data={data} />
+            <BurgerIngredientsContext.Provider value={data}>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </BurgerIngredientsContext.Provider>
           </main>
         </>
       )}

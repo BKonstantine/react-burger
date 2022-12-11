@@ -1,20 +1,21 @@
-import React from "react";
+import { useContext, useMemo, useState, useEffect } from "react";
 import BurgerIngredientsList from "../burger-ingredients-list/burger-ingredients-list";
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useInView } from "react-intersection-observer";
-import PropTypes from "prop-types";
-import cardPropTypes from "../../utils/prop-types";
+import { BurgerIngredientsContext } from "../../context/burger-ingredients-context";
 
-export default function BurgerIngredients({ data }) {
-  const [current, setCurrent] = React.useState("one");
+export default function BurgerIngredients() {
+  const [current, setCurrent] = useState("one");
 
   const [bunTabRef, inViewTabBun] = useInView({ threshold: 0 });
   const [sauceTabRef, inViewTabSauce] = useInView({ threshold: 0 });
   const [mainTabRef, inViewTabMain] = useInView({ threshold: 0 });
 
-  const { buns, mains, sauces } = React.useMemo(() => {
-    return data.reduce(
+  const ingredients = useContext(BurgerIngredientsContext);
+
+  const { buns, mains, sauces } = useMemo(() => {
+    return ingredients.reduce(
       (count, item) => {
         // eslint-disable-next-line default-case
         switch (item.type) {
@@ -32,9 +33,9 @@ export default function BurgerIngredients({ data }) {
       },
       { buns: [], mains: [], sauces: [] }
     );
-  }, [data]);
+  }, [ingredients]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (inViewTabBun) {
       setCurrent("bun");
     } else if (inViewTabSauce) {
@@ -97,7 +98,3 @@ export default function BurgerIngredients({ data }) {
     </div>
   );
 }
-
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(cardPropTypes).isRequired,
-};

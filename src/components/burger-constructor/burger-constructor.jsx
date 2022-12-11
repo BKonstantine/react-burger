@@ -1,13 +1,16 @@
+import { useContext } from "react";
 import BurgerConstructorOrder from "../burger-constructor-order/burger-constructor-order";
 import style from "./burger-constructor.module.css";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import cardPropTypes from "../../utils/prop-types";
+import { BurgerIngredientsContext } from "../../context/burger-ingredients-context";
 
-export default function BurgerConstructor({ data }) {
+export default function BurgerConstructor() {
+
+  const ingredients = useContext(BurgerIngredientsContext);
+  
   return (
     <div className={style.container}>
       <ul className={style.lists}>
@@ -20,7 +23,7 @@ export default function BurgerConstructor({ data }) {
           thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
         />
         <ul className={style.container_constructor}>
-          {data.map((item) => {
+          {ingredients.map((item) => {
             if (item.type !== "bun") {
               return (
                 <li key={item._id} className={style.element}>
@@ -48,7 +51,3 @@ export default function BurgerConstructor({ data }) {
     </div>
   );
 }
-
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(cardPropTypes).isRequired,
-};
