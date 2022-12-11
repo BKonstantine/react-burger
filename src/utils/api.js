@@ -5,5 +5,5 @@ const checkReponse = (res) => {
 };
 
 export default function getIngridients() {
-  return fetch(`${INGREDIENTS_URL}`).then(checkReponse);
+  return fetch(INGREDIENTS_URL).then(checkReponse);
 }
