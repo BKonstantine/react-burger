@@ -6,11 +6,14 @@ import style from "./app.module.css";
 import getIngridients from "../../utils/api";
 import Preloader from "../preloader/preloader";
 import { BurgerIngredientsContext } from "../../context/burger-ingredients-context";
+import { BurgerConstructorContext } from "../../context/burger-constructor-context";
 
 export default function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+
+  const [constructorContext, setConstructorContext] = useState([])
 
   useEffect(() => {
     getIngridients()
@@ -34,8 +37,10 @@ export default function App() {
           <AppHeader />
           <main className={style.main}>
             <BurgerIngredientsContext.Provider value={data}>
-              <BurgerIngredients />
-              <BurgerConstructor />
+              <BurgerConstructorContext.Provider value={{constructorContext, setConstructorContext}}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+              </BurgerConstructorContext.Provider>
             </BurgerIngredientsContext.Provider>
           </main>
         </>
