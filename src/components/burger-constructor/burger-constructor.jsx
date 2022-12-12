@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { useContext } from "react";
 import BurgerConstructorOrder from "../burger-constructor-order/burger-constructor-order";
 import style from "./burger-constructor.module.css";
