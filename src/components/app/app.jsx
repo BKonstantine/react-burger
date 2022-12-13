@@ -13,13 +13,19 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  const [constructorContext, setConstructorContext] = useState([]);
+  const [constructorContext, setConstructorContext] = useState({
+    ingredients: [],
+    price: 0,
+  });
 
   useEffect(() => {
     getIngridients()
       .then((data) => {
         setData(data.data);
-        setConstructorContext(data.data);
+        setConstructorContext({
+          ...constructorContext,
+          ingredients: data.data,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -28,7 +34,7 @@ export default function App() {
       .finally(() => {
         setLoading(!loading);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

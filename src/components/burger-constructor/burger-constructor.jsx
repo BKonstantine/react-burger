@@ -25,7 +25,7 @@ export default function BurgerConstructor() {
           thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
         />
         <ul className={style.container_constructor}>
-          {constructorContext.map((item) => {
+          {constructorContext.ingredients.map((item) => {
             if (item.type !== "bun") {
               return (
                 <li key={item._id} className={style.element}>
