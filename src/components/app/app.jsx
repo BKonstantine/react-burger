@@ -14,7 +14,9 @@ export default function App() {
   const [err, setErr] = useState("");
 
   const [constructorContext, setConstructorContext] = useState({
+    buns: [],
     ingredients: [],
+    id: [],
     price: 0,
   });
 
@@ -22,10 +24,6 @@ export default function App() {
     getIngridients()
       .then((data) => {
         setData(data.data);
-        setConstructorContext({
-          ...constructorContext,
-          ingredients: data.data,
-        });
       })
       .catch((err) => {
         console.log(err);

@@ -6,13 +6,16 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { BurgerIngredientsContext } from "../../context/burger-ingredients-context";
 import { BurgerConstructorContext } from "../../context/burger-constructor-context";
 
 export default function BurgerConstructor() {
-
+  const ingredients = useContext(BurgerIngredientsContext);
   // eslint-disable-next-line no-unused-vars
-  const {constructorContext, setConstructorContext} = useContext(BurgerConstructorContext);
-  
+  const { constructorContext, setConstructorContext } = useContext(
+    BurgerConstructorContext
+  );
+
   return (
     <div className={style.container}>
       <ul className={style.lists}>
