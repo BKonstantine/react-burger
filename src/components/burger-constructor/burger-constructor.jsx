@@ -6,11 +6,12 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgerIngredientsContext } from "../../context/burger-ingredients-context";
+import { BurgerConstructorContext } from "../../context/burger-constructor-context";
 
 export default function BurgerConstructor() {
 
-  const ingredients = useContext(BurgerIngredientsContext);
+  // eslint-disable-next-line no-unused-vars
+  const {constructorContext, setConstructorContext} = useContext(BurgerConstructorContext);
   
   return (
     <div className={style.container}>
@@ -24,7 +25,7 @@ export default function BurgerConstructor() {
           thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
         />
         <ul className={style.container_constructor}>
-          {ingredients.map((item) => {
+          {constructorContext.map((item) => {
             if (item.type !== "bun") {
               return (
                 <li key={item._id} className={style.element}>
