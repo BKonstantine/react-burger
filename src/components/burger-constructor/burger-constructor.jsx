@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { useContext } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import BurgerConstructorOrder from "../burger-constructor-order/burger-constructor-order";
 import style from "./burger-constructor.module.css";
 import {
@@ -11,10 +11,19 @@ import { BurgerConstructorContext } from "../../context/burger-constructor-conte
 
 export default function BurgerConstructor() {
   const ingredients = useContext(BurgerIngredientsContext);
+
+  const randomIngredients = useMemo(() => {
+    return ingredients.slice(0, Math.round(Math.random() * 7) + 3);
+  }, [ingredients]);
+  
   // eslint-disable-next-line no-unused-vars
   const { constructorContext, setConstructorContext } = useContext(
     BurgerConstructorContext
   );
+
+  useEffect(() => {
+    console.log(randomIngredients);
+  });
 
   return (
     <div className={style.container}>
