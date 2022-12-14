@@ -20,17 +20,18 @@ export default function BurgerConstructor() {
     return randomIngredients.find((item) => item.type === "bun");
   }
 
-  function getIngredients() {
+  const { randomFilling } = useMemo(() => {
     return randomIngredients.reduce(
       (count, item) => {
         if (item.type !== "bun") {
-          count.ingredients.push(item);
+          count.randomFilling.push(item);
         }
         return count;
       },
-      { ingredients: [] }
+      { randomFilling: [] }
     );
-  }
+  }, [randomIngredients]);
+
   // eslint-disable-next-line no-unused-vars
   const { constructorContext, setConstructorContext } = useContext(
     BurgerConstructorContext
@@ -38,7 +39,7 @@ export default function BurgerConstructor() {
 
   useEffect(() => {
     console.log(randomIngredients);
-    console.log(getIngredients());
+    console.log(randomFilling);
   });
 
   return (
