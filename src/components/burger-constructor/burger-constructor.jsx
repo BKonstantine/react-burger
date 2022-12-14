@@ -56,6 +56,7 @@ export default function BurgerConstructor() {
       ],
       price: totalPrice,
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
