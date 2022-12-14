@@ -16,9 +16,9 @@ export default function BurgerConstructor() {
     return ingredients.slice(0, Math.round(Math.random() * 7) + 3);
   }, [ingredients]);
 
-  function getBun() {
+  const randomBun = useMemo(() => {
     return randomIngredients.find((item) => item.type === "bun");
-  }
+  }, [randomIngredients]);
 
   const { randomFilling } = useMemo(() => {
     return randomIngredients.reduce(
@@ -37,24 +37,19 @@ export default function BurgerConstructor() {
     BurgerConstructorContext
   );
 
-  useEffect(() => {
-    console.log(randomIngredients);
-    console.log(randomFilling);
-  });
-
   return (
     <div className={style.container}>
       <ul className={style.lists}>
         <ConstructorElement
           type="top"
           isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={1255}
+          text={`${randomBun.name} (верх)`}
+          price={randomBun.price}
           extraClass="ml-8"
-          thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
+          thumbnail={randomBun.image}
         />
         <ul className={style.container_constructor}>
-          {constructorContext.ingredients.map((item) => {
+          {randomFilling.map((item) => {
             if (item.type !== "bun") {
               return (
                 <li key={item._id} className={style.element}>
@@ -72,10 +67,10 @@ export default function BurgerConstructor() {
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={1255}
+          text={`${randomBun.name} (низ)`}
+          price={randomBun.price}
           extraClass="ml-8"
-          thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
+          thumbnail={randomBun.image}
         />
       </ul>
       <BurgerConstructorOrder />

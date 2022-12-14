@@ -20,6 +20,8 @@ export default function App() {
     price: 0,
   });
 
+  console.log(data);
+
   useEffect(() => {
     getIngridients()
       .then((data) => {
@@ -46,8 +48,12 @@ export default function App() {
               <BurgerConstructorContext.Provider
                 value={{ constructorContext, setConstructorContext }}
               >
-                <BurgerIngredients />
-                <BurgerConstructor />
+                {data.length && (
+                  <>
+                    <BurgerIngredients />
+                    <BurgerConstructor />
+                  </>
+                )}
               </BurgerConstructorContext.Provider>
             </BurgerIngredientsContext.Provider>
           </main>
