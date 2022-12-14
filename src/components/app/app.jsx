@@ -1,18 +1,29 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import style from "./app.module.css";
-import getIngridients from "../../utils/api";
+import { getIngridients } from "../../utils/api";
 import Preloader from "../preloader/preloader";
+import { BurgerIngredientsContext } from "../../context/burger-ingredients-context";
+import { BurgerConstructorContext } from "../../context/burger-constructor-context";
 
 export default function App() {
-  const [data, setData] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-  const [err, setErr] = React.useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
 
-  React.useEffect(() => {
-    getIngridients()      
+  const [constructorContext, setConstructorContext] = useState({
+    buns: [],
+    ingredients: [],
+    id: [],
+    price: 0,
+  });
+
+  const [order, setOrder] = useState(undefined);
+
+  useEffect(() => {
+    getIngridients()
       .then((data) => {
         setData(data.data);
       })
@@ -23,6 +34,7 @@ export default function App() {
       .finally(() => {
         setLoading(!loading);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -32,8 +44,23 @@ export default function App() {
         <>
           <AppHeader />
           <main className={style.main}>
-            <BurgerIngredients data={data} />
-            <BurgerConstructor data={data} />
+            <BurgerIngredientsContext.Provider value={data}>
+              <BurgerConstructorContext.Provider
+                value={{
+                  constructorContext,
+                  setConstructorContext,
+                  order,
+                  setOrder,
+                }}
+              >
+                {data.length && (
+                  <>
+                    <BurgerIngredients />
+                    <BurgerConstructor />
+                  </>
+                )}
+              </BurgerConstructorContext.Provider>
+            </BurgerIngredientsContext.Provider>
           </main>
         </>
       )}
