@@ -20,8 +20,6 @@ export default function App() {
     price: 0,
   });
 
-  console.log(data);
-
   useEffect(() => {
     getIngridients()
       .then((data) => {

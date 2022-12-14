@@ -12,6 +12,11 @@ import { BurgerConstructorContext } from "../../context/burger-constructor-conte
 export default function BurgerConstructor() {
   const ingredients = useContext(BurgerIngredientsContext);
 
+  // eslint-disable-next-line no-unused-vars
+  const { constructorContext, setConstructorContext } = useContext(
+    BurgerConstructorContext
+  );
+
   const randomIngredients = useMemo(() => {
     return ingredients.slice(0, Math.round(Math.random() * 7) + 3);
   }, [ingredients]);
@@ -32,14 +37,31 @@ export default function BurgerConstructor() {
     );
   }, [randomIngredients]);
 
-  // eslint-disable-next-line no-unused-vars
-  const { constructorContext, setConstructorContext } = useContext(
-    BurgerConstructorContext
-  );
+  const totalPrice = useMemo(() => {
+    let counter =
+      randomBun.price * 2 +
+      randomFilling.reduce((sum, item) => sum + item.price, 0);
+    return counter;
+  }, [randomBun, randomFilling]);
+
+  useEffect(() => {
+    setConstructorContext({
+      ...constructorContext,
+      buns: [...constructorContext.buns, randomBun],
+      ingredients: randomFilling,
+      id: [
+        randomBun._id,
+        ...randomFilling.map((item) => item._id),
+        randomBun._id,
+      ],
+      price: totalPrice,
+    });
+  }, []);
 
   return (
     <div className={style.container}>
       <ul className={style.lists}>
+        {/* {constructorContext.buns.map(item)} */}
         <ConstructorElement
           type="top"
           isLocked={true}
@@ -49,19 +71,17 @@ export default function BurgerConstructor() {
           thumbnail={randomBun.image}
         />
         <ul className={style.container_constructor}>
-          {randomFilling.map((item) => {
-            if (item.type !== "bun") {
-              return (
-                <li key={item._id} className={style.element}>
-                  <DragIcon />
-                  <ConstructorElement
-                    text={item.name}
-                    price={item.price}
-                    thumbnail={item.image}
-                  />
-                </li>
-              );
-            }
+          {constructorContext.ingredients.map((item) => {
+            return (
+              <li key={item._id} className={style.element}>
+                <DragIcon />
+                <ConstructorElement
+                  text={item.name}
+                  price={item.price}
+                  thumbnail={item.image}
+                />
+              </li>
+            );
           })}
         </ul>
         <ConstructorElement
