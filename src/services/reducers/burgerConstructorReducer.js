@@ -4,7 +4,7 @@ const constructorInitialState = {
   currentOrder: { order: undefined },
 };
 
-export function burgerConstructorReducer(
+export default function burgerConstructorReducer(
   state = constructorInitialState,
   action
 ) {

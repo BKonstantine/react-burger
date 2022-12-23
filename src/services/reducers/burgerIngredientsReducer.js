@@ -8,15 +8,12 @@ const ingredientsInitialState = {
   burgerIngredientsList: [],
   burgerIngredientsListRequest: false,
   burgerIngredientsListFailed: false,
-  burgerIngredientsListFailedText: undefined,
-
-  burgerConstructorList: [],
-  currentIngredient: { ingredient: undefined },
-  currentOrder: { order: undefined },
+  burgerIngredientsListFailedText: undefined,  
 };
 
-export function burgerIngredientsReducer(state = ingredientsInitialState, action) {
+export default function burgerIngredientsReducer(state = ingredientsInitialState, action) {
   switch (action.type) {
+
     case GET_INGREDIENTS_REQUEST:
       return { ...state, burgerIngredientsListRequest: true };
 
@@ -34,6 +31,7 @@ export function burgerIngredientsReducer(state = ingredientsInitialState, action
         burgerIngredientsListFailed: true,
         burgerIngredientsListFailedText: action.errorText,
       };
+
     default:
       return state;
   }
