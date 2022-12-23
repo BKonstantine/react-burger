@@ -61,8 +61,7 @@ export default function BurgerConstructor() {
 
   return (
     <div className={style.container}>
-      <ul className={style.lists}>
-        {/* {constructorContext.buns.map(item)} */}
+      <ul className={style.lists}>        
         <ConstructorElement
           type="top"
           isLocked={true}

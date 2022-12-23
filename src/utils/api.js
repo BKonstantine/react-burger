@@ -4,11 +4,11 @@ const checkReponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
 
-function getIngridients() {
+function getIngridientsRequest() {
   return fetch(INGREDIENTS_URL).then(checkReponse);
 }
 
-function sendOrder(idList) {
+function sendOrderRequest(idList) {
   return fetch(ORDER_URL, {
     method: "POST",
     headers: {
@@ -20,4 +20,4 @@ function sendOrder(idList) {
   }).then(checkReponse);
 }
 
-export { getIngridients, sendOrder };
+export { getIngridientsRequest, sendOrderRequest };

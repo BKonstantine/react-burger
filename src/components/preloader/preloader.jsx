@@ -1,10 +1,23 @@
 import style from "./preloader.module.css";
 import preloader from "../../image/preloader.svg";
+import { useSelector } from "react-redux";
 
-export default function Preloader({ loading, error }) {
+export default function Preloader() {
+  const loading = useSelector(
+    (store) => store.ingredients.burgerIngredientsListRequest
+  );  
+
+  const error = useSelector(
+    (store) => store.ingredients.burgerIngredientsListFailed
+  );
+
+  const errorText = useSelector(
+    (store) => store.ingredients.burgerIngredientsListFailedText
+  );
+
   return (
     <>
-      {!loading && (
+      {loading && (
         <img
           src={preloader}
           alt="Анимация загрузки"
@@ -12,7 +25,7 @@ export default function Preloader({ loading, error }) {
         />
       )}
       {error && (
-        <p className={`text text_type_main-large ${style.text}`}>{error}</p>
+        <p className={`text text_type_main-large ${style.text}`}>{errorText}</p>
       )}
     </>
   );

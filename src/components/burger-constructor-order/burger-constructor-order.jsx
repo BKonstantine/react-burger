@@ -3,7 +3,7 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import style from "./burger-constructor-order.module.css";
 import icon from "../../image/icon.svg";
-import { sendOrder } from "../../utils/api";
+import { sendOrderRequest } from "../../utils/api";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerConstructorContext } from "../../context/burger-constructor-context";
 
@@ -12,7 +12,7 @@ export default function BurgerConstructorOrder() {
   const { constructorContext, setOrder } = useContext(BurgerConstructorContext);
 
   function makeOrder() {
-    sendOrder(constructorContext.id)
+    sendOrderRequest(constructorContext.id)
       .then((res) => setOrder(res.order.number))
       .then(() => {
         toggleModal();
