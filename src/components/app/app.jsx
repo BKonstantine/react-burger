@@ -4,7 +4,7 @@ import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import style from "./app.module.css";
-import { getIngridients } from "../../services/actions/index";
+import { getIngridients } from "../../services/actions/burgerIngredientsAction";
 import Preloader from "../preloader/preloader";
 
 export default function App() {
