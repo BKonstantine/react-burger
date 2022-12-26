@@ -1,7 +1,9 @@
 import style from "./preloader.module.css";
 import preloader from "../../image/preloader.svg";
+import PropTypes from "prop-types";
 
-export default function Preloader({loading, error, errorText}) { 
+export default function Preloader({ loading, error, errorText }) {
+  console.log("Сработал");
   return (
     <>
       {loading && (
@@ -17,3 +19,9 @@ export default function Preloader({loading, error, errorText}) {
     </>
   );
 }
+
+Preloader.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+  errorText: PropTypes.string,
+};

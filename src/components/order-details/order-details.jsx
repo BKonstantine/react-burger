@@ -2,15 +2,14 @@ import { useSelector } from "react-redux";
 import style from "./order-details.module.css";
 import done from "../../image/done.svg";
 
-export default function OrderDetails() {  
-  
-  /* const order = useSelector(store => store.) */
+
+export default function OrderDetails() {
+  const order = useSelector((store) => store.currentOrderReducer.order); 
 
   return (
     <>
       <p className={`${style.order_number} text text_type_digits-large mt-30`}>
-        {/* {order} */}
-        0
+        {order}
       </p>
       <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
       <img className="mt-15 mb-15" src={done} alt="Иконка подтверждения" />

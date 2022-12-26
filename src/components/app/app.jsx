@@ -9,13 +9,7 @@ import Preloader from "../preloader/preloader";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-export default function App() {
-  /* const [constructorContext, setConstructorContext] = useState({
-    buns: [],
-    ingredients: [],
-    id: [],
-    price: 0,
-  }); */
+export default function App() {  
 
   const dispatch = useDispatch();
 

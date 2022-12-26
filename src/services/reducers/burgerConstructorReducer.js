@@ -6,7 +6,6 @@ import {
 const constructorInitialState = {
   burgerConstructorBunElement: undefined,
   burgerConstructorFillingList: [],  
-  currentOrder: { order: undefined },
 };
 
 export default function burgerConstructorReducer(
