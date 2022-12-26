@@ -21,7 +21,7 @@ export default function Preloader({ loading, error, errorText }) {
 }
 
 Preloader.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
   errorText: PropTypes.string,
 };

@@ -9,8 +9,7 @@ import Preloader from "../preloader/preloader";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-export default function App() {  
-
+export default function App() {
   const dispatch = useDispatch();
 
   const loading = useSelector(
@@ -32,9 +31,9 @@ export default function App() {
   return (
     <>
       {loading ? (
-        <Preloader loading={loading} error={error} errorText={errorText} />
+        <Preloader loading={loading} />
       ) : error ? (
-        <Preloader loading={loading} error={error} errorText={errorText} />
+        <Preloader error={error} errorText={errorText} />
       ) : (
         <>
           <AppHeader />

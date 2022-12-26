@@ -6,14 +6,21 @@ import style from "./burger-constructor-order.module.css";
 import icon from "../../image/icon.svg";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { makeOrder } from "../../services/actions/currentOrderAction";
+import Preloader from "../preloader/preloader";
 
 export default function BurgerConstructorOrder({ price }) {
   const [modal, setModal] = useState(false);
 
+  const error = useSelector((store) => store.currentOrderReducer.orderFailed);
+
+  const errorText = useSelector(
+    (store) => store.currentOrderReducer.orderFailedText
+  );
+
   const dispatch = useDispatch();
 
   const ingredients = useSelector((store) => store.burgerConstructorReducer);
-  
+
   function toggleModal() {
     setModal((prevModal) => !prevModal);
   }
@@ -32,11 +39,21 @@ export default function BurgerConstructorOrder({ price }) {
       >
         Оформить заказ
       </Button>
-      {modal && (
+
+      {error ? (
+        <Preloader error={error} errorText={errorText} />
+      ) : (
+        modal && (
+          <Modal onCloseModal={toggleModal}>
+            <OrderDetails />
+          </Modal>
+        )
+      )}
+      {/* {modal && (
         <Modal onCloseModal={toggleModal}>
           <OrderDetails />
         </Modal>
-      )}
+      )} */}
     </div>
   );
 }

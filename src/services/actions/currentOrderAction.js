@@ -18,7 +18,7 @@ export function makeOrder(ingredients, toggleModal) {
         /* dispatch({ type: GET_ORDER_SUCCESS, data: res.order.number}); */
         setTimeout(
           () => dispatch({ type: GET_ORDER_SUCCESS, payload: res.order.number }),
-          500
+          1000
         );
       })
       .then(() => {
