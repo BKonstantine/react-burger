@@ -12,6 +12,11 @@ export default function currentIngredientReducer(
   action
 ) {
   switch (action.type) {
+    case SET_CURRENT_INGREDIENT:
+      return { ...state, currentIngredient: action.payload };
+
+    case RESET_CURRENT_INGREDIENT:
+      return { ...state, currentIngredient: undefined };
     default:
       return state;
   }

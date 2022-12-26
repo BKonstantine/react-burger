@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDrag } from "react-dnd";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CurrencyIcon,
   Counter,
@@ -8,24 +9,40 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import style from "./card.module.css";
 import cardPropTypes from "../../utils/prop-types";
 import Modal from "../modal/modal";
+import {
+  SET_CURRENT_INGREDIENT,
+  RESET_CURRENT_INGREDIENT,
+} from "../../services/actions/currentIngredientAction";
 
 export default function Card({ ingredient }) {
   const [modal, setModal] = useState(false);
   const [visibleCounter, setvisibleCounter] = useState(false);
   const [counter, setCounter] = useState(undefined);
 
+  const dispatch = useDispatch();
+
+  const currenIngredient = useSelector(
+    (store) => store.currentIngredientReducer.currentIngredient
+  );
+
   const [, dragRef, dragPreviewRef] = useDrag({
     type: "ingredients",
     item: ingredient,
   });
 
-  function toggleModal(e) {
+  function openModal() {
+    dispatch({ type: SET_CURRENT_INGREDIENT, payload: ingredient });    
+    setModal(true)
+  }
+
+  function closeModal(e) {
     e.stopPropagation();
-    setModal((prevModal) => !prevModal);
+    dispatch({ type: RESET_CURRENT_INGREDIENT });    
+    setModal(false)
   }
 
   return (
-    <li ref={dragRef} className={style.card} onClick={toggleModal}>
+    <li ref={dragRef} className={style.card} onClick={openModal}>
       {visibleCounter ? <Counter count={0} size="default" /> : undefined}
       <img
         ref={dragPreviewRef}
@@ -43,8 +60,8 @@ export default function Card({ ingredient }) {
         {ingredient.name}
       </p>
       {modal && (
-        <Modal onCloseModal={toggleModal}>
-          <IngredientDetails ingredient={ingredient} />
+        <Modal onCloseModal={closeModal}>
+          <IngredientDetails ingredient={currenIngredient} />
         </Modal>
       )}
     </li>
