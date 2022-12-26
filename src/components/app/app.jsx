@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
@@ -18,15 +18,15 @@ export default function App() {
   const dispatch = useDispatch();
 
   const loading = useSelector(
-    (store) => store.ingredients.burgerIngredientsListRequest
+    (store) => store.burgerIngredientsReducer.burgerIngredientsListRequest
   );
 
   const error = useSelector(
-    (store) => store.ingredients.burgerIngredientsListFailed
+    (store) => store.burgerIngredientsReducer.burgerIngredientsListFailed
   );
 
   const errorText = useSelector(
-    (store) => store.ingredients.burgerIngredientsListFailedText
+    (store) => store.burgerIngredientsReducer.burgerIngredientsListFailedText
   );
 
   useEffect(() => {

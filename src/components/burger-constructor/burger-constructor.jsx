@@ -8,10 +8,19 @@ import BurgerConstructorFillingList from "../burger-constructor-filling-list/bur
 import loader from "../../image/double-ring-loader.svg";
 
 export default function BurgerConstructor() {
-  const ingredients = useSelector(
-    (store) => store.ingredients.burgerIngredientsList
+
+  /* const bun = useSelector(
+    (store) => store.constructor.burgerConstructorBunElement
+  ); */
+
+  const filling = useSelector(
+    (store) => store.burgerConstructorReducer.burgerConstructorFillingList
   );
 
+  /* const filling = useSelector(
+    (store) => store.burgerIngredientsReducer.burgerIngredientsList
+  ); */
+  
   /* const { constructorContext, setConstructorContext } = useContext(
     BurgerConstructorContext
   ); */
@@ -64,13 +73,13 @@ export default function BurgerConstructor() {
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={`(верх)`}
-          price={1010}
+          text={`Выбери булку`}
+          price={0}
           extraClass="ml-8"
           thumbnail={loader}
         />
         <ul className={style.container_constructor}>
-          {ingredients.map((item) => {
+          {filling.map((item) => {
             return (
               <BurgerConstructorFillingList key={item._id} filling={item} />
             );
@@ -79,8 +88,8 @@ export default function BurgerConstructor() {
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={`(верх)`}
-          price={1010}
+          text={`Выбери булку`}
+          price={0}
           extraClass="ml-8"
           thumbnail={loader}
         />

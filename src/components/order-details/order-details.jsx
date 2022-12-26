@@ -9,7 +9,7 @@ export default function OrderDetails() {
     <>
       <p className={`${style.order_number} text text_type_digits-large mt-30`}>
         {/* {order} */}
-        1000
+        0
       </p>
       <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
       <img className="mt-15 mb-15" src={done} alt="Иконка подтверждения" />

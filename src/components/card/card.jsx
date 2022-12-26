@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   CurrencyIcon,
   Counter,
@@ -9,16 +9,18 @@ import cardPropTypes from "../../utils/prop-types";
 import Modal from "../modal/modal";
 
 export default function Card({ ingredient }) {
-  const [modal, setModal] = React.useState(false);
+  const [modal, setModal] = useState(false);
+  const [visibleCounter, setvisibleCounter] = useState(false);
+  const [counter, setCounter] = useState(undefined);
 
   function toggleModal(e) {
-    e.stopPropagation();    
-    setModal((prevModal) => !prevModal);    
+    e.stopPropagation();
+    setModal((prevModal) => !prevModal);
   }
 
   return (
     <li className={style.card} onClick={toggleModal}>
-      <Counter count={1} size="default" />
+      {visibleCounter ? <Counter count={0} size="default" /> : undefined}
       <img
         className={style.card_image}
         src={ingredient.image}

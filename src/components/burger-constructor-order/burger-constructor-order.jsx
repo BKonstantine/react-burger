@@ -28,7 +28,7 @@ export default function BurgerConstructorOrder() {
       <div className={style.price}>
         <p className="text text_type_digits-medium">
           {/*  {constructorContext.price} */}
-          1000
+          0
         </p>
         <img src={icon} alt="Иконка валюты" />
       </div>

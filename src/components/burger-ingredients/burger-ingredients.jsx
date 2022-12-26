@@ -13,7 +13,7 @@ export default function BurgerIngredients() {
   const [mainTabRef, inViewTabMain] = useInView({ threshold: 0 });
 
   const ingredients = useSelector(
-    (store) => store.ingredients.burgerIngredientsList
+    (store) => store.burgerIngredientsReducer.burgerIngredientsList
   );
 
   const { buns, mains, sauces } = useMemo(() => {

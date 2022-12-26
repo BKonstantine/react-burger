@@ -1,5 +1,6 @@
 const constructorInitialState = {
-  burgerConstructorList: [],
+  burgerConstructorBunElement: undefined,
+  burgerConstructorFillingList: [],
   currentIngredient: { ingredient: undefined },
   currentOrder: { order: undefined },
 };
@@ -9,7 +10,7 @@ export default function burgerConstructorReducer(
   action
 ) {
   switch (action.type) {
-    default:
+    default:      
       return state;
   }
 }
