@@ -73,7 +73,7 @@ export default function BurgerConstructor() {
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={`Выбери булку`}
+          text={`Выберите булку`}
           price={0}
           extraClass="ml-8"
           thumbnail={loader}
@@ -88,7 +88,7 @@ export default function BurgerConstructor() {
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={`Выбери булку`}
+          text={`Выберите булку`}
           price={0}
           extraClass="ml-8"
           thumbnail={loader}
