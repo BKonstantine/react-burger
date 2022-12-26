@@ -5,8 +5,7 @@ import {
 
 const constructorInitialState = {
   burgerConstructorBunElement: undefined,
-  burgerConstructorFillingList: [],
-  currentIngredient: { ingredient: undefined },
+  burgerConstructorFillingList: [],  
   currentOrder: { order: undefined },
 };
 

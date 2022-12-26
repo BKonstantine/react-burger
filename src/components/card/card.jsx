@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDrag } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   CurrencyIcon,
   Counter,
@@ -19,11 +19,7 @@ export default function Card({ ingredient }) {
   const [visibleCounter, setvisibleCounter] = useState(false);
   const [counter, setCounter] = useState(undefined);
 
-  const dispatch = useDispatch();
-
-  const currenIngredient = useSelector(
-    (store) => store.currentIngredientReducer.currentIngredient
-  );
+  const dispatch = useDispatch();  
 
   const [, dragRef, dragPreviewRef] = useDrag({
     type: "ingredients",
@@ -61,7 +57,7 @@ export default function Card({ ingredient }) {
       </p>
       {modal && (
         <Modal onCloseModal={closeModal}>
-          <IngredientDetails ingredient={currenIngredient} />
+          <IngredientDetails/>
         </Modal>
       )}
     </li>

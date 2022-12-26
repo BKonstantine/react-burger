@@ -3,21 +3,10 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import style from "./burger-constructor-order.module.css";
 import icon from "../../image/icon.svg";
-import { sendOrderRequest } from "../../utils/api";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export default function BurgerConstructorOrder({price}) {
-  const [modal, setModal] = useState(false);
-  /* const { constructorContext, setOrder } = useContext();
-
-  function makeOrder() {
-    sendOrderRequest(constructorContext.id)
-      .then((res) => setOrder(res.order.number))
-      .then(() => {
-        toggleModal();
-      })
-      .catch(() => console.log("Ошибка при формировании заказа"));
-  } */
+  const [modal, setModal] = useState(false);  
 
   function toggleModal() {
     setModal((prevModal) => !prevModal);
