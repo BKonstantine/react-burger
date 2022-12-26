@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 import style from "./order-details.module.css";
 import done from "../../image/done.svg";
 
-export default function OrderDetails() {
-  /* const { order } = useContext(BurgerConstructorContext); */
+export default function OrderDetails() {  
   
+  /* const order = useSelector(store => store.) */
+
   return (
     <>
       <p className={`${style.order_number} text text_type_digits-large mt-30`}>
