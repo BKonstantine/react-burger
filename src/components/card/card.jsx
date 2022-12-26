@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDrag } from "react-dnd";
 import {
   CurrencyIcon,
   Counter,
@@ -13,15 +14,21 @@ export default function Card({ ingredient }) {
   const [visibleCounter, setvisibleCounter] = useState(false);
   const [counter, setCounter] = useState(undefined);
 
+  const [, dragRef, dragPreviewRef] = useDrag({
+    type: "ingredients",
+    item: ingredient,
+  });
+
   function toggleModal(e) {
     e.stopPropagation();
     setModal((prevModal) => !prevModal);
   }
 
   return (
-    <li className={style.card} onClick={toggleModal}>
+    <li ref={dragRef} className={style.card} onClick={toggleModal}>
       {visibleCounter ? <Counter count={0} size="default" /> : undefined}
       <img
+        ref={dragPreviewRef}
         className={style.card_image}
         src={ingredient.image}
         alt={ingredient.name}

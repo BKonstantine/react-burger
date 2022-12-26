@@ -1,6 +1,8 @@
 /* eslint-disable array-callback-return */
+// eslint-disable-next-line no-unused-vars
 import { useEffect, useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
+import { useSelector, useDispatch } from "react-redux";
 import BurgerConstructorOrder from "../burger-constructor-order/burger-constructor-order";
 import style from "./burger-constructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -8,19 +10,27 @@ import BurgerConstructorFillingList from "../burger-constructor-filling-list/bur
 import loader from "../../image/double-ring-loader.svg";
 
 export default function BurgerConstructor() {
+  const dispatch = useDispatch();
 
-  /* const bun = useSelector(
+  const bun = useSelector(
     (store) => store.constructor.burgerConstructorBunElement
-  ); */
+  );
 
   const filling = useSelector(
     (store) => store.burgerConstructorReducer.burgerConstructorFillingList
   );
 
-  /* const filling = useSelector(
-    (store) => store.burgerIngredientsReducer.burgerIngredientsList
-  ); */
-  
+  function onDropHandler(ingredient) {
+    console.log(ingredient);
+  }
+
+  const [, dropTarget] = useDrop({
+    accept: "ingredients",
+    drop(ingredient) {
+      onDropHandler(ingredient);
+    },
+  });
+
   /* const { constructorContext, setConstructorContext } = useContext(
     BurgerConstructorContext
   ); */
@@ -69,7 +79,7 @@ export default function BurgerConstructor() {
 
   return (
     <div className={style.container}>
-      <ul className={style.lists}>
+      <ul ref={dropTarget} className={style.lists}>
         <ConstructorElement
           type="top"
           isLocked={true}
