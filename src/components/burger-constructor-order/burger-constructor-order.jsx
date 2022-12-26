@@ -6,7 +6,7 @@ import icon from "../../image/icon.svg";
 import { sendOrderRequest } from "../../utils/api";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export default function BurgerConstructorOrder() {
+export default function BurgerConstructorOrder({price}) {
   const [modal, setModal] = useState(false);
   /* const { constructorContext, setOrder } = useContext();
 
@@ -27,8 +27,8 @@ export default function BurgerConstructorOrder() {
     <div className={style.order}>
       <div className={style.price}>
         <p className="text text_type_digits-medium">
-          {/*  {constructorContext.price} */}
-          0
+          
+          {price}
         </p>
         <img src={icon} alt="Иконка валюты" />
       </div>

@@ -1,6 +1,4 @@
-/* eslint-disable array-callback-return */
-// eslint-disable-next-line no-unused-vars
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useDrop } from "react-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import BurgerConstructorOrder from "../burger-constructor-order/burger-constructor-order";
@@ -8,20 +6,21 @@ import style from "./burger-constructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorFillingList from "../burger-constructor-filling-list/burger-constructor-filling-list";
 import loader from "../../image/double-ring-loader.svg";
+import { ADD_INGREDIENT } from "../../services/actions/burgerConstructorAction";
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
 
   const bun = useSelector(
-    (store) => store.constructor.burgerConstructorBunElement
+    (store) => store.burgerConstructorReducer.burgerConstructorBunElement
   );
 
-  const filling = useSelector(
+  const fillingList = useSelector(
     (store) => store.burgerConstructorReducer.burgerConstructorFillingList
   );
 
   function onDropHandler(ingredient) {
-    console.log(ingredient);
+    dispatch({ type: ADD_INGREDIENT, payload: ingredient });
   }
 
   const [, dropTarget] = useDrop({
@@ -31,51 +30,17 @@ export default function BurgerConstructor() {
     },
   });
 
-  /* const { constructorContext, setConstructorContext } = useContext(
-    BurgerConstructorContext
-  ); */
+  const bunPrice = useMemo(() => {
+    return bun === undefined ? 0 : bun.price * 2;
+  }, [bun]);
 
-  /* const randomIngredients = useMemo(() => {
-    return ingredients.slice(0, Math.round(Math.random() * 7) + 3);
-  }, [ingredients]);
-
-  const randomBun = useMemo(() => {
-    return randomIngredients.find((item) => item.type === "bun");
-  }, [randomIngredients]);
-
-  const { randomFilling } = useMemo(() => {
-    return randomIngredients.reduce(
-      (count, item) => {
-        if (item.type !== "bun") {
-          count.randomFilling.push(item);
-        }
-        return count;
-      },
-      { randomFilling: [] }
-    );
-  }, [randomIngredients]);
+  const fillingPrice = useMemo(() => {
+    return fillingList.reduce((sum, item) => sum + item.price, 0);
+  }, [fillingList]);
 
   const totalPrice = useMemo(() => {
-    let counter =
-      randomBun.price * 2 +
-      randomFilling.reduce((sum, item) => sum + item.price, 0);
-    return counter;
-  }, [randomBun, randomFilling]); */
-
-  /* useEffect(() => {
-    setConstructorContext({
-      ...constructorContext,
-      buns: [...constructorContext.buns, randomBun],
-      ingredients: randomFilling,
-      id: [
-        randomBun._id,
-        ...randomFilling.map((item) => item._id),
-        randomBun._id,
-      ],
-      price: totalPrice,
-    });
-    
-  }, []); */
+    return bun === undefined ? fillingPrice : bunPrice + fillingPrice;
+  }, [bunPrice, fillingPrice, bun]);
 
   return (
     <div className={style.container}>
@@ -83,28 +48,31 @@ export default function BurgerConstructor() {
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={`Выберите булку`}
-          price={0}
+          text={bun === undefined ? "Выберите булку" : `${bun.name} (верх)`}
+          price={bun === undefined ? 0 : bun.price}
           extraClass="ml-8"
-          thumbnail={loader}
+          thumbnail={bun === undefined ? loader : bun.image}
         />
         <ul className={style.container_constructor}>
-          {filling.map((item) => {
+          {fillingList.map((item, index) => {
             return (
-              <BurgerConstructorFillingList key={item._id} filling={item} />
+              <BurgerConstructorFillingList
+                key={`${item._id}+${index}`}
+                filling={item}
+              />
             );
           })}
         </ul>
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={`Выберите булку`}
-          price={0}
+          text={bun === undefined ? "Выберите булку" : `${bun.name} (низ)`}
+          price={bun === undefined ? 0 : bun.price}
           extraClass="ml-8"
-          thumbnail={loader}
+          thumbnail={bun === undefined ? loader : bun.image}
         />
       </ul>
-      <BurgerConstructorOrder />
+      <BurgerConstructorOrder price={totalPrice} />
     </div>
   );
 }
