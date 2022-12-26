@@ -1,20 +1,7 @@
 import style from "./preloader.module.css";
 import preloader from "../../image/preloader.svg";
-import { useSelector } from "react-redux";
 
-export default function Preloader() {
-  const loading = useSelector(
-    (store) => store.ingredients.burgerIngredientsListRequest
-  );  
-
-  const error = useSelector(
-    (store) => store.ingredients.burgerIngredientsListFailed
-  );
-
-  const errorText = useSelector(
-    (store) => store.ingredients.burgerIngredientsListFailedText
-  );
-
+export default function Preloader({loading, error, errorText}) { 
   return (
     <>
       {loading && (

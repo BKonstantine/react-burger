@@ -1,15 +1,14 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import style from "./burger-constructor-order.module.css";
 import icon from "../../image/icon.svg";
 import { sendOrderRequest } from "../../utils/api";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgerConstructorContext } from "../../context/burger-constructor-context";
 
 export default function BurgerConstructorOrder() {
   const [modal, setModal] = useState(false);
-  const { constructorContext, setOrder } = useContext(BurgerConstructorContext);
+  /* const { constructorContext, setOrder } = useContext();
 
   function makeOrder() {
     sendOrderRequest(constructorContext.id)
@@ -18,7 +17,7 @@ export default function BurgerConstructorOrder() {
         toggleModal();
       })
       .catch(() => console.log("Ошибка при формировании заказа"));
-  }
+  } */
 
   function toggleModal() {
     setModal((prevModal) => !prevModal);
@@ -28,11 +27,12 @@ export default function BurgerConstructorOrder() {
     <div className={style.order}>
       <div className={style.price}>
         <p className="text text_type_digits-medium">
-          {constructorContext.price}
+          {/*  {constructorContext.price} */}
+          1000
         </p>
         <img src={icon} alt="Иконка валюты" />
       </div>
-      <Button htmlType="button" type="primary" size="large" onClick={makeOrder}>
+      <Button htmlType="button" type="primary" size="large" /* onClick={makeOrder} */>
         Оформить заказ
       </Button>
       {modal && (

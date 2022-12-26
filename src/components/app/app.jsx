@@ -8,12 +8,12 @@ import { getIngridients } from "../../services/actions/burgerIngredientsAction";
 import Preloader from "../preloader/preloader";
 
 export default function App() {
-  const [constructorContext, setConstructorContext] = useState({
+  /* const [constructorContext, setConstructorContext] = useState({
     buns: [],
     ingredients: [],
     id: [],
     price: 0,
-  });
+  }); */
 
   const dispatch = useDispatch();
 
@@ -25,6 +25,10 @@ export default function App() {
     (store) => store.ingredients.burgerIngredientsListFailed
   );
 
+  const errorText = useSelector(
+    (store) => store.ingredients.burgerIngredientsListFailedText
+  );
+
   useEffect(() => {
     dispatch(getIngridients());
   }, [dispatch]);
@@ -32,15 +36,15 @@ export default function App() {
   return (
     <>
       {loading ? (
-        <Preloader />
+        <Preloader loading={loading} error={error} errorText={errorText} />
       ) : error ? (
-        <Preloader />
+        <Preloader loading={loading} error={error} errorText={errorText} />
       ) : (
         <>
           <AppHeader />
           <main className={style.main}>
             <BurgerIngredients />
-            {/* <BurgerConstructor /> */}
+            <BurgerConstructor />
           </main>
         </>
       )}

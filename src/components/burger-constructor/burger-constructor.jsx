@@ -1,23 +1,22 @@
 /* eslint-disable array-callback-return */
-import { useContext, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { useSelector } from "react-redux";
 import BurgerConstructorOrder from "../burger-constructor-order/burger-constructor-order";
 import style from "./burger-constructor.module.css";
-import {
-  ConstructorElement,
-  DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgerIngredientsContext } from "../../context/burger-ingredients-context";
-import { BurgerConstructorContext } from "../../context/burger-constructor-context";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import BurgerConstructorFillingList from "../burger-constructor-filling-list/burger-constructor-filling-list";
+import loader from "../../image/double-ring-loader.svg";
 
 export default function BurgerConstructor() {
-  const ingredients = useContext(BurgerIngredientsContext);
-
-  // eslint-disable-next-line no-unused-vars
-  const { constructorContext, setConstructorContext } = useContext(
-    BurgerConstructorContext
+  const ingredients = useSelector(
+    (store) => store.ingredients.burgerIngredientsList
   );
 
-  const randomIngredients = useMemo(() => {
+  /* const { constructorContext, setConstructorContext } = useContext(
+    BurgerConstructorContext
+  ); */
+
+  /* const randomIngredients = useMemo(() => {
     return ingredients.slice(0, Math.round(Math.random() * 7) + 3);
   }, [ingredients]);
 
@@ -42,9 +41,9 @@ export default function BurgerConstructor() {
       randomBun.price * 2 +
       randomFilling.reduce((sum, item) => sum + item.price, 0);
     return counter;
-  }, [randomBun, randomFilling]);
+  }, [randomBun, randomFilling]); */
 
-  useEffect(() => {
+  /* useEffect(() => {
     setConstructorContext({
       ...constructorContext,
       buns: [...constructorContext.buns, randomBun],
@@ -56,41 +55,34 @@ export default function BurgerConstructor() {
       ],
       price: totalPrice,
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    
+  }, []); */
 
   return (
     <div className={style.container}>
-      <ul className={style.lists}>        
+      <ul className={style.lists}>
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={`${randomBun.name} (верх)`}
-          price={randomBun.price}
+          text={`(верх)`}
+          price={1010}
           extraClass="ml-8"
-          thumbnail={randomBun.image}
+          thumbnail={loader}
         />
         <ul className={style.container_constructor}>
-          {constructorContext.ingredients.map((item) => {
+          {ingredients.map((item) => {
             return (
-              <li key={item._id} className={style.element}>
-                <DragIcon />
-                <ConstructorElement
-                  text={item.name}
-                  price={item.price}
-                  thumbnail={item.image}
-                />
-              </li>
+              <BurgerConstructorFillingList key={item._id} filling={item} />
             );
           })}
         </ul>
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={`${randomBun.name} (низ)`}
-          price={randomBun.price}
+          text={`(верх)`}
+          price={1010}
           extraClass="ml-8"
-          thumbnail={randomBun.image}
+          thumbnail={loader}
         />
       </ul>
       <BurgerConstructorOrder />
