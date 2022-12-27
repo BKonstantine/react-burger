@@ -8,12 +8,20 @@ export default function OrderDetails() {
 
   const loading = useSelector(
     (store) => store.currentOrderReducer.orderRequest
-  );  
+  );
+
+  const error = useSelector((store) => store.currentOrderReducer.orderFailed);
+
+  const errorText = useSelector(
+    (store) => store.currentOrderReducer.orderFailedText
+  );
 
   return (
     <>
       {loading ? (
         <Preloader loading={loading} />
+      ) : error ? (
+        <Preloader error={error} errorText={errorText} />
       ) : (
         <>
           <p

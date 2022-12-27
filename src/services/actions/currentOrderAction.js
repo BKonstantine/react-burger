@@ -17,7 +17,8 @@ export function makeOrder(ingredients, toggleModal) {
       .then((res) => {
         /* dispatch({ type: GET_ORDER_SUCCESS, data: res.order.number}); */
         setTimeout(
-          () => dispatch({ type: GET_ORDER_SUCCESS, payload: res.order.number }),
+          () =>
+            dispatch({ type: GET_ORDER_SUCCESS, payload: res.order.number }),
           1000
         );
       })
@@ -29,6 +30,7 @@ export function makeOrder(ingredients, toggleModal) {
           type: GET_ORDER_FAILED,
           errorText: "Ошибка при формировании заказа",
         });
+        toggleModal();
       });
   };
 }
