@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useDrag } from "react-dnd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CurrencyIcon,
   Counter,
@@ -16,10 +16,27 @@ import {
 
 export default function Card({ ingredient }) {
   const [modal, setModal] = useState(false);
-  const [visibleCounter, setvisibleCounter] = useState(false);
-  const [counter, setCounter] = useState(undefined);
 
-  const dispatch = useDispatch();  
+  const burgerConstructorIngredients = useSelector(
+    (store) => store.burgerConstructorReducer
+  );
+
+  const counter = useMemo(() => {
+    if (
+      burgerConstructorIngredients.burgerConstructorBunElement === undefined
+    ) {
+      return 0;
+    }
+    return ingredient.type === "bun" &&
+      ingredient._id ===
+        burgerConstructorIngredients.burgerConstructorBunElement._id
+      ? 2
+      : burgerConstructorIngredients.burgerConstructorFillingList.filter(
+          (item) => item._id === ingredient._id
+        ).length;
+  }, [burgerConstructorIngredients, ingredient._id, ingredient.type]);
+
+  const dispatch = useDispatch();
 
   const [, dragRef, dragPreviewRef] = useDrag({
     type: "ingredients",
@@ -27,19 +44,19 @@ export default function Card({ ingredient }) {
   });
 
   function openModal() {
-    dispatch({ type: SET_CURRENT_INGREDIENT, payload: ingredient });    
-    setModal(true)
+    dispatch({ type: SET_CURRENT_INGREDIENT, payload: ingredient });
+    setModal(true);
   }
 
   function closeModal(e) {
     e.stopPropagation();
-    dispatch({ type: RESET_CURRENT_INGREDIENT });    
-    setModal(false)
+    dispatch({ type: RESET_CURRENT_INGREDIENT });
+    setModal(false);
   }
 
   return (
     <li ref={dragRef} className={style.card} onClick={openModal}>
-      {visibleCounter ? <Counter count={0} size="default" /> : undefined}
+      {counter !== 0 && <Counter count={counter} size="default" />}
       <img
         ref={dragPreviewRef}
         className={style.card_image}
@@ -57,7 +74,7 @@ export default function Card({ ingredient }) {
       </p>
       {modal && (
         <Modal onCloseModal={closeModal}>
-          <IngredientDetails/>
+          <IngredientDetails />
         </Modal>
       )}
     </li>
