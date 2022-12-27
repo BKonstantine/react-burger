@@ -36,6 +36,7 @@ export default function BurgerConstructorOrder({ price }) {
         type="primary"
         size="large"
         onClick={() => dispatch(makeOrder(ingredients, toggleModal))}
+        disabled={!ingredients.burgerConstructorBunElement}
       >
         Оформить заказ
       </Button>
