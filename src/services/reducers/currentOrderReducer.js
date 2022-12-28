@@ -2,6 +2,7 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILED,
+  RESET_ORDER
 } from "../actions/currentOrderAction";
 
 const currentOrderInitialState = {
@@ -34,6 +35,9 @@ export default function currentOrderReducer(
         orderFailed: true,
         orderFailedText: action.errorText,
       };
+
+    case RESET_ORDER:
+      return { ...state, order: undefined };
     default:
       return state;
   }

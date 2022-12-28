@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import Modal from "../modal/modal";
@@ -7,16 +6,17 @@ import style from "./burger-constructor-order.module.css";
 import icon from "../../image/icon.svg";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { makeOrder } from "../../services/actions/currentOrderAction";
+import { RESET_ORDER } from "../../services/actions/currentOrderAction";
 
 export default function BurgerConstructorOrder({ price }) {
-  const [modal, setModal] = useState(false);
+  const order = useSelector((store) => store.currentOrderReducer.order);
 
   const dispatch = useDispatch();
 
   const ingredients = useSelector((store) => store.burgerConstructorReducer);
 
-  function toggleModal() {
-    setModal((prevModal) => !prevModal);
+  function closeModal() {
+    dispatch({ type: RESET_ORDER });
   }
 
   return (
@@ -29,13 +29,13 @@ export default function BurgerConstructorOrder({ price }) {
         htmlType="button"
         type="primary"
         size="large"
-        onClick={() => dispatch(makeOrder(ingredients, toggleModal))}
+        onClick={() => dispatch(makeOrder(ingredients))}
         disabled={!ingredients.burgerConstructorBunElement}
       >
         Оформить заказ
       </Button>
-      {modal && (
-        <Modal onCloseModal={toggleModal}>
+      {order && (
+        <Modal onCloseModal={closeModal}>
           <OrderDetails />
         </Modal>
       )}
