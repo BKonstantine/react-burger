@@ -15,7 +15,9 @@ import {
 } from "../../services/actions/currentIngredientAction";
 
 export default function Card({ ingredient }) {
-  const [modal, setModal] = useState(false);
+  const currenIngredient = useSelector(
+    (store) => store.currentIngredientReducer.currentIngredient
+  );
 
   const burgerConstructorIngredients = useSelector(
     (store) => store.burgerConstructorReducer
@@ -32,14 +34,13 @@ export default function Card({ ingredient }) {
         burgerConstructorIngredients.burgerConstructorFillingList.filter(
           (constructorItem) => constructorItem._id === ingredient._id
         ).length;
-    });    
+    });
     if (burgerConstructorIngredients.burgerConstructorBunElement) {
       counters[
         burgerConstructorIngredients.burgerConstructorBunElement._id
       ] = 2;
-    } 
-    return counters;   
-
+    }
+    return counters;
   }, [burgerConstructorIngredients, burgerIngredients]);
 
   const getCounterInredient = (ingredientId) => counter[ingredientId];
@@ -53,13 +54,11 @@ export default function Card({ ingredient }) {
 
   function openModal() {
     dispatch({ type: SET_CURRENT_INGREDIENT, payload: ingredient });
-    setModal(true);
   }
 
   function closeModal(e) {
     e.stopPropagation();
     dispatch({ type: RESET_CURRENT_INGREDIENT });
-    setModal(false);
   }
 
   return (
@@ -82,7 +81,7 @@ export default function Card({ ingredient }) {
       <p className={`text text_type_main-default ${style.card_name}`}>
         {ingredient.name}
       </p>
-      {modal && (
+      {currenIngredient && (
         <Modal onCloseModal={closeModal}>
           <IngredientDetails />
         </Modal>
