@@ -16,13 +16,10 @@ import { Reorder } from "framer-motion";
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
 
-  const bun = useSelector(
-    (store) => store.burgerConstructorReducer.burgerConstructorBunElement
-  );
-
-  const fillingList = useSelector(
-    (store) => store.burgerConstructorReducer.burgerConstructorFillingList
-  );
+  const { bun, fillingList } = useSelector((store) => ({
+    bun: store.burgerConstructorReducer.burgerConstructorBunElement,
+    fillingList: store.burgerConstructorReducer.burgerConstructorFillingList,
+  }));
 
   function onDropHandler(ingredient) {
     dispatch({ type: ADD_INGREDIENT, id: uuidv4(), payload: ingredient });

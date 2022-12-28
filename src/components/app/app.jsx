@@ -12,17 +12,11 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 export default function App() {
   const dispatch = useDispatch();
 
-  const loading = useSelector(
-    (store) => store.burgerIngredientsReducer.burgerIngredientsListRequest
-  );
-
-  const error = useSelector(
-    (store) => store.burgerIngredientsReducer.burgerIngredientsListFailed
-  );
-
-  const errorText = useSelector(
-    (store) => store.burgerIngredientsReducer.burgerIngredientsListFailedText
-  );
+  const { loading, error, errorText } = useSelector((store) => ({
+    loading: store.burgerIngredientsReducer.burgerIngredientsListRequest,
+    error: store.burgerIngredientsReducer.burgerIngredientsListFailed,
+    errorText: store.burgerIngredientsReducer.burgerIngredientsListFailedText,
+  }));
 
   useEffect(() => {
     dispatch(getIngridients());

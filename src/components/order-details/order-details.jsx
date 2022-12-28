@@ -4,17 +4,12 @@ import done from "../../image/done.svg";
 import Preloader from "../preloader/preloader";
 
 export default function OrderDetails() {
-  const order = useSelector((store) => store.currentOrderReducer.order);
-
-  const loading = useSelector(
-    (store) => store.currentOrderReducer.orderRequest
-  );
-
-  const error = useSelector((store) => store.currentOrderReducer.orderFailed);
-
-  const errorText = useSelector(
-    (store) => store.currentOrderReducer.orderFailedText
-  );
+  const { order, loading, error, errorText } = useSelector((store) => ({
+    order: store.currentOrderReducer.order,
+    loading: store.currentOrderReducer.orderRequest,
+    error: store.currentOrderReducer.orderFailed,
+    errorText: store.currentOrderReducer.orderFailedText,
+  }));
 
   return (
     <>
