@@ -21,20 +21,28 @@ export default function Card({ ingredient }) {
     (store) => store.burgerConstructorReducer
   );
 
+  const burgerIngredients = useSelector(
+    (store) => store.burgerIngredientsReducer
+  );
+
   const counter = useMemo(() => {
-    if (
-      burgerConstructorIngredients.burgerConstructorBunElement === undefined
-    ) {
-      return 0;
-    }
-    return ingredient.type === "bun" &&
-      ingredient._id ===
-        burgerConstructorIngredients.burgerConstructorBunElement._id
-      ? 2
-      : burgerConstructorIngredients.burgerConstructorFillingList.filter(
-          (item) => item._id === ingredient._id
+    const counters = {};
+    burgerIngredients.burgerIngredientsList.forEach((ingredient) => {
+      counters[ingredient._id] =
+        burgerConstructorIngredients.burgerConstructorFillingList.filter(
+          (constructorItem) => constructorItem._id === ingredient._id
         ).length;
-  }, [burgerConstructorIngredients, ingredient._id, ingredient.type]);
+    });    
+    if (burgerConstructorIngredients.burgerConstructorBunElement) {
+      counters[
+        burgerConstructorIngredients.burgerConstructorBunElement._id
+      ] = 2;
+    } 
+    return counters;   
+
+  }, [burgerConstructorIngredients, burgerIngredients]);
+
+  const getCounterInredient = (ingredientId) => counter[ingredientId];
 
   const dispatch = useDispatch();
 
@@ -56,7 +64,9 @@ export default function Card({ ingredient }) {
 
   return (
     <li ref={dragRef} className={style.card} onClick={openModal}>
-      {counter !== 0 && <Counter count={counter} size="default" />}
+      {getCounterInredient(ingredient._id) !== 0 && (
+        <Counter count={getCounterInredient(ingredient._id)} size="default" />
+      )}
       <img
         ref={dragPreviewRef}
         className={style.card_image}

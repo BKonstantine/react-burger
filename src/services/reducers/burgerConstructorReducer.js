@@ -5,7 +5,7 @@ import {
 
 const constructorInitialState = {
   burgerConstructorBunElement: undefined,
-  burgerConstructorFillingList: [],  
+  burgerConstructorFillingList: [],
 };
 
 export default function burgerConstructorReducer(
@@ -25,8 +25,16 @@ export default function burgerConstructorReducer(
         ...state,
         burgerConstructorFillingList: [
           ...state.burgerConstructorFillingList,
-          action.payload,
+          { constructorItemId: Date.now(), ...action.payload },
         ],
+      };
+
+    case DELETE_INGREDIENT:
+      return {
+        ...state,
+        burgerConstructorFillingList: state.burgerConstructorFillingList.filter(
+          (item) => item.constructorItemId !== action.payload.constructorItemId
+        ),
       };
     default:
       return state;
