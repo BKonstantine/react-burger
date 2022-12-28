@@ -1,6 +1,7 @@
 import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
+  SORT_INGREDIENTS,
 } from "../actions/burgerConstructorAction";
 
 const constructorInitialState = {
@@ -25,7 +26,7 @@ export default function burgerConstructorReducer(
         ...state,
         burgerConstructorFillingList: [
           ...state.burgerConstructorFillingList,
-          { constructorItemId: Date.now(), ...action.payload },
+          { constructorItemId: action.id, ...action.payload },
         ],
       };
 
@@ -35,6 +36,12 @@ export default function burgerConstructorReducer(
         burgerConstructorFillingList: state.burgerConstructorFillingList.filter(
           (item) => item.constructorItemId !== action.payload.constructorItemId
         ),
+      };
+
+    case SORT_INGREDIENTS:
+      return {
+        ...state,
+        burgerConstructorFillingList: action.payload,
       };
     default:
       return state;

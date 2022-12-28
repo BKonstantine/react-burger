@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import style from "./burger-constructor-order.module.css";
@@ -8,7 +9,7 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { makeOrder } from "../../services/actions/currentOrderAction";
 
 export default function BurgerConstructorOrder({ price }) {
-  const [modal, setModal] = useState(false);  
+  const [modal, setModal] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -41,3 +42,7 @@ export default function BurgerConstructorOrder({ price }) {
     </div>
   );
 }
+
+BurgerConstructorOrder.propTypes = {
+  price: PropTypes.number.isRequired,
+};
