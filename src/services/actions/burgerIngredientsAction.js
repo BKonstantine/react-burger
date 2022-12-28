@@ -9,11 +9,7 @@ export function getIngridients() {
     dispatch({ type: GET_INGREDIENTS_REQUEST });
     getIngridientsRequest()
       .then((res) => {        
-        /* dispatch({ type: GET_INGREDIENTS_SUCCESS, data: res.data }); */
-        setTimeout(
-          () => dispatch({ type: GET_INGREDIENTS_SUCCESS, data: res.data }),
-          500
-        );
+        dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });        
       })
       .catch((err) => {
         dispatch({ type: GET_INGREDIENTS_FAILED, errorText: err });

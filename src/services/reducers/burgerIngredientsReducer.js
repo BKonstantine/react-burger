@@ -20,7 +20,7 @@ export default function burgerIngredientsReducer(state = ingredientsInitialState
     case GET_INGREDIENTS_SUCCESS:
       return {
         ...state,
-        burgerIngredientsList: action.data,
+        burgerIngredientsList: action.payload,
         burgerIngredientsListRequest: false,
         burgerIngredientsListFailed: false,
       };
