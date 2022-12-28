@@ -12,6 +12,12 @@
   padding: 0;
 }
 
+.lists_hover {
+  composes: lists;
+  box-shadow: 0px 0px 16px 8px rgba(51, 51, 255, 0.25),
+    0px 0px 8px 8px rgba(51, 51, 255, 0.25);
+}
+
 .container_constructor {
   display: flex;
   flex-direction: column;

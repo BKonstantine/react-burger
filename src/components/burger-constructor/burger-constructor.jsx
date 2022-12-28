@@ -23,11 +23,14 @@ export default function BurgerConstructor() {
     dispatch({ type: ADD_INGREDIENT, payload: ingredient });
   }
 
-  const [, dropTarget] = useDrop({
+  const [{ isHover }, dropTarget] = useDrop({
     accept: "ingredients",
     drop(ingredient) {
       onDropHandler(ingredient);
     },
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+    }),
   });
 
   const bunPrice = useMemo(() => {
@@ -44,7 +47,10 @@ export default function BurgerConstructor() {
 
   return (
     <div className={style.container}>
-      <ul ref={dropTarget} className={style.lists}>
+      <ul
+        ref={dropTarget}
+        className={isHover ? style.lists_hover : style.lists}
+      >
         <ConstructorElement
           type="top"
           isLocked={true}
