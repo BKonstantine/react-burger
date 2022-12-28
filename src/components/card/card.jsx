@@ -5,19 +5,13 @@ import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 import style from "./card.module.css";
 import cardPropTypes from "../../utils/prop-types";
-import Modal from "../modal/modal";
 import {
-  SET_CURRENT_INGREDIENT,
-  RESET_CURRENT_INGREDIENT,
+  SET_CURRENT_INGREDIENT,  
 } from "../../services/actions/currentIngredientAction";
 
-export default function Card({ ingredient }) {
-  const currenIngredient = useSelector(
-    (store) => store.currentIngredientReducer.currentIngredient
-  );
+export default function Card({ ingredient }) {  
 
   const burgerConstructorIngredients = useSelector(
     (store) => store.burgerConstructorReducer
@@ -54,12 +48,7 @@ export default function Card({ ingredient }) {
 
   function openModal() {
     dispatch({ type: SET_CURRENT_INGREDIENT, payload: ingredient });
-  }
-
-  function closeModal(e) {
-    e.stopPropagation();
-    dispatch({ type: RESET_CURRENT_INGREDIENT });
-  }
+  }  
 
   return (
     <li ref={dragRef} className={style.card} onClick={openModal}>
@@ -80,12 +69,7 @@ export default function Card({ ingredient }) {
       </div>
       <p className={`text text_type_main-default ${style.card_name}`}>
         {ingredient.name}
-      </p>
-      {currenIngredient && (
-        <Modal onCloseModal={closeModal}>
-          <IngredientDetails />
-        </Modal>
-      )}
+      </p>      
     </li>
   );
 }
