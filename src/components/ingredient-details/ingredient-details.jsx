@@ -1,7 +1,12 @@
+import { useSelector } from "react-redux";
 import style from "./ingredient-details.module.css";
-import cardPropTypes from "../../utils/prop-types";
 
-export default function IngredientDetails({ ingredient }) {
+export default function IngredientDetails() {
+
+  const ingredient = useSelector(
+    (store) => store.currentIngredientReducer.currentIngredient
+  );
+
   return (
     <>
       <p className={`${style.title} text text_type_main-large`}>
@@ -42,7 +47,3 @@ export default function IngredientDetails({ ingredient }) {
     </>
   );
 }
-
-IngredientDetails.propTypes = {
-  ingredient: cardPropTypes,
-};

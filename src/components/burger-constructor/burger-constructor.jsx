@@ -1,100 +1,93 @@
-/* eslint-disable array-callback-return */
-import { useContext, useEffect, useMemo } from "react";
+import { useMemo } from "react";
+import { useDrop } from "react-dnd";
+import { useSelector, useDispatch } from "react-redux";
 import BurgerConstructorOrder from "../burger-constructor-order/burger-constructor-order";
 import style from "./burger-constructor.module.css";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import BurgerConstructorFillingList from "../burger-constructor-filling-list/burger-constructor-filling-list";
+import loader from "../../image/double-ring-loader.svg";
 import {
-  ConstructorElement,
-  DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgerIngredientsContext } from "../../context/burger-ingredients-context";
-import { BurgerConstructorContext } from "../../context/burger-constructor-context";
+  ADD_INGREDIENT,
+  SORT_INGREDIENTS,
+} from "../../services/actions/burgerConstructorAction";
+import { v4 as uuidv4 } from "uuid";
+import { Reorder } from "framer-motion";
 
 export default function BurgerConstructor() {
-  const ingredients = useContext(BurgerIngredientsContext);
+  const dispatch = useDispatch();
 
-  // eslint-disable-next-line no-unused-vars
-  const { constructorContext, setConstructorContext } = useContext(
-    BurgerConstructorContext
-  );
+  const { bun, fillingList } = useSelector((store) => ({
+    bun: store.burgerConstructorReducer.burgerConstructorBunElement,
+    fillingList: store.burgerConstructorReducer.burgerConstructorFillingList,
+  }));
 
-  const randomIngredients = useMemo(() => {
-    return ingredients.slice(0, Math.round(Math.random() * 7) + 3);
-  }, [ingredients]);
+  function onDropHandler(ingredient) {
+    dispatch({ type: ADD_INGREDIENT, id: uuidv4(), payload: ingredient });
+  }
 
-  const randomBun = useMemo(() => {
-    return randomIngredients.find((item) => item.type === "bun");
-  }, [randomIngredients]);
+  const [{ isHover }, dropTarget] = useDrop({
+    accept: "ingredients",
+    drop(ingredient) {
+      onDropHandler(ingredient);
+    },
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+    }),
+  });
 
-  const { randomFilling } = useMemo(() => {
-    return randomIngredients.reduce(
-      (count, item) => {
-        if (item.type !== "bun") {
-          count.randomFilling.push(item);
-        }
-        return count;
-      },
-      { randomFilling: [] }
-    );
-  }, [randomIngredients]);
+  const bunPrice = useMemo(() => {
+    return bun === undefined ? 0 : bun.price * 2;
+  }, [bun]);
+
+  const fillingPrice = useMemo(() => {
+    return fillingList.reduce((sum, item) => sum + item.price, 0);
+  }, [fillingList]);
 
   const totalPrice = useMemo(() => {
-    let counter =
-      randomBun.price * 2 +
-      randomFilling.reduce((sum, item) => sum + item.price, 0);
-    return counter;
-  }, [randomBun, randomFilling]);
-
-  useEffect(() => {
-    setConstructorContext({
-      ...constructorContext,
-      buns: [...constructorContext.buns, randomBun],
-      ingredients: randomFilling,
-      id: [
-        randomBun._id,
-        ...randomFilling.map((item) => item._id),
-        randomBun._id,
-      ],
-      price: totalPrice,
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    return bun === undefined ? fillingPrice : bunPrice + fillingPrice;
+  }, [bunPrice, fillingPrice, bun]);
 
   return (
     <div className={style.container}>
-      <ul className={style.lists}>
-        {/* {constructorContext.buns.map(item)} */}
+      <ul
+        ref={dropTarget}
+        className={isHover ? style.lists_hover : style.lists}
+      >
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={`${randomBun.name} (верх)`}
-          price={randomBun.price}
+          text={bun === undefined ? "Выберите булку" : `${bun.name} (верх)`}
+          price={bun === undefined ? 0 : bun.price}
           extraClass="ml-8"
-          thumbnail={randomBun.image}
+          thumbnail={bun === undefined ? loader : bun.image}
         />
-        <ul className={style.container_constructor}>
-          {constructorContext.ingredients.map((item) => {
+        <Reorder.Group
+          axis="y"
+          values={fillingList}
+          className={style.container_constructor}
+          onReorder={(sortFillingList) =>
+            dispatch({ type: SORT_INGREDIENTS, payload: sortFillingList })
+          }
+        >
+          {fillingList.map((item) => {
             return (
-              <li key={item._id} className={style.element}>
-                <DragIcon />
-                <ConstructorElement
-                  text={item.name}
-                  price={item.price}
-                  thumbnail={item.image}
-                />
-              </li>
+              <BurgerConstructorFillingList
+                key={item.constructorItemId}
+                filling={item}
+              />
             );
           })}
-        </ul>
+        </Reorder.Group>
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={`${randomBun.name} (низ)`}
-          price={randomBun.price}
+          text={bun === undefined ? "Выберите булку" : `${bun.name} (низ)`}
+          price={bun === undefined ? 0 : bun.price}
           extraClass="ml-8"
-          thumbnail={randomBun.image}
+          thumbnail={bun === undefined ? loader : bun.image}
         />
       </ul>
-      <BurgerConstructorOrder />
+      <BurgerConstructorOrder price={totalPrice} />
     </div>
   );
 }

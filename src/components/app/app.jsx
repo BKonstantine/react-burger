@@ -1,67 +1,42 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import style from "./app.module.css";
-import { getIngridients } from "../../utils/api";
+import { getIngridients } from "../../services/actions/burgerIngredientsAction";
 import Preloader from "../preloader/preloader";
-import { BurgerIngredientsContext } from "../../context/burger-ingredients-context";
-import { BurgerConstructorContext } from "../../context/burger-constructor-context";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 export default function App() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
+  const dispatch = useDispatch();
 
-  const [constructorContext, setConstructorContext] = useState({
-    buns: [],
-    ingredients: [],
-    id: [],
-    price: 0,
-  });
-
-  const [order, setOrder] = useState(undefined);
+  const { loading, error, errorText } = useSelector((store) => ({
+    loading: store.burgerIngredientsReducer.burgerIngredientsListRequest,
+    error: store.burgerIngredientsReducer.burgerIngredientsListFailed,
+    errorText: store.burgerIngredientsReducer.burgerIngredientsListFailedText,
+  }));
 
   useEffect(() => {
-    getIngridients()
-      .then((data) => {
-        setData(data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        setErr(err);
-      })
-      .finally(() => {
-        setLoading(!loading);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(getIngridients());
+  }, [dispatch]);
 
   return (
     <>
-      <Preloader loading={loading} error={err} />
-      {!err && (
+      {loading ? (
+        <Preloader loading={loading} />
+      ) : error ? (
+        <Preloader error={error} errorText={errorText} />
+      ) : (
         <>
           <AppHeader />
-          <main className={style.main}>
-            <BurgerIngredientsContext.Provider value={data}>
-              <BurgerConstructorContext.Provider
-                value={{
-                  constructorContext,
-                  setConstructorContext,
-                  order,
-                  setOrder,
-                }}
-              >
-                {data.length && (
-                  <>
-                    <BurgerIngredients />
-                    <BurgerConstructor />
-                  </>
-                )}
-              </BurgerConstructorContext.Provider>
-            </BurgerIngredientsContext.Provider>
-          </main>
+          <DndProvider backend={HTML5Backend}>
+            <main className={style.main}>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </main>
+          </DndProvider>
         </>
       )}
     </>
