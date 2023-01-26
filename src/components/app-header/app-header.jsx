@@ -5,34 +5,45 @@ import {
   ListIcon,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { NavLink } from "react-router-dom";
 import style from "./app-header.module.css";
 
 export default function AppHeader() {
+  const activeStyle = {
+    color: "#f2f2f3",
+  };
+
   return (
     <header className={style.header}>
       <div className={style.container}>
         <nav className={style.nav}>
-          <a
-            href="#"
-            className={`text text_type_main-default ${style.button} ${style.button_active}`}
+          <NavLink
+            to="/"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            className={`text text_type_main-default ${style.button}`}
           >
             <BurgerIcon type="primary" />
             Конструктор
-          </a>
-          <a href="#" className={`text text_type_main-default ${style.button}`}>
+          </NavLink>
+          <NavLink
+            to="order_list"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            className={`text text_type_main-default ${style.button}`}
+          >
             <ListIcon type="secondary" />
             Лента заказов
-          </a>
+          </NavLink>
           <div className={style.logo}>
             <Logo />
           </div>
-          <a
-            href="#"
+          <NavLink
+            to="/link"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
             className={`text text_type_main-default ${style.button} ${style.button_profile}`}
           >
             <ProfileIcon type="secondary" />
             Личный кабинет
-          </a>
+          </NavLink>
         </nav>
       </div>
     </header>

@@ -10,7 +10,7 @@
   margin: auto;
   max-width: 1280px;
   display: flex;
-  align-items: center;  
+  align-items: center;
 }
 
 .logo {
@@ -36,9 +36,10 @@
 }
 
 .button_active {
+  composes: button;
   color: #f2f2f3;
 }
 
-.button_profile {  
+.button_profile {
   margin-left: 280px;
 }
