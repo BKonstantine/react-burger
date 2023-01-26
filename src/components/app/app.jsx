@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AppHeader from "../app-header/app-header";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
-import style from "./app.module.css";
 import { getIngridients } from "../../services/actions/burgerIngredientsAction";
 import Preloader from "../preloader/preloader";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { Routes, Route } from "react-router-dom";
+import MainPage from "../../pages/main-page/main-page";
+import LoginPage from "../../pages/login-page/login-page";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -32,10 +32,10 @@ export default function App() {
         <>
           <AppHeader />
           <DndProvider backend={HTML5Backend}>
-            <main className={style.main}>
-              <BurgerIngredients />
-              <BurgerConstructor />
-            </main>
+            <Routes>
+              <Route exact path="/" element={<MainPage />} />
+              <Route exact path="/login" element={<LoginPage />} />
+            </Routes>
           </DndProvider>
         </>
       )}
