@@ -1,0 +1,34 @@
+.main {
+  margin-top: 180px;
+  display: flex;
+  justify-content: center;
+  height: calc(100vh - 88px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.links {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.link {
+  margin-left: 8px;
+  display: inline-block;
+  color: #4c4cff;
+  text-decoration: none;
+}
