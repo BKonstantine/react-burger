@@ -1,4 +1,10 @@
-import { INGREDIENTS_URL, ORDER_URL } from "./variables";
+import {
+  INGREDIENTS_URL,
+  ORDER_URL,
+  REGISTER_URL,
+  LOGIN_URL,
+  LOGOUT_URL,
+} from "./variables";
 
 const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
@@ -15,9 +21,19 @@ function sendOrderRequest(idList) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      "ingredients": idList,
+      ingredients: idList,
     }),
   }).then(checkResponse);
 }
 
-export { getIngridientsRequest, sendOrderRequest };
+function registerUserRequest(userDate) {
+  return fetch(REGISTER_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userDate),
+  }).then(checkResponse);
+}
+
+export { getIngridientsRequest, sendOrderRequest, registerUserRequest };

@@ -7,14 +7,13 @@ import {
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setParticipantFormValue } from "../../services/actions/registrationPageAction";
+import { registerUser } from "../../services/actions/registrationPageAction";
 import style from "./registration-page.module.css";
 
 export default function RegistrationPage() {
   const dispatch = useDispatch();
 
-  const { name, email, password } = useSelector(
-    (store) => store.registrationPageReducer.form
-  );
+  const { form } = useSelector((store) => store.registrationPageReducer);
 
   function onFormChange(e) {
     dispatch(setParticipantFormValue(e.target.name, e.target.value));
@@ -28,19 +27,24 @@ export default function RegistrationPage() {
           <Input
             placeholder="Имя"
             type="text"
-            value={name}
+            value={form.name}
             name="name"
             onChange={onFormChange}
           />
-          <EmailInput value={email} name="email" onChange={onFormChange} />
+          <EmailInput value={form.email} name="email" onChange={onFormChange} />
           <PasswordInput
-            value={password}
+            value={form.password}
             name="password"
             onChange={onFormChange}
           />
-          <Button htmlType="button" type="primary" size="medium">
+          <Button
+            htmlType="button"
+            type="primary"
+            size="medium"
+            onClick={() => dispatch(registerUser(form))}
+          >
             Зарегистрироваться
-          </Button>
+          </Button>          
         </form>
         <p className="text text_type_main-default">
           Уже зарегистрированы?

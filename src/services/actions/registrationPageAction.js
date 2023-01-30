@@ -1,3 +1,5 @@
+import { registerUserRequest } from "../../utils/api";
+
 export const PARTICIPANT_REGISTER_FORM_SET_VALUE =
   "PARTICIPANT_REGISTER_FORM_SET_VALUE";
 export const PARTICIPANT_REGISTER_FORM_SUBMIT =
@@ -12,5 +14,17 @@ export function setParticipantFormValue(field, value) {
     type: PARTICIPANT_REGISTER_FORM_SET_VALUE,
     field,
     value,
+  };
+}
+
+export function registerUser(userDate) {
+  return function (dispatch) {
+    dispatch({ type: PARTICIPANT_REGISTER_FORM_SUBMIT });
+    registerUserRequest(userDate)
+      .then((res) => console.log(res))
+      .then(() => dispatch({ type: PARTICIPANT_REGISTER_FORM_SUBMIT_SUCCESS }))
+      .catch(() => {
+        dispatch({ type: PARTICIPANT_REGISTER_FORM_SUBMIT_FAILED });
+      });
   };
 }
