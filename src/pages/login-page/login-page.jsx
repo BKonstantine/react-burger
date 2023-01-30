@@ -21,7 +21,7 @@ export default function LoginPage() {
         <div className={style.links}>
           <p className="text text_type_main-default">
             Вы — новый пользователь?
-            <Link className={style.link}>Зарегистрироваться</Link>
+            <Link to="/register" className={style.link}>Зарегистрироваться</Link>
           </p>
           <p className="text text_type_main-default">
             Забыли пароль?
