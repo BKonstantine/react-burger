@@ -6,17 +6,17 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setParticipantFormValue } from "../../services/actions/registrationPageAction";
-import { registerUser } from "../../services/actions/registrationPageAction";
+import { setUserFormValue } from "../../services/actions/userAction";
+import { registerUser } from "../../services/actions/userAction";
 import style from "./registration-page.module.css";
 
 export default function RegistrationPage() {
   const dispatch = useDispatch();
 
-  const { form } = useSelector((store) => store.registrationPageReducer);
+  const { form } = useSelector((store) => store.registerPageReducer);
 
   function onFormChange(e) {
-    dispatch(setParticipantFormValue(e.target.name, e.target.value));
+    dispatch(setUserFormValue(e.target.name, e.target.value));
   }
 
   return (
@@ -44,7 +44,7 @@ export default function RegistrationPage() {
             onClick={() => dispatch(registerUser(form))}
           >
             Зарегистрироваться
-          </Button>          
+          </Button>
         </form>
         <p className="text text_type_main-default">
           Уже зарегистрированы?

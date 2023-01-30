@@ -1,9 +1,9 @@
 import {
-  PARTICIPANT_REGISTER_FORM_SET_VALUE,
-  PARTICIPANT_REGISTER_FORM_SUBMIT,
-  PARTICIPANT_REGISTER_FORM_SUBMIT_SUCCESS,
-  PARTICIPANT_REGISTER_FORM_SUBMIT_FAILED,
-} from "../actions/registrationPageAction";
+  USER_REGISTER_FORM_SET_VALUE,
+  USER_REGISTER_FORM_SUBMIT,
+  USER_REGISTER_FORM_SUBMIT_SUCCESS,
+  USER_REGISTER_FORM_SUBMIT_FAILED,
+} from "../actions/userAction";
 
 const initialState = {
   form: {
@@ -15,16 +15,16 @@ const initialState = {
   registrationFailed: false,
 };
 
-export default function registrationPageReducer(state = initialState, action) {
+export default function registerPageReducer(state = initialState, action) {
   switch (action.type) {
-    case PARTICIPANT_REGISTER_FORM_SET_VALUE: {
+    case USER_REGISTER_FORM_SET_VALUE: {
       return {
         ...state,
         form: { ...state.form, [action.field]: action.value },
       };
     }
 
-    case PARTICIPANT_REGISTER_FORM_SUBMIT: {
+    case USER_REGISTER_FORM_SUBMIT: {
       return {
         ...state,
         registrationSubmit: true,
@@ -32,7 +32,7 @@ export default function registrationPageReducer(state = initialState, action) {
       };
     }
 
-    case PARTICIPANT_REGISTER_FORM_SUBMIT_SUCCESS: {
+    case USER_REGISTER_FORM_SUBMIT_SUCCESS: {
       return {
         ...state,
         form: { ...state.form },
@@ -40,7 +40,7 @@ export default function registrationPageReducer(state = initialState, action) {
       };
     }
 
-    case PARTICIPANT_REGISTER_FORM_SUBMIT_FAILED: {
+    case USER_REGISTER_FORM_SUBMIT_FAILED: {
       return {
         ...state,
         registrationSubmit: false,
