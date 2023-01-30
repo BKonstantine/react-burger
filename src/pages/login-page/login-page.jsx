@@ -25,7 +25,7 @@ export default function LoginPage() {
           </p>
           <p className="text text_type_main-default">
             Забыли пароль?
-            <Link className={style.link}>Восстановить пароль</Link>
+            <Link to="/forgot-password" className={style.link}>Восстановить пароль</Link>
           </p>
         </div>
       </div>
