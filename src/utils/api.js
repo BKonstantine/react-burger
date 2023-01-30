@@ -1,11 +1,11 @@
 import { INGREDIENTS_URL, ORDER_URL } from "./variables";
 
-const checkReponse = (res) => {
+const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
 
 function getIngridientsRequest() {
-  return fetch(INGREDIENTS_URL).then(checkReponse);
+  return fetch(INGREDIENTS_URL).then(checkResponse);
 }
 
 function sendOrderRequest(idList) {
@@ -17,7 +17,7 @@ function sendOrderRequest(idList) {
     body: JSON.stringify({
       "ingredients": idList,
     }),
-  }).then(checkReponse);
+  }).then(checkResponse);
 }
 
 export { getIngridientsRequest, sendOrderRequest };
