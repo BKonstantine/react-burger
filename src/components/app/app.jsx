@@ -12,6 +12,7 @@ import RegistrationPage from "../../pages/registration-page/registration-page";
 import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password-page";
 import ResetPasswordPage from "../../pages/reset-password-page/reset-password-page";
 import NotFoundPage from "../../pages/not-found-page/not-found-page";
+import ProfilePage from "../../pages/profile-page/profile-page";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ export default function App() {
               <Route path="*" element={<NotFoundPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegistrationPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/reset-password" element={<ResetPasswordPage />} />
             </Routes>
