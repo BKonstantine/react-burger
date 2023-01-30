@@ -11,6 +11,7 @@ import LoginPage from "../../pages/login-page/login-page";
 import RegistrationPage from "../../pages/registration-page/registration-page";
 import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password-page";
 import ResetPasswordPage from "../../pages/reset-password-page/reset-password-page";
+import NotFoundPage from "../../pages/not-found-page/not-found-page";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ export default function App() {
           <DndProvider backend={HTML5Backend}>
             <Routes>
               <Route exact path="/" element={<MainPage />} />
+              <Route path="*" element={<NotFoundPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegistrationPage />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
