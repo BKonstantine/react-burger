@@ -6,8 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setRegisterFormValue } from "../../services/actions/userAction";
-import { registerUser } from "../../services/actions/userAction";
+import { setRegisterFormValue , registerUser} from "../../services/actions/userAction";
 import style from "./registration-page.module.css";
 
 export default function RegistrationPage() {

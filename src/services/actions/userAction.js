@@ -31,8 +31,6 @@ export function setLoginFormValue(field, value) {
   };
 }
 
-
-
 /* thunk формы регистрации */
 export function registerUser(userDate) {
   return function (dispatch) {
@@ -46,6 +44,23 @@ export function registerUser(userDate) {
       .then(() => dispatch({ type: USER_REGISTER_FORM_SUBMIT_SUCCESS }))
       .catch(() => {
         dispatch({ type: USER_REGISTER_FORM_SUBMIT_FAILED });
+      });
+  };
+}
+
+/* thunk формы авторизации */
+export function loginUser(userDate) {
+  return function (dispatch) {
+    dispatch({ type: USER_LOGIN_FORM_SUBMIT });
+    registerUserRequest(userDate)
+      .then((res) => {
+        console.log(res);
+        setCookie("accessToken", res.accessToken);
+        setCookie("refreshToken", res.refreshToken);
+      })
+      .then(() => dispatch({ type: USER_LOGIN_FORM_SUBMIT_SUCCESS }))
+      .catch(() => {
+        dispatch({ type: USER_LOGIN_FORM_SUBMIT_FAILED });
       });
   };
 }
