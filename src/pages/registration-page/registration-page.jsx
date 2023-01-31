@@ -6,7 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserFormValue } from "../../services/actions/userAction";
+import { setRegisterFormValue } from "../../services/actions/userAction";
 import { registerUser } from "../../services/actions/userAction";
 import style from "./registration-page.module.css";
 
@@ -16,7 +16,7 @@ export default function RegistrationPage() {
   const { form } = useSelector((store) => store.registerPageReducer);
 
   function onFormChange(e) {
-    dispatch(setUserFormValue(e.target.name, e.target.value));
+    dispatch(setRegisterFormValue(e.target.name, e.target.value));
   }
 
   return (
