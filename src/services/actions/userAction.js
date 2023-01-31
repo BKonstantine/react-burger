@@ -1,4 +1,5 @@
 import { registerUserRequest } from "../../utils/api";
+import { getCookie, setCookie, deleteCookie } from "../../utils/cookie";
 
 /* Экшены управления формой регистрации */
 export const USER_REGISTER_FORM_SET_VALUE =
@@ -21,7 +22,11 @@ export function registerUser(userDate) {
   return function (dispatch) {
     dispatch({ type: USER_REGISTER_FORM_SUBMIT });
     registerUserRequest(userDate)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        setCookie("accessToken", res.accessToken);        
+        setCookie("refreshToken", res.refreshToken);
+      })
       .then(() => dispatch({ type: USER_REGISTER_FORM_SUBMIT_SUCCESS }))
       .catch(() => {
         dispatch({ type: USER_REGISTER_FORM_SUBMIT_FAILED });

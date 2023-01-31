@@ -11,6 +11,7 @@ const initialState = {
     email: "",
     password: "",
   },
+  isAuth: false,
   registrationSubmit: false,
   registrationFailed: false,
 };
@@ -28,7 +29,6 @@ export default function registerPageReducer(state = initialState, action) {
       return {
         ...state,
         registrationSubmit: true,
-        registrationFailed: false,
       };
     }
 
@@ -36,7 +36,7 @@ export default function registerPageReducer(state = initialState, action) {
       return {
         ...state,
         form: { ...state.form },
-        registrationSubmit: false,
+        isAuth: true,
       };
     }
 
