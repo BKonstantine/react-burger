@@ -44,7 +44,7 @@ export default function App() {
               <Route path="*" element={<NotFoundPage />} />
               <Route
                 path="/order_list"
-                element={<ProtectedRoute to="/" element={<OrderListPage />} />}
+                element={<ProtectedRoute to="/login" element={<OrderListPage />} />}
               />
               <Route
                 path="/profile"

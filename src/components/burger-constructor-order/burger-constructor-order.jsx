@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
@@ -11,12 +12,20 @@ import { RESET_ORDER } from "../../services/actions/currentOrderAction";
 export default function BurgerConstructorOrder({ price }) {
   const order = useSelector((store) => store.currentOrderReducer.order);
 
+  const ingredients = useSelector((store) => store.burgerConstructorReducer);
+
+  const isAuth = useSelector((store) => store.userReducer.isAuth);
+
   const dispatch = useDispatch();
 
-  const ingredients = useSelector((store) => store.burgerConstructorReducer);
+  const navigate = useNavigate();
 
   function closeModal() {
     dispatch({ type: RESET_ORDER });
+  }
+
+  function sendOrder() {
+    isAuth ? dispatch(makeOrder(ingredients)) : navigate("/login");
   }
 
   return (
@@ -29,7 +38,7 @@ export default function BurgerConstructorOrder({ price }) {
         htmlType="button"
         type="primary"
         size="large"
-        onClick={() => dispatch(makeOrder(ingredients))}
+        onClick={sendOrder}
         disabled={!ingredients.burgerConstructorBunElement}
       >
         Оформить заказ
