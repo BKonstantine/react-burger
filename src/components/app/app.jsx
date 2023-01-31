@@ -14,7 +14,7 @@ import ResetPasswordPage from "../../pages/reset-password-page/reset-password-pa
 import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import ProfilePage from "../../pages/profile-page/profile-page";
 import OrderListPage from "../../pages/order-list-page/order-list-page";
-
+import ProtectedRoute from "../protected-route/protected-route";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -42,10 +42,18 @@ export default function App() {
             <Routes>
               <Route exact path="/" element={<MainPage />} />
               <Route path="*" element={<NotFoundPage />} />
-              <Route path="/order_list" element={<OrderListPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
+              <Route
+                path="/order_list"
+                element={<ProtectedRoute to="/" element={<OrderListPage />} />}
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute to="/login" element={<ProfilePage />} />
+                }
+              />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegistrationPage />} />              
+              <Route path="/register" element={<RegistrationPage />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/reset-password" element={<ResetPasswordPage />} />
             </Routes>
