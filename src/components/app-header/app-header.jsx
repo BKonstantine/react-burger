@@ -47,7 +47,7 @@ export default function AppHeader() {
             <Logo />
           </div>
           <NavLink
-            to="/login"
+            to="/profile"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             className={`text text_type_main-default ${style.button} ${style.button_profile}`}
           >

@@ -1,16 +1,4 @@
-.main {
-  margin-top: 180px;
-  display: flex;
-  justify-content: center;  
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.text {
+.order_title {
   position: fixed;
   top: 50%;
   left: 50%;

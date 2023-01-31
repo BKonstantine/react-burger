@@ -14,7 +14,7 @@ import style from "./login-page.module.css";
 export default function LoginPage() {
   const dispatch = useDispatch();
 
-  const { form } = useSelector((store) => store.loginPageReducer);
+  const { loginForm } = useSelector((store) => store.userReducer);
 
   function onFormChange(e) {
     dispatch(setLoginFormValue(e.target.name, e.target.value));
@@ -25,9 +25,9 @@ export default function LoginPage() {
       <div className={style.container}>
         <p className="text text_type_main-medium mb-6">Вход</p>
         <form className={style.form}>
-          <EmailInput value={form.email} name="email" onChange={onFormChange} />
+          <EmailInput value={loginForm.email} name="email" onChange={onFormChange} />
           <PasswordInput
-            value={form.password}
+            value={loginForm.password}
             name="password"
             onChange={onFormChange}
           />
@@ -35,7 +35,7 @@ export default function LoginPage() {
             htmlType="button"
             type="primary"
             size="medium"
-            onClick={() => dispatch(loginUser(form))}
+            onClick={() => dispatch(loginUser(loginForm))}
           >
             Войти
           </Button>

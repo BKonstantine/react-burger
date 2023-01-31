@@ -6,13 +6,16 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setRegisterFormValue , registerUser} from "../../services/actions/userAction";
+import {
+  setRegisterFormValue,
+  registerUser,
+} from "../../services/actions/userAction";
 import style from "./registration-page.module.css";
 
 export default function RegistrationPage() {
   const dispatch = useDispatch();
 
-  const { form } = useSelector((store) => store.registerPageReducer);
+  const { registerForm } = useSelector((store) => store.userReducer);
 
   function onFormChange(e) {
     dispatch(setRegisterFormValue(e.target.name, e.target.value));
@@ -26,13 +29,17 @@ export default function RegistrationPage() {
           <Input
             placeholder="Имя"
             type="text"
-            value={form.name}
+            value={registerForm.name}
             name="name"
             onChange={onFormChange}
           />
-          <EmailInput value={form.email} name="email" onChange={onFormChange} />
+          <EmailInput
+            value={registerForm.email}
+            name="email"
+            onChange={onFormChange}
+          />
           <PasswordInput
-            value={form.password}
+            value={registerForm.password}
             name="password"
             onChange={onFormChange}
           />
@@ -40,7 +47,7 @@ export default function RegistrationPage() {
             htmlType="button"
             type="primary"
             size="medium"
-            onClick={() => dispatch(registerUser(form))}
+            onClick={() => dispatch(registerUser(registerForm))}
           >
             Зарегистрироваться
           </Button>

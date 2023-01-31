@@ -1,3 +1,9 @@
+export function parseCookie(name) {
+  let authToken;
+  authToken = name.split("Bearer ")[1];
+  return authToken;
+}
+
 export function getCookie(name) {
   const matches = document.cookie.match(
     new RegExp(

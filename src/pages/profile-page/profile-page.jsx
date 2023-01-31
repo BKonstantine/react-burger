@@ -10,7 +10,9 @@ export default function ProfilePage() {
   return (
     <main className={style.main}>
       <div className={style.container}>
-        <p className="text text_type_main-medium mb-6">Страница профиля</p>
+        <p className={`text text_type_main-large ${style.text}`}>
+          Страница профиля
+        </p>
       </div>
     </main>
   );
