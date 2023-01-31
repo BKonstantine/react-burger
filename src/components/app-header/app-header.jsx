@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useEffect, useCallback } from "react";
 import {
   Logo,
   BurgerIcon,
@@ -13,16 +14,19 @@ export default function AppHeader() {
     color: "#f2f2f3",
   };
 
-  const { pathname } = useLocation();
+  const { pathname } = useLocation();  
 
-  const toggleStyleIcon = (url) => {
-    if (url === pathname) {
-      return "primary";
-    } else {
-      return "secondary";
-    }
-  };
-
+  const toggleStyleIcon = useCallback(
+    (url) => {
+      if (url === pathname) {
+        return "primary";
+      } else {
+        return "secondary";
+      }
+    },
+    [pathname]
+  );
+  
   return (
     <header className={style.header}>
       <div className={style.container}>
@@ -51,7 +55,7 @@ export default function AppHeader() {
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             className={`text text_type_main-default ${style.button} ${style.button_profile}`}
           >
-            <ProfileIcon type={toggleStyleIcon("/login")} />
+            <ProfileIcon type={toggleStyleIcon("/profile")} />
             Личный кабинет
           </NavLink>
         </nav>
