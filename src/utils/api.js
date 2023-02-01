@@ -10,10 +10,14 @@ const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
 
+
+// TODO: Запрос списка ингредиентов 
 function getIngridientsRequest() {
   return fetch(INGREDIENTS_URL).then(checkResponse);
 }
 
+
+// TODO: Создание заказа
 function sendOrderRequest(idList) {
   return fetch(ORDER_URL, {
     method: "POST",
@@ -26,6 +30,7 @@ function sendOrderRequest(idList) {
   }).then(checkResponse);
 }
 
+// ТОDO: Регистрация пользователя 
 function registerUserRequest(userDate) {
   return fetch(REGISTER_URL, {
     method: "POST",
