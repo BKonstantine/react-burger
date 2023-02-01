@@ -48,7 +48,9 @@ export default function RegistrationPage() {
             htmlType="button"
             type="primary"
             size="medium"
-            onClick={() => dispatch(registerUser(registerForm, navigate("/")))}
+            onClick={() =>
+              dispatch(registerUser(registerForm, () => navigate("/")))
+            }
           >
             Зарегистрироваться
           </Button>

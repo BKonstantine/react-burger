@@ -72,7 +72,7 @@ function refreshTokenRequest(refreshToken) {
     body: JSON.stringify({
       token: refreshToken,
     }),
-  });
+  }).then(checkResponse);
 }
 
 export {

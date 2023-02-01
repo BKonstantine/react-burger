@@ -41,7 +41,7 @@ export default function LoginPage() {
             htmlType="button"
             type="primary"
             size="medium"
-            onClick={() => dispatch(loginUser(loginForm, navigate("/")))}
+            onClick={() => dispatch(loginUser(loginForm, () => navigate("/")))}
           >
             Войти
           </Button>

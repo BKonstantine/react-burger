@@ -50,10 +50,7 @@ export function registerUser(userDate, callback) {
     registerUserRequest(userDate)
       .then((res) => {
         console.log("TRUE registerUserRequest", res);
-        setCookie(
-          "accessToken",
-          parseCookie(res.accessToken)
-        );
+        setCookie("accessToken", parseCookie(res.accessToken));
         setCookie("refreshToken", res.refreshToken);
       })
       .then(() => {
@@ -74,10 +71,7 @@ export function loginUser(userDate, callback) {
     loginUserRequest(userDate)
       .then((res) => {
         console.log("TRUE loginUserRequest", res);
-        setCookie(
-          "accessToken",
-          parseCookie(res.accessToken)
-        );
+        setCookie("accessToken", parseCookie(res.accessToken));
         setCookie("refreshToken", res.refreshToken);
       })
       .then(() => {
@@ -99,24 +93,22 @@ export function checkUserAccess(accessToken) {
       .then((res) => console.log("TRUE checkUserAccessRequest", res))
       .catch((err) => {
         console.log("FALSE checkUserAccessRequest", err);
-        if (err.message === "jwt malformed") {
-          dispatch(refreshUserToken(getCookie("refreshToken")));
+        if (err.message === "jwt expired") {
+          dispatch(refreshUserToken(getCookie("refreshToken")));          
         }
       });
   };
 }
 
+/* thunk обновления токена */
 function refreshUserToken(refreshToken) {
   return function (dispatch) {
     refreshTokenRequest(refreshToken)
       .then((res) => {
         console.log("TRUE refreshTokenRequest", res);
-
-        setCookie("accessToken", parseCookie(res.accessToken), {
-          "max-age": 60,
-        });
-        /* setCookie("refreshToken", res.refreshToken);
-        dispatch(checkUserAccess(res.accessToken)); */
+        setCookie("accessToken", parseCookie(res.accessToken));
+        setCookie("refreshToken", res.refreshToken);
+        dispatch(checkUserAccess(getCookie("accessToken")));
       })
       .catch((err) => {
         console.log("FALSE refreshTokenRequest", err);
