@@ -15,9 +15,12 @@ import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import ProfilePage from "../../pages/profile-page/profile-page";
 import OrderListPage from "../../pages/order-list-page/order-list-page";
 import ProtectedRoute from "../protected-route/protected-route";
+import { checkUserAccess } from "../../services/actions/userAction";
+import { getCookie } from "../../utils/cookie";
 
 export default function App() {
   const dispatch = useDispatch();
+  const accessToken = getCookie("accessToken");
 
   const { loading, error, errorText } = useSelector((store) => ({
     loading: store.burgerIngredientsReducer.burgerIngredientsListRequest,
@@ -27,7 +30,8 @@ export default function App() {
 
   useEffect(() => {
     dispatch(getIngridients());
-  }, [dispatch]);
+    dispatch(checkUserAccess(accessToken));
+  }, [dispatch, accessToken]);
 
   return (
     <>
@@ -44,7 +48,9 @@ export default function App() {
               <Route path="*" element={<NotFoundPage />} />
               <Route
                 path="/order_list"
-                element={<ProtectedRoute to="/login" element={<OrderListPage />} />}
+                element={
+                  <ProtectedRoute to="/login" element={<OrderListPage />} />
+                }
               />
               <Route
                 path="/profile"

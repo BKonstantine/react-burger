@@ -3,7 +3,7 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setLoginFormValue,
@@ -13,6 +13,8 @@ import style from "./login-page.module.css";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const { loginForm } = useSelector((store) => store.userReducer);
 
@@ -25,7 +27,11 @@ export default function LoginPage() {
       <div className={style.container}>
         <p className="text text_type_main-medium mb-6">Вход</p>
         <form className={style.form}>
-          <EmailInput value={loginForm.email} name="email" onChange={onFormChange} />
+          <EmailInput
+            value={loginForm.email}
+            name="email"
+            onChange={onFormChange}
+          />
           <PasswordInput
             value={loginForm.password}
             name="password"
@@ -35,7 +41,7 @@ export default function LoginPage() {
             htmlType="button"
             type="primary"
             size="medium"
-            onClick={() => dispatch(loginUser(loginForm))}
+            onClick={() => dispatch(loginUser(loginForm, navigate("/")))}
           >
             Войти
           </Button>

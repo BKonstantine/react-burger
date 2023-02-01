@@ -7,6 +7,7 @@ import {
   USER_LOGIN_FORM_SUBMIT,
   USER_LOGIN_FORM_SUBMIT_SUCCESS,
   USER_LOGIN_FORM_SUBMIT_FAILED,
+  CHECK_USER_ACCESS,
 } from "../actions/userAction";
 
 const initialState = {
@@ -88,6 +89,13 @@ export default function userReducer(state = initialState, action) {
         ...state,
         loginSubmit: false,
         loginFailed: true,
+      };
+    }
+
+    case CHECK_USER_ACCESS: {
+      return {
+        ...state,
+        isAuth: true,
       };
     }
     default:

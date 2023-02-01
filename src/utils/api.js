@@ -9,7 +9,7 @@ import {
 } from "./variables";
 
 const checkResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
 // TODO: Запрос списка ингредиентов
@@ -57,9 +57,22 @@ function checkUserAccessRequest(accessToken) {
   return fetch(CHECK_ACCESS_URL, {
     headers: {
       "Content-Type": "application/json",
-      authorization: accessToken,
+      authorization: `Bearer ${accessToken}`,
     },
   }).then(checkResponse);
+}
+
+// TODO: Запрос обновления токена
+function refreshTokenRequest(refreshToken) {
+  return fetch(TOKEN_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: refreshToken,
+    }),
+  });
 }
 
 export {
@@ -68,4 +81,5 @@ export {
   registerUserRequest,
   loginUserRequest,
   checkUserAccessRequest,
+  refreshTokenRequest,
 };
