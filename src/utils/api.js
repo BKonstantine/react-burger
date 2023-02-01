@@ -5,6 +5,7 @@ import {
   LOGIN_URL,
   LOGOUT_URL,
   TOKEN_URL,
+  CHECK_ACCESS_URL,
 } from "./variables";
 
 const checkResponse = (res) => {
@@ -51,9 +52,20 @@ function loginUserRequest(userDate) {
   }).then(checkResponse);
 }
 
+// TODO: Запрос данных пользователя
+function checkUserAccessRequest(accessToken) {
+  return fetch(CHECK_ACCESS_URL, {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: accessToken,
+    },
+  }).then(checkResponse);
+}
+
 export {
   getIngridientsRequest,
   sendOrderRequest,
   registerUserRequest,
   loginUserRequest,
+  checkUserAccessRequest,
 };
