@@ -4,7 +4,7 @@ import {
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setRegisterFormValue,
@@ -14,6 +14,7 @@ import style from "./registration-page.module.css";
 
 export default function RegistrationPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { registerForm } = useSelector((store) => store.userReducer);
 
@@ -47,7 +48,7 @@ export default function RegistrationPage() {
             htmlType="button"
             type="primary"
             size="medium"
-            onClick={() => dispatch(registerUser(registerForm))}
+            onClick={() => dispatch(registerUser(registerForm, navigate("/")))}
           >
             Зарегистрироваться
           </Button>

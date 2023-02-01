@@ -1,4 +1,4 @@
-import { registerUserRequest } from "../../utils/api";
+import { registerUserRequest, loginUserRequest } from "../../utils/api";
 import {
   parseCookie,
   getCookie,
@@ -37,16 +37,22 @@ export function setLoginFormValue(field, value) {
 }
 
 /* thunk формы регистрации */
-export function registerUser(userDate) {
+export function registerUser(userDate, callback) {
   return function (dispatch) {
     dispatch({ type: USER_REGISTER_FORM_SUBMIT });
     registerUserRequest(userDate)
       .then((res) => {
         console.log(res);
-        setCookie("accessToken", parseCookie(res.accessToken));
+        setCookie(
+          "accessToken",
+          parseCookie(res.accessToken, { "max-age": 5 })
+        );
         setCookie("refreshToken", res.refreshToken);
       })
-      .then(() => dispatch({ type: USER_REGISTER_FORM_SUBMIT_SUCCESS }))
+      .then(() => {
+        dispatch({ type: USER_REGISTER_FORM_SUBMIT_SUCCESS });
+        callback();
+      })
       .catch(() => {
         dispatch({ type: USER_REGISTER_FORM_SUBMIT_FAILED });
       });
@@ -54,16 +60,19 @@ export function registerUser(userDate) {
 }
 
 /* thunk формы авторизации */
-export function loginUser(userDate) {
+export function loginUser(userDate, callback) {
   return function (dispatch) {
     dispatch({ type: USER_LOGIN_FORM_SUBMIT });
-    registerUserRequest(userDate)
+    loginUserRequest(userDate)
       .then((res) => {
         console.log(res);
-        setCookie("accessToken", res.accessToken);
+        setCookie("accessToken", res.accessToken, { "max-age": 5 });
         setCookie("refreshToken", res.refreshToken);
       })
-      .then(() => dispatch({ type: USER_LOGIN_FORM_SUBMIT_SUCCESS }))
+      .then(() => {
+        dispatch({ type: USER_LOGIN_FORM_SUBMIT_SUCCESS });
+        callback();
+      })
       .catch(() => {
         dispatch({ type: USER_LOGIN_FORM_SUBMIT_FAILED });
       });
