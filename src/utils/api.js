@@ -90,7 +90,7 @@ function refreshTokenRequest(refreshToken) {
   }).then(checkResponse);
 }
 
-// TODO: Запрос на восстановление пароля
+// TODO: Запросы на восстановление пароля
 function forgotPasswordRequest(email) {
   return fetch(FORGOT_PASSWORD_URL, {
     method: "POST",
@@ -111,6 +111,18 @@ function resetPasswordRequest(userDate) {
   }).then(checkResponse);
 }
 
+// TODO: Запрос на изменение данных пользователя
+function changeUserDataRequest(userDate, accessToken) {
+  return fetch(CHECK_ACCESS_URL, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(userDate),
+  }).then(checkResponse);
+}
+
 export {
   getIngridientsRequest,
   sendOrderRequest,
@@ -121,4 +133,5 @@ export {
   logoutUserRequest,
   forgotPasswordRequest,
   resetPasswordRequest,
+  changeUserDataRequest,
 };
