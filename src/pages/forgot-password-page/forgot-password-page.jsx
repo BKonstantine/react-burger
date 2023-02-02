@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   EmailInput,
   Button,
@@ -16,20 +15,14 @@ export default function ForgotPasswordPage() {
 
   const navigate = useNavigate();  
 
-  const { forgotPasswordForm, resetEmailSent } = useSelector(
+  const { forgotPasswordForm } = useSelector(
     (store) => store.userReducer
   );
 
   function onFormChange(e) {
     dispatch(setForgotPasswordFormValue(e.target.name, e.target.value));
   }
-
-  useEffect(() => {
-    if (resetEmailSent) {
-      navigate("/reset-password");
-    }
-  }, [resetEmailSent]);
-
+ 
   return (
     <main className={style.main}>
       <div className={style.container}>

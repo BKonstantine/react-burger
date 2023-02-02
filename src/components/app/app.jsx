@@ -23,12 +23,15 @@ export default function App() {
   const accessToken = getCookie("accessToken");
   const navigate = useNavigate();
 
-  const { loading, error, errorText, isAuth } = useSelector((store) => ({
-    loading: store.burgerIngredientsReducer.burgerIngredientsListRequest,
-    error: store.burgerIngredientsReducer.burgerIngredientsListFailed,
-    errorText: store.burgerIngredientsReducer.burgerIngredientsListFailedText,
-    isAuth: store.userReducer.isAuth,
-  }));
+  const { loading, error, errorText, isAuth, resetEmailSent } = useSelector(
+    (store) => ({
+      loading: store.burgerIngredientsReducer.burgerIngredientsListRequest,
+      error: store.burgerIngredientsReducer.burgerIngredientsListFailed,
+      errorText: store.burgerIngredientsReducer.burgerIngredientsListFailedText,
+      isAuth: store.userReducer.isAuth,
+      resetEmailSent: store.userReducer.resetEmailSent,
+    })
+  );
 
   useEffect(() => {
     navigate(isAuth ? "/" : "/login");
@@ -58,19 +61,46 @@ export default function App() {
               <Route
                 path="/order_list"
                 element={
-                  <ProtectedRoute to="/login" element={<OrderListPage />} />
+                  <ProtectedRoute
+                    isAuth={isAuth}
+                    to="/login"
+                    element={<OrderListPage />}
+                  />
                 }
               />
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute to="/login" element={<ProfilePage />} />
+                  <ProtectedRoute
+                    isAuth={isAuth}
+                    to="/login"
+                    element={<ProfilePage />}
+                  />
                 }
               />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegistrationPage />} />
-              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-              <Route path="/reset-password" element={<ResetPasswordPage />} />
+              <Route
+                path="/forgot-password"
+                element={
+                  <ProtectedRoute
+                    isAuth={!resetEmailSent}
+                    to="/reset-password"
+                    element={<ForgotPasswordPage />}
+                  />
+                }
+              />
+              <Route />
+              <Route
+                path="/reset-password"
+                element={
+                  <ProtectedRoute
+                    isAuth={resetEmailSent}
+                    to="/login"
+                    element={<ResetPasswordPage />}
+                  />
+                }
+              />
             </Routes>
           </DndProvider>
         </>
