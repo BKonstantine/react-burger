@@ -150,7 +150,7 @@ export function checkUserAccess(accessToken) {
       })
       .catch((err) => {
         console.log("FALSE checkUserAccessRequest", err);
-        // dispatch({ type: USER_ACCESS_DENIED });
+        /* dispatch({ type: USER_ACCESS_DENIED }); */
         if (err.message === "jwt expired") {
           dispatch(refreshUserToken(getCookie("refreshToken")));
         }
