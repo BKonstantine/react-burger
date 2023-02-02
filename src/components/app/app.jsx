@@ -23,15 +23,16 @@ export default function App() {
   const accessToken = getCookie("accessToken");
   const navigate = useNavigate();
 
-  const { loading, error, errorText } = useSelector((store) => ({
+  const { loading, error, errorText, isAuth } = useSelector((store) => ({
     loading: store.burgerIngredientsReducer.burgerIngredientsListRequest,
     error: store.burgerIngredientsReducer.burgerIngredientsListFailed,
     errorText: store.burgerIngredientsReducer.burgerIngredientsListFailedText,
+    isAuth: store.userReducer.isAuth,
   }));
 
   useEffect(() => {
-    navigate("/login");
-  }, []);
+    navigate(isAuth ? "/" : "/login");
+  }, [isAuth]);
 
   useEffect(() => {
     dispatch(getIngridients());

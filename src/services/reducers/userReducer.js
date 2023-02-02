@@ -28,7 +28,7 @@ const initialState = {
     name: "",
   },
 
-  isAuth: false,
+  isAuth: undefined,
 
   registrationSubmit: false,
   registrationFailed: false,
