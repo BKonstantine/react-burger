@@ -52,6 +52,19 @@ function loginUserRequest(userDate) {
   }).then(checkResponse);
 }
 
+// TODO: Выход пользователя из аккаунта
+function logoutUserRequest(refreshToken) {
+  return fetch(LOGOUT_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: refreshToken,
+    }),
+  }).then(checkResponse);
+}
+
 // TODO: Запрос данных пользователя
 function checkUserAccessRequest(accessToken) {
   return fetch(CHECK_ACCESS_URL, {
@@ -82,4 +95,5 @@ export {
   loginUserRequest,
   checkUserAccessRequest,
   refreshTokenRequest,
+  logoutUserRequest
 };

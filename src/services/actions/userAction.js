@@ -3,6 +3,7 @@ import {
   loginUserRequest,
   checkUserAccessRequest,
   refreshTokenRequest,
+  logoutUserRequest,
 } from "../../utils/api";
 import {
   parseCookie,
@@ -87,6 +88,21 @@ export function loginUser(userDate, callback) {
   };
 }
 
+/* thunk выхода пользователя из аккаунта */
+export function logoutUser(refreshToken, callback) {
+  return function (dispatch) {
+    logoutUserRequest(refreshToken)
+      .then((res) => {
+        dispatch({ type: USER_ACCESS_DENIED });
+        console.log("TRUE logoutUserRequest", res);
+        deleteCookie("accessToken");
+        deleteCookie("refreshToken");
+        callback();
+      })
+      .catch((err) => console.log(err));
+  };
+}
+
 /* thunk проверки пользователя */
 export function checkUserAccess(accessToken) {
   return function (dispatch) {
@@ -97,7 +113,7 @@ export function checkUserAccess(accessToken) {
       })
       .catch((err) => {
         console.log("FALSE checkUserAccessRequest", err);
-        dispatch({ type: USER_ACCESS_DENIED });
+        // dispatch({ type: USER_ACCESS_DENIED });
         if (err.message === "jwt expired") {
           dispatch(refreshUserToken(getCookie("refreshToken")));
         }

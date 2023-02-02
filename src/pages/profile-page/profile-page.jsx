@@ -1,10 +1,22 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import style from "./profile-page.module.css";
+import { getCookie } from "../../utils/cookie";
+import { logoutUser } from "../../services/actions/userAction";
 
 export default function ProfilePage() {
   const { user } = useSelector((store) => store.userReducer);
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const refreshToken = getCookie("refreshToken");
+
+  function handleLogout() {
+    dispatch(logoutUser(refreshToken, () => navigate("/login")));
+  }
 
   return (
     <main className={style.main}>
@@ -23,6 +35,7 @@ export default function ProfilePage() {
               История заказов
             </NavLink>
             <NavLink
+              onClick={handleLogout}
               className={`text text_type_main-medium text_color_inactive ${style.link}`}
             >
               Выход
