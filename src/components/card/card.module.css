@@ -17,6 +17,11 @@
 
 .card_image {
   padding: 0 16px;
+  transition: transform 0.1s linear;
+}
+
+.card_image:hover {
+  transform: scale(1.2);
 }
 
 .card_name {

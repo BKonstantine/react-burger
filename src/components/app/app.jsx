@@ -5,7 +5,7 @@ import { getIngridients } from "../../services/actions/burgerIngredientsAction";
 import Preloader from "../preloader/preloader";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import MainPage from "../../pages/main-page/main-page";
 import LoginPage from "../../pages/login-page/login-page";
 import RegistrationPage from "../../pages/registration-page/registration-page";
@@ -21,12 +21,17 @@ import { getCookie } from "../../utils/cookie";
 export default function App() {
   const dispatch = useDispatch();
   const accessToken = getCookie("accessToken");
+  const navigate = useNavigate();
 
   const { loading, error, errorText } = useSelector((store) => ({
     loading: store.burgerIngredientsReducer.burgerIngredientsListRequest,
     error: store.burgerIngredientsReducer.burgerIngredientsListFailed,
     errorText: store.burgerIngredientsReducer.burgerIngredientsListFailedText,
   }));
+
+  useEffect(() => {
+    navigate("/login");
+  }, []);
 
   useEffect(() => {
     dispatch(getIngridients());

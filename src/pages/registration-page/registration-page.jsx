@@ -49,7 +49,7 @@ export default function RegistrationPage() {
             type="primary"
             size="medium"
             onClick={() =>
-              dispatch(registerUser(registerForm, () => navigate("/")))
+              dispatch(registerUser(registerForm, () => navigate("/login")))
             }
           >
             Зарегистрироваться
