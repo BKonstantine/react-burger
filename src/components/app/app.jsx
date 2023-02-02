@@ -35,9 +35,12 @@ export default function App() {
   }, [isAuth]);
 
   useEffect(() => {
-    dispatch(getIngridients());
     dispatch(checkUserAccess(accessToken));
-  }, [dispatch, accessToken]);
+  }, [accessToken]);
+
+  useEffect(() => {
+    dispatch(getIngridients());
+  }, []);
 
   return (
     <>
