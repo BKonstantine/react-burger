@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   Input,
@@ -11,12 +12,24 @@ import { logoutUser } from "../../services/actions/userAction";
 export default function ProfilePage() {
   const { user } = useSelector((store) => store.userReducer);
 
+  const [userData, setUserDate] = useState(user);
+
+  const [input, setInput] = useState({ name: false, email: false });
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const refreshToken = getCookie("refreshToken");
 
+  function onFormReset() {
+    setUserDate({ name: user.name, email: user.email });
+  }
+
+  function onFormChange(e) {
+    setUserDate({ ...userData, [e.target.name]: e.target.value });
+  }
+  
   return (
     <main className={style.main}>
       <div className={style.container}>
@@ -47,16 +60,32 @@ export default function ProfilePage() {
           </p>
         </div>
         <form className={style.container__form}>
-          <Input icon="EditIcon" disabled placeholder="Имя" value={user.name} />
           <Input
             icon="EditIcon"
-            disabled
+            placeholder="Имя"
+            name="name"
+            value={userData.name}
+            disabled={input.name ? false : true}
+            onChange={onFormChange}
+            onIconClick={() => setInput({ ...input, name: !input.name })}
+          />
+          <Input
+            icon="EditIcon"
             placeholder="Логин"
-            value={user.email}
+            name="email"
+            value={userData.email}
+            disabled={input.email ? false : true}
+            onChange={onFormChange}
+            onIconClick={() => setInput({ ...input, email: !input.email })}
           />
           <Input icon="EditIcon" disabled placeholder="Пароль" value="******" />
           <div className={style.container__buttons}>
-            <Button type="secondary" size="medium" htmlType="button">
+            <Button
+              type="secondary"
+              size="medium"
+              htmlType="button"
+              onClick={onFormReset}
+            >
               Отмена
             </Button>
             <Button type="primary" size="medium" htmlType="submit">
