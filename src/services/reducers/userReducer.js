@@ -9,6 +9,10 @@ import {
   USER_LOGIN_FORM_SUBMIT_FAILED,
   USER_ACCESS_ALLOWED,
   USER_ACCESS_DENIED,
+  FORGOT_PASSWORD_FORM_SET_VALUE,
+  FORGOT_PASSWORD_FORM_SUBMIT,
+  FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS,
+  FORGOT_PASSWORD_FORM_SUBMIT_FAILED,
 } from "../actions/userAction";
 
 const initialState = {
@@ -28,6 +32,10 @@ const initialState = {
     name: "",
   },
 
+  forgotPasswordForm: {
+    email: "",
+  },
+
   isAuth: undefined,
 
   registrationSubmit: false,
@@ -35,6 +43,9 @@ const initialState = {
 
   loginSubmit: false,
   loginFailed: false,
+
+  forgotPasswordSubmit: false,
+  forgotPasswordFailed: false,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -113,6 +124,38 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         isAuth: false,
+      };
+    }
+
+    case FORGOT_PASSWORD_FORM_SET_VALUE: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          [action.field]: action.value,
+        },
+      };
+    }
+    case FORGOT_PASSWORD_FORM_SUBMIT: {
+      return {
+        ...state,
+        forgotPasswordSubmit: true,
+      };
+    }
+    case FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          email: "",
+        },
+      };
+    }
+    case FORGOT_PASSWORD_FORM_SUBMIT_FAILED: {
+      return {
+        ...state,
+        forgotPasswordSubmit: false,
+        forgotPasswordFailed: true,
       };
     }
 

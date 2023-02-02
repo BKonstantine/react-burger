@@ -6,6 +6,8 @@ import {
   LOGOUT_URL,
   TOKEN_URL,
   CHECK_ACCESS_URL,
+  FORGOT_PASSWORD_URL,
+  RESET_PASSWORD_URL,
 } from "./variables";
 
 const checkResponse = (res) => {
@@ -88,6 +90,19 @@ function refreshTokenRequest(refreshToken) {
   }).then(checkResponse);
 }
 
+// TODO: Запрос на восстановление пароля
+function forgotPasswordRequest(email) {
+  return fetch(FORGOT_PASSWORD_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: email,
+    }),
+  }).then(checkResponse);
+}
+
 export {
   getIngridientsRequest,
   sendOrderRequest,
@@ -95,5 +110,6 @@ export {
   loginUserRequest,
   checkUserAccessRequest,
   refreshTokenRequest,
-  logoutUserRequest
+  logoutUserRequest,
+  forgotPasswordRequest,
 };

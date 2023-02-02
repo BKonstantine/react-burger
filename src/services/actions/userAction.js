@@ -4,6 +4,7 @@ import {
   checkUserAccessRequest,
   refreshTokenRequest,
   logoutUserRequest,
+  forgotPasswordRequest,
 } from "../../utils/api";
 import {
   parseCookie,
@@ -45,6 +46,22 @@ export function setLoginFormValue(field, value) {
 /* Экшены управления доступом пользователя */
 export const USER_ACCESS_ALLOWED = "USER_ACCESS_ALLOWED";
 export const USER_ACCESS_DENIED = "USER_ACCESS_DENIED";
+
+/* Экшены управления формой forgot password */
+export const FORGOT_PASSWORD_FORM_SET_VALUE = "FORGOT_PASSWORD_FORM_SET_VALUE";
+export const FORGOT_PASSWORD_FORM_SUBMIT = "FORGOT_PASSWORD_FORM_SUBMIT";
+export const FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS =
+  "FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS";
+export const FORGOT_PASSWORD_FORM_SUBMIT_FAILED =
+  "FORGOT_PASSWORD_FORM_SUBMIT_FAILED";
+
+export function setForgotPasswordFormValue(field, value) {
+  return {
+    type: FORGOT_PASSWORD_FORM_SET_VALUE,
+    field,
+    value,
+  };
+}
 
 /* thunk формы регистрации */
 export function registerUser(userDate, callback) {
@@ -99,7 +116,10 @@ export function logoutUser(refreshToken, callback) {
         deleteCookie("refreshToken");
         callback();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log("FALSE logoutUserRequest", err);
+        console.log(err);
+      });
   };
 }
 
@@ -133,6 +153,23 @@ function refreshUserToken(refreshToken) {
       })
       .catch((err) => {
         console.log("FALSE refreshTokenRequest", err);
+      });
+  };
+}
+
+/* thunks восстановления пароля */
+export function forgotPassword(email, callback) {
+  return function (dispatch) {
+    dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT });
+    forgotPasswordRequest(email)
+      .then((res) => {
+        console.log("TRUE forgotPasswordRequest", res);
+        dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS });
+        callback();
+      })
+      .catch((err) => {
+        console.log("FALSE forgotPasswordRequest", err);
+        dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT_FAILED });
       });
   };
 }
