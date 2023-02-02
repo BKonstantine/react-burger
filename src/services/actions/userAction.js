@@ -74,7 +74,7 @@ export const RESET_PASSWORD_FORM_SUBMIT_FAILED =
 
 export function setResetPasswordFormValue(field, value) {
   return {
-    type: FORGOT_PASSWORD_FORM_SET_VALUE,
+    type: RESET_PASSWORD_FORM_SET_VALUE,
     field,
     value,
   };
@@ -196,12 +196,12 @@ export function resetPassword(userDate, callback) {
     dispatch({ type: RESET_PASSWORD_FORM_SUBMIT });
     resetPasswordRequest(userDate)
       .then((res) => {
-        console.log("TRUE forgotPasswordRequest", res);
+        console.log("TRUE resetPasswordRequest", res);
         dispatch({ type: RESET_PASSWORD_FORM_SUBMIT_SUCCESS });
         callback();
       })
       .catch((err) => {
-        console.log("FALSE forgotPasswordRequest", err);
+        console.log("FALSE resetPasswordRequest", err);
         dispatch({ type: RESET_PASSWORD_FORM_SUBMIT_FAILED });
       });
   };

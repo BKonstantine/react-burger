@@ -14,6 +14,7 @@ import style from "./registration-page.module.css";
 
 export default function RegistrationPage() {
   const dispatch = useDispatch();
+  
   const navigate = useNavigate();
 
   const { registerForm } = useSelector((store) => store.userReducer);

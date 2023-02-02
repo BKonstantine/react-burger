@@ -12,11 +12,7 @@ export default function ProfilePage() {
 
   const navigate = useNavigate();
 
-  const refreshToken = getCookie("refreshToken");
-
-  function handleLogout() {
-    dispatch(logoutUser(refreshToken, () => navigate("/login")));
-  }
+  const refreshToken = getCookie("refreshToken");  
 
   return (
     <main className={style.main}>
@@ -35,7 +31,9 @@ export default function ProfilePage() {
               История заказов
             </NavLink>
             <NavLink
-              onClick={handleLogout}
+              onClick={() =>
+                dispatch(logoutUser(refreshToken, () => navigate("/login")))
+              }
               className={`text text_type_main-medium text_color_inactive ${style.link}`}
             >
               Выход

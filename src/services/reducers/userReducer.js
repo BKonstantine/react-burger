@@ -55,6 +55,7 @@ const initialState = {
 
   forgotPasswordSubmit: false,
   forgotPasswordFailed: false,
+  resetEmailSent: false,
 
   resetPasswordSubmit: false,
   resetPasswordFailed: false,
@@ -161,6 +162,7 @@ export default function userReducer(state = initialState, action) {
           ...state.forgotPasswordForm,
           email: "",
         },
+        resetEmailSent: true,
       };
     }
     case FORGOT_PASSWORD_FORM_SUBMIT_FAILED: {
@@ -194,6 +196,7 @@ export default function userReducer(state = initialState, action) {
           password: "",
           token: "",
         },
+        resetEmailSent: false,
       };
     }
     case RESET_PASSWORD_FORM_SUBMIT_FAILED: {
