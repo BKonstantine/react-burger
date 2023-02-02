@@ -41,7 +41,9 @@ export function setLoginFormValue(field, value) {
   };
 }
 
-export const CHECK_USER_ACCESS = "CHECK_USER_ACCESS";
+/* Экшены управления доступом пользователя */
+export const USER_ACCESS_ALLOWED = "USER_ACCESS_ALLOWED";
+export const USER_ACCESS_DENIED = "USER_ACCESS_DENIED";
 
 /* thunk формы регистрации */
 export function registerUser(userDate, callback) {
@@ -88,13 +90,16 @@ export function loginUser(userDate, callback) {
 /* thunk проверки пользователя */
 export function checkUserAccess(accessToken) {
   return function (dispatch) {
-    /* dispatch({ type: CHECK_USER_ACCESS }); */
     checkUserAccessRequest(accessToken)
-      .then((res) => console.log("TRUE checkUserAccessRequest", res))
+      .then((res) => {
+        console.log("TRUE checkUserAccessRequest", res);
+        dispatch({ type: USER_ACCESS_ALLOWED, payload: res.user });
+      })
       .catch((err) => {
         console.log("FALSE checkUserAccessRequest", err);
+        dispatch({ type: USER_ACCESS_DENIED });
         if (err.message === "jwt expired") {
-          dispatch(refreshUserToken(getCookie("refreshToken")));          
+          dispatch(refreshUserToken(getCookie("refreshToken")));
         }
       });
   };

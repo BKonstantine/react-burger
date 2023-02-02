@@ -7,7 +7,8 @@ import {
   USER_LOGIN_FORM_SUBMIT,
   USER_LOGIN_FORM_SUBMIT_SUCCESS,
   USER_LOGIN_FORM_SUBMIT_FAILED,
-  CHECK_USER_ACCESS,
+  USER_ACCESS_ALLOWED,
+  USER_ACCESS_DENIED,
 } from "../actions/userAction";
 
 const initialState = {
@@ -20,6 +21,11 @@ const initialState = {
   loginForm: {
     email: "",
     password: "",
+  },
+
+  user: {
+    email: "",
+    name: "",
   },
 
   isAuth: false,
@@ -92,12 +98,24 @@ export default function userReducer(state = initialState, action) {
       };
     }
 
-    case CHECK_USER_ACCESS: {
+    case USER_ACCESS_ALLOWED: {
       return {
         ...state,
+        user: {
+          ...state.user,
+          email: action.payload.email,
+          name: action.payload.name,
+        },
         isAuth: true,
       };
     }
+    case USER_ACCESS_DENIED: {
+      return {
+        ...state,
+        isAuth: false,
+      };
+    }
+
     default:
       return state;
   }
