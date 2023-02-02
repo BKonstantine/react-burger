@@ -22,6 +22,11 @@
   gap: 24px;
 }
 
+.container__buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .nav {
   display: flex;
   flex-direction: column;

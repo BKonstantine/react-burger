@@ -1,5 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  Input,
+  Button,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
 import style from "./profile-page.module.css";
 import { getCookie } from "../../utils/cookie";
@@ -12,7 +15,7 @@ export default function ProfilePage() {
 
   const navigate = useNavigate();
 
-  const refreshToken = getCookie("refreshToken");  
+  const refreshToken = getCookie("refreshToken");
 
   return (
     <main className={style.main}>
@@ -52,6 +55,14 @@ export default function ProfilePage() {
             value={user.email}
           />
           <Input icon="EditIcon" disabled placeholder="Пароль" value="******" />
+          <div className={style.container__buttons}>
+            <Button type="secondary" size="medium" htmlType="button">
+              Отмена
+            </Button>
+            <Button type="primary" size="medium" htmlType="submit">
+              Сохранить
+            </Button>
+          </div>
         </form>
       </div>
     </main>
