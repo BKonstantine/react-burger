@@ -103,6 +103,16 @@ function forgotPasswordRequest(email) {
   }).then(checkResponse);
 }
 
+function resetPasswordRequest(userDate) {
+  return fetch(RESET_PASSWORD_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userDate),
+  }).then(checkResponse);
+}
+
 export {
   getIngridientsRequest,
   sendOrderRequest,
@@ -112,4 +122,5 @@ export {
   refreshTokenRequest,
   logoutUserRequest,
   forgotPasswordRequest,
+  resetPasswordRequest,
 };

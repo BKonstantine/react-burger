@@ -13,6 +13,10 @@ import {
   FORGOT_PASSWORD_FORM_SUBMIT,
   FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS,
   FORGOT_PASSWORD_FORM_SUBMIT_FAILED,
+  RESET_PASSWORD_FORM_SET_VALUE,
+  RESET_PASSWORD_FORM_SUBMIT,
+  RESET_PASSWORD_FORM_SUBMIT_SUCCESS,
+  RESET_PASSWORD_FORM_SUBMIT_FAILED,
 } from "../actions/userAction";
 
 const initialState = {
@@ -36,6 +40,11 @@ const initialState = {
     email: "",
   },
 
+  resetPasswordForm: {
+    password: "",
+    token: "",
+  },
+
   isAuth: undefined,
 
   registrationSubmit: false,
@@ -46,6 +55,9 @@ const initialState = {
 
   forgotPasswordSubmit: false,
   forgotPasswordFailed: false,
+
+  resetPasswordSubmit: false,
+  resetPasswordFailed: false,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -156,6 +168,39 @@ export default function userReducer(state = initialState, action) {
         ...state,
         forgotPasswordSubmit: false,
         forgotPasswordFailed: true,
+      };
+    }
+
+    case RESET_PASSWORD_FORM_SET_VALUE: {
+      return {
+        ...state,
+        resetPasswordForm: {
+          ...state.resetPasswordForm,
+          [action.field]: action.value,
+        },
+      };
+    }
+    case RESET_PASSWORD_FORM_SUBMIT: {
+      return {
+        ...state,
+        resetPasswordSubmit: true,
+      };
+    }
+    case RESET_PASSWORD_FORM_SUBMIT_SUCCESS: {
+      return {
+        ...state,
+        resetPasswordForm: {
+          ...state.resetPasswordForm,
+          password: "",
+          token: "",
+        },
+      };
+    }
+    case RESET_PASSWORD_FORM_SUBMIT_FAILED: {
+      return {
+        ...state,
+        resetPasswordSubmit: false,
+        resetPasswordFailed: true,
       };
     }
 

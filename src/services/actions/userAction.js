@@ -5,6 +5,7 @@ import {
   refreshTokenRequest,
   logoutUserRequest,
   forgotPasswordRequest,
+  resetPasswordRequest,
 } from "../../utils/api";
 import {
   parseCookie,
@@ -56,6 +57,22 @@ export const FORGOT_PASSWORD_FORM_SUBMIT_FAILED =
   "FORGOT_PASSWORD_FORM_SUBMIT_FAILED";
 
 export function setForgotPasswordFormValue(field, value) {
+  return {
+    type: FORGOT_PASSWORD_FORM_SET_VALUE,
+    field,
+    value,
+  };
+}
+
+/* Экшены управления формой reset password */
+export const RESET_PASSWORD_FORM_SET_VALUE = "RESET_PASSWORD_FORM_SET_VALUE";
+export const RESET_PASSWORD_FORM_SUBMIT = "RESET_PASSWORD_FORM_SUBMIT";
+export const RESET_PASSWORD_FORM_SUBMIT_SUCCESS =
+  "RESET_PASSWORD_FORM_SUBMIT_SUCCESS";
+export const RESET_PASSWORD_FORM_SUBMIT_FAILED =
+  "RESET_PASSWORD_FORM_SUBMIT_FAILED";
+
+export function setResetPasswordFormValue(field, value) {
   return {
     type: FORGOT_PASSWORD_FORM_SET_VALUE,
     field,
@@ -170,6 +187,22 @@ export function forgotPassword(email, callback) {
       .catch((err) => {
         console.log("FALSE forgotPasswordRequest", err);
         dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT_FAILED });
+      });
+  };
+}
+
+export function resetPassword(userDate, callback) {
+  return function (dispatch) {
+    dispatch({ type: RESET_PASSWORD_FORM_SUBMIT });
+    resetPasswordRequest(userDate)
+      .then((res) => {
+        console.log("TRUE forgotPasswordRequest", res);
+        dispatch({ type: RESET_PASSWORD_FORM_SUBMIT_SUCCESS });
+        callback();
+      })
+      .catch((err) => {
+        console.log("FALSE forgotPasswordRequest", err);
+        dispatch({ type: RESET_PASSWORD_FORM_SUBMIT_FAILED });
       });
   };
 }
