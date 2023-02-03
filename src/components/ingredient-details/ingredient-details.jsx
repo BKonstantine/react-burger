@@ -1,9 +1,19 @@
+import cn from "classnames";
 import style from "./ingredient-details.module.css";
 
-export default function IngredientDetails({ ingredient }) {
+export default function IngredientDetails({
+  ingredient,
+  titleClassName,
+  subtitleClassName,
+}) {
   return (
     <>
-      <p className={`${style.title} text text_type_main-large`}>
+      <p
+        className={`${cn(
+          style.title,
+          titleClassName
+        )} text text_type_main-large`}
+      >
         Детали ингредиента
       </p>
       <img
@@ -11,7 +21,12 @@ export default function IngredientDetails({ ingredient }) {
         src={ingredient.image_large}
         alt={ingredient.name}
       />
-      <p className={`${style.subtitle} text text_type_main-medium`}>
+      <p
+        className={`${cn(
+          style.subtitle,
+          subtitleClassName
+        )} text text_type_main-medium`}
+      >
         {ingredient.name}
       </p>
       <ul className={style.container}>

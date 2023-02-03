@@ -1,5 +1,21 @@
 .main {
-  margin-top: 180px;
+  margin-top: 120px;
   display: flex;
   justify-content: center;
+}
+
+.container {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  align-self: center;
+  margin: 0;
+}
+
+.subtitle {
+  text-align: center;
 }

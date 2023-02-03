@@ -11,10 +11,16 @@ export default function IngredientPage() {
   const { id } = useParams();
 
   const currentIngredient = ingredients.find((item) => item._id === id);
-  
+
   return (
     <main className={style.main}>
-      <IngredientDetails ingredient={currentIngredient} />
+      <div className={style.container}>
+        <IngredientDetails
+          ingredient={currentIngredient}
+          titleClassName={style.title}
+          subtitleClassName={style.subtitle}
+        />
+      </div>
     </main>
   );
 }
