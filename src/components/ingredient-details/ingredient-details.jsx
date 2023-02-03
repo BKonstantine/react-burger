@@ -1,12 +1,6 @@
-import { useSelector } from "react-redux";
 import style from "./ingredient-details.module.css";
 
-export default function IngredientDetails() {
-
-  const ingredient = useSelector(
-    (store) => store.currentIngredientReducer.currentIngredient
-  );
-
+export default function IngredientDetails({ ingredient }) {
   return (
     <>
       <p className={`${style.title} text text_type_main-large`}>

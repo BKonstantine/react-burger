@@ -5,9 +5,7 @@ import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useInView } from "react-intersection-observer";
 import Modal from "../modal/modal";
-import {  
-  RESET_CURRENT_INGREDIENT,
-} from "../../services/actions/currentIngredientAction";
+import { RESET_CURRENT_INGREDIENT } from "../../services/actions/currentIngredientAction";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
 export default function BurgerIngredients() {
@@ -115,7 +113,7 @@ export default function BurgerIngredients() {
       </div>
       {currenIngredient && (
         <Modal onCloseModal={closeModal}>
-          <IngredientDetails />
+          <IngredientDetails ingredient={currenIngredient} />
         </Modal>
       )}
     </div>
