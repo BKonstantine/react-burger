@@ -17,6 +17,9 @@ import {
   RESET_PASSWORD_FORM_SUBMIT,
   RESET_PASSWORD_FORM_SUBMIT_SUCCESS,
   RESET_PASSWORD_FORM_SUBMIT_FAILED,
+  CHANGE_USER_DATA_FORM_SUBMIT,
+  CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
+  CHANGE_USER_DATA_FORM_SUBMIT_FAILED,
 } from "../actions/userAction";
 
 const initialState = {
@@ -59,6 +62,9 @@ const initialState = {
 
   resetPasswordSubmit: false,
   resetPasswordFailed: false,
+
+  changeUserDataSubmit: false,
+  changeUserDataFailed: false,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -204,6 +210,30 @@ export default function userReducer(state = initialState, action) {
         ...state,
         resetPasswordSubmit: false,
         resetPasswordFailed: true,
+      };
+    }
+
+    case CHANGE_USER_DATA_FORM_SUBMIT: {
+      return {
+        ...state,
+        changeUserDataSubmit: true,
+      };
+    }
+    case CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          email: action.payload.email,
+          name: action.payload.name,
+        },
+      };
+    }
+    case CHANGE_USER_DATA_FORM_SUBMIT_FAILED: {
+      return {
+        ...state,
+        changeUserDataSubmit: false,
+        changeUserDataFailed: true,
       };
     }
 

@@ -7,7 +7,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import style from "./profile-page.module.css";
 import { getCookie } from "../../utils/cookie";
-import { logoutUser } from "../../services/actions/userAction";
+import { logoutUser, cahangeUserData } from "../../services/actions/userAction";
 
 export default function ProfilePage() {
   const { user } = useSelector((store) => store.userReducer);
@@ -26,10 +26,17 @@ export default function ProfilePage() {
     setUserDate({ name: user.name, email: user.email });
   }
 
+  console.log(user);
+
   function onFormChange(e) {
     setUserDate({ ...userData, [e.target.name]: e.target.value });
   }
-  
+
+  function onFormSubmit(e) {
+    e.preventDefault();
+    dispatch(cahangeUserData(userData));
+  }
+
   return (
     <main className={style.main}>
       <div className={style.container}>
@@ -88,7 +95,12 @@ export default function ProfilePage() {
             >
               Отмена
             </Button>
-            <Button type="primary" size="medium" htmlType="submit">
+            <Button
+              type="primary"
+              size="medium"
+              htmlType="submit"
+              onClick={(e) => onFormSubmit(e)}
+            >
               Сохранить
             </Button>
           </div>

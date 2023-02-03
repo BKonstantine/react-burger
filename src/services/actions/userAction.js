@@ -6,6 +6,7 @@ import {
   logoutUserRequest,
   forgotPasswordRequest,
   resetPasswordRequest,
+  changeUserDataRequest,
 } from "../../utils/api";
 import {
   parseCookie,
@@ -79,6 +80,12 @@ export function setResetPasswordFormValue(field, value) {
     value,
   };
 }
+
+export const CHANGE_USER_DATA_FORM_SUBMIT = "CHANGE_USER_DATA_FORM_SUBMIT";
+export const CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS =
+  "CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS";
+export const CHANGE_USER_DATA_FORM_SUBMIT_FAILED =
+  "CHANGE_USER_DATA_FORM_SUBMIT_FAILED";
 
 /* thunk формы регистрации */
 export function registerUser(userDate, callback) {
@@ -203,6 +210,21 @@ export function resetPassword(userDate, callback) {
       .catch((err) => {
         console.log("FALSE resetPasswordRequest", err);
         dispatch({ type: RESET_PASSWORD_FORM_SUBMIT_FAILED });
+      });
+  };
+}
+
+export function cahangeUserData(userData) {
+  return function (dispatch) {
+    dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT });
+    changeUserDataRequest(userData, getCookie("accessToken"))
+      .then((res) => {
+        console.log("TRUE changeUserDataRequest", res);
+        dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS, payload: res.user });
+      })
+      .catch((err) => {
+        console.log("FALSE changeUserDataRequest", err);
+        dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT_FAILED });
       });
   };
 }
