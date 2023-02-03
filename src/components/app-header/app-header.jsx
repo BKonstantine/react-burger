@@ -16,17 +16,21 @@ export default function AppHeader() {
 
   const { pathname } = useLocation();
 
+  const location = useLocation();
+
   const toggleStyleIcon = useCallback(
     (url) => {
-      if (url === pathname) {
+      if (pathname === "/" && url === "/") {
+        return "primary";
+      } else if (pathname.includes(url) && url !== "/") {
         return "primary";
       } else {
         return "secondary";
       }
     },
     [pathname]
-  );
-  
+  );  
+
   return (
     <header className={style.header}>
       <div className={style.container}>
