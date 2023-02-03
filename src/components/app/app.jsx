@@ -16,6 +16,7 @@ import ProfilePage from "../../pages/profile-page/profile-page";
 import OrderListPage from "../../pages/order-list-page/order-list-page";
 import ProtectedRoute from "../protected-route/protected-route";
 import OrderPage from "../../pages/order-page/order-page";
+import IngredientPage from "../../pages/ingredient-page/ingredient-page";
 import { checkUserAccess } from "../../services/actions/userAction";
 import { getCookie } from "../../utils/cookie";
 
@@ -57,53 +58,56 @@ export default function App() {
           <AppHeader />
           <DndProvider backend={HTML5Backend}>
             <Routes>
-              <Route exact path="/" element={<MainPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-              <Route
-                path="/order_list"
-                element={
-                  <ProtectedRoute
-                    isAuth={isAuth}
-                    to="/login"
-                    element={<OrderListPage />}
-                  />
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute
-                    isAuth={isAuth}
-                    to="/login"
-                    element={<ProfilePage />}
-                  />
-                }
-              >
-                <Route path="order-page" element={<OrderPage />} />
-              </Route>              
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegistrationPage />} />
-              <Route
-                path="/forgot-password"
-                element={
-                  <ProtectedRoute
-                    isAuth={!resetEmailSent}
-                    to="/reset-password"
-                    element={<ForgotPasswordPage />}
-                  />
-                }
-              />
-              <Route />
-              <Route
-                path="/reset-password"
-                element={
-                  <ProtectedRoute
-                    isAuth={resetEmailSent}
-                    to="/login"
-                    element={<ResetPasswordPage />}
-                  />
-                }
-              />
+              
+                <Route path="/" element={<MainPage />} />
+                <Route
+                  path="/order_list"
+                  element={
+                    <ProtectedRoute
+                      isAuth={isAuth}
+                      to="/login"
+                      element={<OrderListPage />}
+                    />
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute
+                      isAuth={isAuth}
+                      to="/login"
+                      element={<ProfilePage />}
+                    />
+                  }
+                >
+                  <Route path="order-page" element={<OrderPage />} />
+                </Route>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegistrationPage />} />
+                <Route
+                  path="/forgot-password"
+                  element={
+                    <ProtectedRoute
+                      isAuth={!resetEmailSent}
+                      to="/reset-password"
+                      element={<ForgotPasswordPage />}
+                    />
+                  }
+                />
+                <Route />
+                <Route
+                  path="/reset-password"
+                  element={
+                    <ProtectedRoute
+                      isAuth={resetEmailSent}
+                      to="/login"
+                      element={<ResetPasswordPage />}
+                    />
+                  }
+                />
+                <Route path="/ingredients/:id" element={<IngredientPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              
             </Routes>
           </DndProvider>
         </>

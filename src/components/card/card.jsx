@@ -7,12 +7,10 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./card.module.css";
 import cardPropTypes from "../../utils/prop-types";
-import {
-  SET_CURRENT_INGREDIENT,  
-} from "../../services/actions/currentIngredientAction";
+import { SET_CURRENT_INGREDIENT } from "../../services/actions/currentIngredientAction";
+import { Link } from "react-router-dom";
 
-export default function Card({ ingredient }) {  
-
+export default function Card({ ingredient }) {
   const burgerConstructorIngredients = useSelector(
     (store) => store.burgerConstructorReducer
   );
@@ -48,29 +46,31 @@ export default function Card({ ingredient }) {
 
   function openModal() {
     dispatch({ type: SET_CURRENT_INGREDIENT, payload: ingredient });
-  }  
+  }
 
   return (
-    <li ref={dragRef} className={style.card} onClick={openModal}>
-      {getCounterInredient(ingredient._id) !== 0 && (
-        <Counter count={getCounterInredient(ingredient._id)} size="default" />
-      )}
-      <img
-        ref={dragPreviewRef}
-        className={style.card_image}
-        src={ingredient.image}
-        alt={ingredient.name}
-      />
-      <div className={style.card_price}>
-        <p className="text text_type_digits-default mt-2 mb-2">
-          {ingredient.price}
+    <Link to={`/ingredients/${ingredient._id}`}>
+      <li ref={dragRef} className={style.card} onClick={openModal}>
+        {getCounterInredient(ingredient._id) !== 0 && (
+          <Counter count={getCounterInredient(ingredient._id)} size="default" />
+        )}
+        <img
+          ref={dragPreviewRef}
+          className={style.card_image}
+          src={ingredient.image}
+          alt={ingredient.name}
+        />
+        <div className={style.card_price}>
+          <p className="text text_type_digits-default mt-2 mb-2">
+            {ingredient.price}
+          </p>
+          <CurrencyIcon />
+        </div>
+        <p className={`text text_type_main-default ${style.card_name}`}>
+          {ingredient.name}
         </p>
-        <CurrencyIcon />
-      </div>
-      <p className={`text text_type_main-default ${style.card_name}`}>
-        {ingredient.name}
-      </p>      
-    </li>
+      </li>
+    </Link>
   );
 }
 
