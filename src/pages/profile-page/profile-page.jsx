@@ -66,7 +66,7 @@ export default function ProfilePage() {
             В&nbsp;этом разделе вы&nbsp;можете изменить свои персональные данные
           </p>
         </div>
-        <form className={style.container__form}>
+        <form className={style.container__form} onSubmit={onFormSubmit}>
           <Input
             icon="EditIcon"
             placeholder="Имя"
@@ -95,12 +95,7 @@ export default function ProfilePage() {
             >
               Отмена
             </Button>
-            <Button
-              type="primary"
-              size="medium"
-              htmlType="submit"
-              onClick={(e) => onFormSubmit(e)}
-            >
+            <Button type="primary" size="medium" htmlType="submit">
               Сохранить
             </Button>
           </div>
