@@ -22,8 +22,7 @@ import { getCookie } from "../../utils/cookie";
 
 export default function App() {
   const dispatch = useDispatch();
-  const accessToken = getCookie("accessToken");
-  const navigate = useNavigate();
+  const accessToken = getCookie("accessToken"); 
 
   const { loading, error, errorText, isAuth, resetEmailSent } = useSelector(
     (store) => ({
@@ -34,10 +33,6 @@ export default function App() {
       resetEmailSent: store.userReducer.resetEmailSent,
     })
   );
-
-  useEffect(() => {
-    navigate(isAuth ? "/" : "/login");
-  }, [isAuth]);
 
   useEffect(() => {
     dispatch(checkUserAccess(accessToken));
