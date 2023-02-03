@@ -15,6 +15,7 @@ import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import ProfilePage from "../../pages/profile-page/profile-page";
 import OrderListPage from "../../pages/order-list-page/order-list-page";
 import ProtectedRoute from "../protected-route/protected-route";
+import OrderPage from "../../pages/order-page/order-page";
 import { checkUserAccess } from "../../services/actions/userAction";
 import { getCookie } from "../../utils/cookie";
 
@@ -77,7 +78,9 @@ export default function App() {
                     element={<ProfilePage />}
                   />
                 }
-              />
+              >
+                <Route path="order-page" element={<OrderPage />} />
+              </Route>              
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegistrationPage />} />
               <Route

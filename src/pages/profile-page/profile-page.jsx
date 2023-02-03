@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Outlet, useLocation } from "react-router-dom";
 import {
   Input,
   Button,
@@ -20,13 +20,19 @@ export default function ProfilePage() {
 
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   const refreshToken = getCookie("refreshToken");
+
+  const activeStyle = {
+    color: "#f2f2f3",
+  };
 
   function onFormReset() {
     setUserDate({ name: user.name, email: user.email });
   }
 
-  console.log(user);
+  console.log(location);
 
   function onFormChange(e) {
     setUserDate({ ...userData, [e.target.name]: e.target.value });
@@ -43,13 +49,19 @@ export default function ProfilePage() {
         <div className={style.container__nav}>
           <nav className={style.nav}>
             <NavLink
-              style={{ color: "#F2F2F3" }}
+              to="/profile"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
               className={`text text_type_main-medium text_color_inactive ${style.link}`}
+              end
             >
               Профиль
             </NavLink>
             <NavLink
+              to="order-page"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
               className={`text text_type_main-medium text_color_inactive ${style.link}`}
+              state={{ order: true }}
+              end
             >
               История заказов
             </NavLink>
@@ -66,40 +78,49 @@ export default function ProfilePage() {
             В&nbsp;этом разделе вы&nbsp;можете изменить свои персональные данные
           </p>
         </div>
-        <form className={style.container__form} onSubmit={onFormSubmit}>
-          <Input
-            icon="EditIcon"
-            placeholder="Имя"
-            name="name"
-            value={userData.name}
-            disabled={input.name ? false : true}
-            onChange={onFormChange}
-            onIconClick={() => setInput({ ...input, name: !input.name })}
-          />
-          <Input
-            icon="EditIcon"
-            placeholder="Логин"
-            name="email"
-            value={userData.email}
-            disabled={input.email ? false : true}
-            onChange={onFormChange}
-            onIconClick={() => setInput({ ...input, email: !input.email })}
-          />
-          <Input icon="EditIcon" disabled placeholder="Пароль" value="******" />
-          <div className={style.container__buttons}>
-            <Button
-              type="secondary"
-              size="medium"
-              htmlType="button"
-              onClick={onFormReset}
-            >
-              Отмена
-            </Button>
-            <Button type="primary" size="medium" htmlType="submit">
-              Сохранить
-            </Button>
-          </div>
-        </form>
+        {location.state ? (
+          <Outlet />
+        ) : (
+          <form className={style.container__form} onSubmit={onFormSubmit}>
+            <Input
+              icon="EditIcon"
+              placeholder="Имя"
+              name="name"
+              value={userData.name}
+              disabled={input.name ? false : true}
+              onChange={onFormChange}
+              onIconClick={() => setInput({ ...input, name: !input.name })}
+            />
+            <Input
+              icon="EditIcon"
+              placeholder="Логин"
+              name="email"
+              value={userData.email}
+              disabled={input.email ? false : true}
+              onChange={onFormChange}
+              onIconClick={() => setInput({ ...input, email: !input.email })}
+            />
+            <Input
+              icon="EditIcon"
+              disabled
+              placeholder="Пароль"
+              value="******"
+            />
+            <div className={style.container__buttons}>
+              <Button
+                type="secondary"
+                size="medium"
+                htmlType="button"
+                onClick={onFormReset}
+              >
+                Отмена
+              </Button>
+              <Button type="primary" size="medium" htmlType="submit">
+                Сохранить
+              </Button>
+            </div>
+          </form>
+        )}
       </div>
     </main>
   );

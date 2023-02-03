@@ -14,7 +14,7 @@ export default function AppHeader() {
     color: "#f2f2f3",
   };
 
-  const { pathname } = useLocation();  
+  const { pathname } = useLocation();
 
   const toggleStyleIcon = useCallback(
     (url) => {
