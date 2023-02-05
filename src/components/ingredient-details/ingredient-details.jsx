@@ -1,4 +1,6 @@
 import cn from "classnames";
+import PropTypes from "prop-types";
+import cardPropTypes from "../../utils/prop-types";
 import style from "./ingredient-details.module.css";
 
 export default function IngredientDetails({
@@ -56,3 +58,9 @@ export default function IngredientDetails({
     </>
   );
 }
+
+IngredientDetails.propTypes = {
+  ingredient: cardPropTypes,
+  titleClassName: PropTypes.string,
+  subtitleClassName: PropTypes.string
+};

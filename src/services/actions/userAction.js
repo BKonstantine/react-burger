@@ -93,7 +93,6 @@ export function registerUser(userDate, callback) {
     dispatch({ type: USER_REGISTER_FORM_SUBMIT });
     registerUserRequest(userDate)
       .then((res) => {
-        console.log("TRUE registerUserRequest", res);
         setCookie("accessToken", parseCookie(res.accessToken));
         setCookie("refreshToken", res.refreshToken);
       })
@@ -102,7 +101,6 @@ export function registerUser(userDate, callback) {
         callback();
       })
       .catch((err) => {
-        console.log("FALSE registerUserRequest", err);
         dispatch({ type: USER_REGISTER_FORM_SUBMIT_FAILED });
       });
   };
@@ -114,7 +112,6 @@ export function loginUser(userDate, callback) {
     dispatch({ type: USER_LOGIN_FORM_SUBMIT });
     loginUserRequest(userDate)
       .then((res) => {
-        console.log("TRUE loginUserRequest", res);
         setCookie("accessToken", parseCookie(res.accessToken));
         setCookie("refreshToken", res.refreshToken);
       })
@@ -123,7 +120,6 @@ export function loginUser(userDate, callback) {
         callback();
       })
       .catch((err) => {
-        console.log("FALSE loginUserRequest", err);
         dispatch({ type: USER_LOGIN_FORM_SUBMIT_FAILED });
       });
   };
@@ -135,13 +131,11 @@ export function logoutUser(refreshToken, callback) {
     logoutUserRequest(refreshToken)
       .then((res) => {
         dispatch({ type: USER_ACCESS_DENIED });
-        console.log("TRUE logoutUserRequest", res);
         deleteCookie("accessToken");
         deleteCookie("refreshToken");
         callback();
       })
       .catch((err) => {
-        console.log("FALSE logoutUserRequest", err);
         console.log(err);
       });
   };
@@ -152,12 +146,9 @@ export function checkUserAccess(accessToken) {
   return function (dispatch) {
     checkUserAccessRequest(accessToken)
       .then((res) => {
-        console.log("TRUE checkUserAccessRequest", res);
         dispatch({ type: USER_ACCESS_ALLOWED, payload: res.user });
       })
       .catch((err) => {
-        console.log("FALSE checkUserAccessRequest", err);
-        /* dispatch({ type: USER_ACCESS_DENIED }); */
         if (err.message === "jwt expired") {
           dispatch(refreshUserToken(getCookie("refreshToken")));
         }
@@ -170,13 +161,12 @@ function refreshUserToken(refreshToken) {
   return function (dispatch) {
     refreshTokenRequest(refreshToken)
       .then((res) => {
-        console.log("TRUE refreshTokenRequest", res);
         setCookie("accessToken", parseCookie(res.accessToken));
         setCookie("refreshToken", res.refreshToken);
         dispatch(checkUserAccess(getCookie("accessToken")));
       })
       .catch((err) => {
-        console.log("FALSE refreshTokenRequest", err);
+        console.log(err);
       });
   };
 }
@@ -187,13 +177,12 @@ export function forgotPassword(email, callback) {
     dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT });
     forgotPasswordRequest(email)
       .then((res) => {
-        console.log("TRUE forgotPasswordRequest", res);
         dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS });
         callback();
       })
       .catch((err) => {
-        console.log("FALSE forgotPasswordRequest", err);
         dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT_FAILED });
+        console.log(err);
       });
   };
 }
@@ -203,13 +192,12 @@ export function resetPassword(userDate, callback) {
     dispatch({ type: RESET_PASSWORD_FORM_SUBMIT });
     resetPasswordRequest(userDate)
       .then((res) => {
-        console.log("TRUE resetPasswordRequest", res);
         dispatch({ type: RESET_PASSWORD_FORM_SUBMIT_SUCCESS });
         callback();
       })
       .catch((err) => {
-        console.log("FALSE resetPasswordRequest", err);
         dispatch({ type: RESET_PASSWORD_FORM_SUBMIT_FAILED });
+        console.log(err);
       });
   };
 }
@@ -219,12 +207,14 @@ export function cahangeUserData(userData) {
     dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT });
     changeUserDataRequest(userData, getCookie("accessToken"))
       .then((res) => {
-        console.log("TRUE changeUserDataRequest", res);
-        dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS, payload: res.user });
+        dispatch({
+          type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
+          payload: res.user,
+        });
       })
       .catch((err) => {
-        console.log("FALSE changeUserDataRequest", err);
         dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT_FAILED });
+        console.log(err);
       });
   };
 }
