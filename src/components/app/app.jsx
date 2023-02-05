@@ -71,19 +71,36 @@ export default function App() {
               >
                 <Route path="order-page" element={<OrderPage />} />
               </Route>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegistrationPage />} />
+              <Route
+                path="/login"
+                element={
+                  <ProtectedRoute
+                    isAuth={!isAuth}
+                    to="/"
+                    element={<LoginPage />}
+                  />
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <ProtectedRoute
+                    isAuth={!isAuth}
+                    to="/"
+                    element={<RegistrationPage />}
+                  />
+                }
+              />
               <Route
                 path="/forgot-password"
                 element={
                   <ProtectedRoute
-                    isAuth={!resetEmailSent}
-                    to="/reset-password"
+                    isAuth={!isAuth}
+                    to="/"
                     element={<ForgotPasswordPage />}
                   />
                 }
               />
-              <Route />
               <Route
                 path="/reset-password"
                 element={

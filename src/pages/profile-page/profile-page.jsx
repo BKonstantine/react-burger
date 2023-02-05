@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate, Outlet, useLocation } from "react-router-dom";
 import {
   Input,
@@ -39,6 +39,10 @@ export default function ProfilePage() {
   function profileFormSubmit(e) {
     e.preventDefault();
     dispatch(changeUserData(userData));
+  }
+
+  function checkButton() {
+    return JSON.stringify(user) === JSON.stringify(userData);
   }
 
   return (
@@ -110,10 +114,16 @@ export default function ProfilePage() {
                 size="medium"
                 htmlType="button"
                 onClick={onFormReset}
+                disabled={checkButton() ? true : false}
               >
                 Отмена
               </Button>
-              <Button type="primary" size="medium" htmlType="submit">
+              <Button
+                type="primary"
+                size="medium"
+                htmlType="submit"
+                disabled={checkButton() ? true : false}
+              >
                 Сохранить
               </Button>
             </div>
