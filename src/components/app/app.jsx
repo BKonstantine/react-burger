@@ -18,11 +18,9 @@ import ProtectedRoute from "../protected-route/protected-route";
 import OrderPage from "../../pages/order-page/order-page";
 import IngredientPage from "../../pages/ingredient-page/ingredient-page";
 import { checkUserAccess } from "../../services/actions/userAction";
-import { getCookie } from "../../utils/cookie";
 
 export default function App() {
   const dispatch = useDispatch();
-  const accessToken = getCookie("accessToken"); 
 
   const { loading, error, errorText, isAuth, resetEmailSent } = useSelector(
     (store) => ({
@@ -35,11 +33,8 @@ export default function App() {
   );
 
   useEffect(() => {
-    dispatch(checkUserAccess(accessToken));
-  }, [accessToken]);
-
-  useEffect(() => {
     dispatch(getIngridients());
+    dispatch(checkUserAccess());
   }, []);
 
   return (
@@ -53,56 +48,54 @@ export default function App() {
           <AppHeader />
           <DndProvider backend={HTML5Backend}>
             <Routes>
-              
-                <Route path="/" element={<MainPage />} />
-                <Route
-                  path="/order_list"
-                  element={
-                    <ProtectedRoute
-                      isAuth={isAuth}
-                      to="/login"
-                      element={<OrderListPage />}
-                    />
-                  }
-                />
-                <Route
-                  path="/profile"
-                  element={
-                    <ProtectedRoute
-                      isAuth={isAuth}
-                      to="/login"
-                      element={<ProfilePage />}
-                    />
-                  }
-                >
-                  <Route path="order-page" element={<OrderPage />} />
-                </Route>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegistrationPage />} />
-                <Route
-                  path="/forgot-password"
-                  element={
-                    <ProtectedRoute
-                      isAuth={!resetEmailSent}
-                      to="/reset-password"
-                      element={<ForgotPasswordPage />}
-                    />
-                  }
-                />
-                <Route />
-                <Route
-                  path="/reset-password"
-                  element={
-                    <ProtectedRoute
-                      isAuth={resetEmailSent}
-                      to="/login"
-                      element={<ResetPasswordPage />}
-                    />
-                  }
-                />
-                <Route path="/ingredients/:id" element={<IngredientPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-              
+              <Route path="/" element={<MainPage />} />
+              <Route
+                path="/order_list"
+                element={
+                  <ProtectedRoute
+                    isAuth={isAuth}
+                    to="/login"
+                    element={<OrderListPage />}
+                  />
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute
+                    isAuth={isAuth}
+                    to="/login"
+                    element={<ProfilePage />}
+                  />
+                }
+              >
+                <Route path="order-page" element={<OrderPage />} />
+              </Route>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegistrationPage />} />
+              <Route
+                path="/forgot-password"
+                element={
+                  <ProtectedRoute
+                    isAuth={!resetEmailSent}
+                    to="/reset-password"
+                    element={<ForgotPasswordPage />}
+                  />
+                }
+              />
+              <Route />
+              <Route
+                path="/reset-password"
+                element={
+                  <ProtectedRoute
+                    isAuth={resetEmailSent}
+                    to="/login"
+                    element={<ResetPasswordPage />}
+                  />
+                }
+              />
+              <Route path="/ingredients/:id" element={<IngredientPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </DndProvider>
         </>

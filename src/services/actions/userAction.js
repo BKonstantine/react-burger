@@ -142,9 +142,9 @@ export function logoutUser(refreshToken, callback) {
 }
 
 /* thunk проверки пользователя */
-export function checkUserAccess(accessToken) {
+export function checkUserAccess() {
   return function (dispatch) {
-    checkUserAccessRequest(accessToken)
+    checkUserAccessRequest(getCookie("accessToken"))
       .then((res) => {
         dispatch({ type: USER_ACCESS_ALLOWED, payload: res.user });
       })
