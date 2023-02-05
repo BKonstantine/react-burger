@@ -2,9 +2,7 @@
   box-sizing: border-box;
   max-width: 272px;
   min-height: 208px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
   position: relative;
   cursor: pointer;
 }
@@ -29,5 +27,8 @@
 }
 
 .link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-decoration: none;
 }

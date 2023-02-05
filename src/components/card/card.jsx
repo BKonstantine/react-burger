@@ -49,11 +49,14 @@ export default function Card({ ingredient }) {
   }
 
   return (
-    <Link to={`/ingredients/${ingredient._id}`} className={`text_color_primary ${style.link}`}>
-      <li ref={dragRef} className={style.card} onClick={openModal}>
-        {getCounterInredient(ingredient._id) !== 0 && (
-          <Counter count={getCounterInredient(ingredient._id)} size="default" />
-        )}
+    <li ref={dragRef} className={style.card} onClick={openModal}>
+      {getCounterInredient(ingredient._id) !== 0 && (
+        <Counter count={getCounterInredient(ingredient._id)} size="default" />
+      )}
+      <Link
+        to={`/ingredients/${ingredient._id}`}
+        className={`text_color_primary ${style.link}`}
+      >
         <img
           ref={dragPreviewRef}
           className={style.card_image}
@@ -69,8 +72,8 @@ export default function Card({ ingredient }) {
         <p className={`text text_type_main-default ${style.card_name}`}>
           {ingredient.name}
         </p>
-      </li>
-    </Link>
+      </Link>
+    </li>
   );
 }
 
