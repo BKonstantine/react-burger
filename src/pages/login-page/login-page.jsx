@@ -22,11 +22,16 @@ export default function LoginPage() {
     dispatch(setLoginFormValue(e.target.name, e.target.value));
   }
 
+  function loginFormSubmit(e) {
+    e.preventDefault();
+    dispatch(loginUser(loginForm, () => navigate("/")));
+  }
+
   return (
     <main className={style.main}>
       <div className={style.container}>
         <p className="text text_type_main-medium mb-6">Вход</p>
-        <form className={style.form}>
+        <form className={style.form} onSubmit={loginFormSubmit}>
           <EmailInput
             value={loginForm.email}
             name="email"
@@ -37,12 +42,7 @@ export default function LoginPage() {
             name="password"
             onChange={onFormChange}
           />
-          <Button
-            htmlType="button"
-            type="primary"
-            size="medium"
-            onClick={() => dispatch(loginUser(loginForm, () => navigate("/")))}
-          >
+          <Button htmlType="submit" type="primary" size="medium">
             Войти
           </Button>
         </form>

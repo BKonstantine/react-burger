@@ -13,39 +13,33 @@ import style from "./forgot-password-page.module.css";
 export default function ForgotPasswordPage() {
   const dispatch = useDispatch();
 
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
-  const { forgotPasswordForm } = useSelector(
-    (store) => store.userReducer
-  );
+  const { forgotPasswordForm } = useSelector((store) => store.userReducer);
 
   function onFormChange(e) {
     dispatch(setForgotPasswordFormValue(e.target.name, e.target.value));
   }
- 
+
+  function forgotPasswordFormSubmit(e) {
+    e.preventDefault();
+    dispatch(
+      forgotPassword(forgotPasswordForm, () => navigate("/reset-password"))
+    );
+  }
+
   return (
     <main className={style.main}>
       <div className={style.container}>
         <p className="text text_type_main-medium mb-6">Восстановление пароля</p>
-        <form className={style.form}>
+        <form className={style.form} onSubmit={forgotPasswordFormSubmit}>
           <EmailInput
             placeholder="Укажите e-mail"
             value={forgotPasswordForm.email}
             name="email"
             onChange={onFormChange}
           />
-          <Button
-            htmlType="button"
-            type="primary"
-            size="medium"
-            onClick={() =>
-              dispatch(
-                forgotPassword(forgotPasswordForm, () =>
-                  navigate("/reset-password")
-                )
-              )
-            }
-          >
+          <Button htmlType="submit" type="primary" size="medium">
             Восстановить
           </Button>
         </form>

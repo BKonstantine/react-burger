@@ -212,6 +212,17 @@ export function cahangeUserData(userData) {
           payload: res.user,
         });
       })
+      .catch(() => {
+        checkUserAccessRequest(getCookie("accessToken"))
+          .then((res) => {
+            dispatch({ type: USER_ACCESS_ALLOWED, payload: res.user });
+          })
+          .catch((err) => {
+            if (err.message === "jwt expired") {
+              dispatch(refreshUserToken(getCookie("refreshToken")));
+            }
+          });
+      })
       .catch((err) => {
         dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT_FAILED });
         console.log(err);

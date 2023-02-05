@@ -21,13 +21,18 @@ export default function ResetPasswordPage() {
 
   function onFormChange(e) {
     dispatch(setResetPasswordFormValue(e.target.name, e.target.value));
-  }  
+  }
+
+  function resetFormSubmit(e) {
+    e.preventDefault();
+    dispatch(resetPassword(resetPasswordForm, () => navigate("/login")));
+  }
 
   return (
     <main className={style.main}>
       <div className={style.container}>
         <p className="text text_type_main-medium mb-6">Восстановление пароля</p>
-        <form className={style.form}>
+        <form className={style.form} onSubmit={resetFormSubmit}>
           <PasswordInput
             placeholder="Введите новый пароль"
             value={resetPasswordForm.password}
@@ -41,16 +46,7 @@ export default function ResetPasswordPage() {
             type="text"
             onChange={onFormChange}
           />
-          <Button
-            htmlType="button"
-            type="primary"
-            size="medium"
-            onClick={() =>
-              dispatch(
-                resetPassword(resetPasswordForm, () => navigate("/login"))
-              )
-            }
-          >
+          <Button htmlType="button" type="primary" size="medium">
             Сохранить
           </Button>
         </form>

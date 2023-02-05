@@ -14,7 +14,7 @@ import style from "./registration-page.module.css";
 
 export default function RegistrationPage() {
   const dispatch = useDispatch();
-  
+
   const navigate = useNavigate();
 
   const { registerForm } = useSelector((store) => store.userReducer);
@@ -23,11 +23,16 @@ export default function RegistrationPage() {
     dispatch(setRegisterFormValue(e.target.name, e.target.value));
   }
 
+  function regestrationFormSubmit(e) {
+    e.preventDefault();
+    dispatch(registerUser(registerForm, () => navigate("/login")));
+  }
+
   return (
     <main className={style.main}>
       <div className={style.container}>
         <p className="text text_type_main-medium mb-6">Регистрация</p>
-        <form className={style.form}>
+        <form className={style.form} onSubmit={regestrationFormSubmit}>
           <Input
             placeholder="Имя"
             type="text"
@@ -45,14 +50,7 @@ export default function RegistrationPage() {
             name="password"
             onChange={onFormChange}
           />
-          <Button
-            htmlType="button"
-            type="primary"
-            size="medium"
-            onClick={() =>
-              dispatch(registerUser(registerForm, () => navigate("/login")))
-            }
-          >
+          <Button htmlType="button" type="primary" size="medium">
             Зарегистрироваться
           </Button>
         </form>

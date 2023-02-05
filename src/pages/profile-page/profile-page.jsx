@@ -30,15 +30,13 @@ export default function ProfilePage() {
 
   function onFormReset() {
     setUserDate({ name: user.name, email: user.email });
-  }
-
-  console.log(location);
+  }  
 
   function onFormChange(e) {
     setUserDate({ ...userData, [e.target.name]: e.target.value });
   }
 
-  function onFormSubmit(e) {
+  function profileFormSubmit(e) {
     e.preventDefault();
     dispatch(cahangeUserData(userData));
   }
@@ -81,7 +79,7 @@ export default function ProfilePage() {
         {location.state ? (
           <Outlet />
         ) : (
-          <form className={style.container__form} onSubmit={onFormSubmit}>
+          <form className={style.container__form} onSubmit={profileFormSubmit}>
             <Input
               icon="EditIcon"
               placeholder="Имя"
