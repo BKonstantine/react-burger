@@ -16,8 +16,7 @@ export default function ResetPasswordPage() {
 
   const navigate = useNavigate();
 
-  const { resetPasswordForm } = useSelector((store) => store.userReducer);
-  console.log(resetPasswordForm);
+  const { resetPasswordForm } = useSelector((store) => store.userReducer);  
 
   function onFormChange(e) {
     dispatch(setResetPasswordFormValue(e.target.name, e.target.value));
