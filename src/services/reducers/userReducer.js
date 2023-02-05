@@ -89,7 +89,7 @@ export default function userReducer(state = initialState, action) {
           name: "",
           email: "",
           password: "",
-        },        
+        },
       };
     }
     case USER_REGISTER_FORM_SUBMIT_FAILED: {
@@ -116,6 +116,11 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         loginForm: { ...state.loginForm, email: "", password: "" },
+        user: {
+          ...state.user,
+          email: action.payload.email,
+          name: action.payload.name,
+        },
         isAuth: true,
       };
     }

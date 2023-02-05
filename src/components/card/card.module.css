@@ -19,7 +19,7 @@
 }
 
 .card_image:hover {
-  transform: scale(1.2);
+  transform: scale(1.05);
 }
 
 .card_name {

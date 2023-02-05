@@ -112,11 +112,11 @@ export function loginUser(userDate, callback) {
     dispatch({ type: USER_LOGIN_FORM_SUBMIT });
     loginUserRequest(userDate)
       .then((res) => {
+        dispatch({ type: USER_LOGIN_FORM_SUBMIT_SUCCESS, payload: res.user });
         setCookie("accessToken", parseCookie(res.accessToken));
         setCookie("refreshToken", res.refreshToken);
       })
       .then(() => {
-        dispatch({ type: USER_LOGIN_FORM_SUBMIT_SUCCESS });
         callback();
       })
       .catch(() => {
