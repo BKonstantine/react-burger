@@ -1,9 +1,10 @@
 import { sendOrderRequest } from "../../utils/api";
+import { getCookie } from "../../utils/cookie";
 
 export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST";
 export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
 export const GET_ORDER_FAILED = "GET_ORDER_FAILED";
-export const RESET_ORDER = "RESET_ORDER"
+export const RESET_ORDER = "RESET_ORDER";
 
 export function makeOrder(ingredients) {
   return function (dispatch) {
@@ -14,15 +15,17 @@ export function makeOrder(ingredients) {
     ];
 
     dispatch({ type: GET_ORDER_REQUEST });
-    sendOrderRequest(arrayId)
+    sendOrderRequest(arrayId, getCookie("accessToken"))
       .then((res) => {
-        dispatch({ type: GET_ORDER_SUCCESS, payload: res.order.number});        
-      })      
-      .catch(() => {
+        console.log(res);
+        dispatch({ type: GET_ORDER_SUCCESS, payload: res.order.number });
+      })
+      .catch((err) => {
+        console.log(err);
         dispatch({
           type: GET_ORDER_FAILED,
           errorText: "Ошибка при формировании заказа",
-        });        
+        });
       });
   };
 }

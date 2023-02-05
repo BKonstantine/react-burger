@@ -20,11 +20,12 @@ function getIngridientsRequest() {
 }
 
 // TODO: Создание заказа
-function sendOrderRequest(idList) {
+function sendOrderRequest(idList, accessToken) {
   return fetch(ORDER_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
       ingredients: idList,
