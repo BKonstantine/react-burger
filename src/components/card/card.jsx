@@ -49,7 +49,7 @@ export default function Card({ ingredient }) {
   }
 
   return (
-    <Link to={`/ingredients/${ingredient._id}`}>
+    <Link to={`/ingredients/${ingredient._id}`} className={`text_color_primary ${style.link}`}>
       <li ref={dragRef} className={style.card} onClick={openModal}>
         {getCounterInredient(ingredient._id) !== 0 && (
           <Counter count={getCounterInredient(ingredient._id)} size="default" />

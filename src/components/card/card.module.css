@@ -27,3 +27,7 @@
 .card_name {
   text-align: center;
 }
+
+.link {
+  text-decoration: none;
+}

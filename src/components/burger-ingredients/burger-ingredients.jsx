@@ -1,5 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import BurgerIngredientsList from "../burger-ingredients-list/burger-ingredients-list";
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -20,6 +21,9 @@ export default function BurgerIngredients() {
   );
 
   const dispatch = useDispatch();
+
+  const location = useLocation();
+  console.log(location);
 
   const { buns, mains, sauces } = useMemo(() => {
     return ingredients.reduce(
