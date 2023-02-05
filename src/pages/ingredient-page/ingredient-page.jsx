@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import IngredientDetails from "../../components/ingredient-details/ingredient-details";
+import MainPage from "../main-page/main-page";
 import style from "./ingredient-page.module.css";
 
 export default function IngredientPage() {
@@ -12,7 +13,11 @@ export default function IngredientPage() {
 
   const currentIngredient = ingredients.find((item) => item._id === id);
 
-  return (
+  const location = useLocation();  
+
+  return location.state?.from === "/" ? (
+    <MainPage />
+  ) : (
     currentIngredient && (
       <main className={style.main}>
         <div className={style.container}>

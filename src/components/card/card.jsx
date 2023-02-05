@@ -56,6 +56,7 @@ export default function Card({ ingredient }) {
       <Link
         to={`/ingredients/${ingredient._id}`}
         className={`text_color_primary ${style.link}`}
+        state={{ from: "/" }}
       >
         <img
           ref={dragPreviewRef}

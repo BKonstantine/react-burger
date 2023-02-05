@@ -1,6 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
 import BurgerIngredientsList from "../burger-ingredients-list/burger-ingredients-list";
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -15,10 +14,7 @@ export default function BurgerIngredients() {
 
   const ingredients = useSelector(
     (store) => store.burgerIngredientsReducer.burgerIngredientsList
-  ); 
-
-  const location = useLocation();
-  console.log(location);
+  );
 
   const { buns, mains, sauces } = useMemo(() => {
     return ingredients.reduce(
@@ -54,7 +50,7 @@ export default function BurgerIngredients() {
   function changeIngredients(id) {
     setCurrent(id);
     document.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth" });
-  }  
+  }
 
   return (
     <div className={style.container}>
@@ -100,7 +96,7 @@ export default function BurgerIngredients() {
           ref={mainTabRef}
           ingredients={mains}
         />
-      </div>      
+      </div>
     </div>
   );
 }
