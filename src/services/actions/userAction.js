@@ -202,7 +202,7 @@ export function resetPassword(userDate, callback) {
   };
 }
 
-export function cahangeUserData(userData) {
+export function changeUserData(userData) {
   return function (dispatch) {
     dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT });
     changeUserDataRequest(userData, getCookie("accessToken"))
