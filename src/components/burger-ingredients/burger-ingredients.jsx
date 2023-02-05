@@ -1,13 +1,10 @@
 import { useMemo, useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import BurgerIngredientsList from "../burger-ingredients-list/burger-ingredients-list";
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useInView } from "react-intersection-observer";
-import Modal from "../modal/modal";
-import { RESET_CURRENT_INGREDIENT } from "../../services/actions/currentIngredientAction";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 
 export default function BurgerIngredients() {
   const [current, setCurrent] = useState("one");
@@ -18,9 +15,7 @@ export default function BurgerIngredients() {
 
   const ingredients = useSelector(
     (store) => store.burgerIngredientsReducer.burgerIngredientsList
-  );
-
-  const dispatch = useDispatch();
+  ); 
 
   const location = useLocation();
   console.log(location);
@@ -59,16 +54,7 @@ export default function BurgerIngredients() {
   function changeIngredients(id) {
     setCurrent(id);
     document.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth" });
-  }
-
-  const currenIngredient = useSelector(
-    (store) => store.currentIngredientReducer.currentIngredient
-  );
-
-  function closeModal(e) {
-    e.stopPropagation();
-    dispatch({ type: RESET_CURRENT_INGREDIENT });
-  }
+  }  
 
   return (
     <div className={style.container}>
@@ -114,12 +100,7 @@ export default function BurgerIngredients() {
           ref={mainTabRef}
           ingredients={mains}
         />
-      </div>
-      {currenIngredient && (
-        <Modal onCloseModal={closeModal}>
-          <IngredientDetails ingredient={currenIngredient} />
-        </Modal>
-      )}
+      </div>      
     </div>
   );
 }
