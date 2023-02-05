@@ -1,4 +1,5 @@
 import { sendOrderRequest } from "../../utils/api";
+import { refreshUserToken } from "../actions/userAction";
 import { getCookie } from "../../utils/cookie";
 
 export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST";
@@ -16,14 +17,25 @@ export function makeOrder(ingredients) {
 
     dispatch({ type: GET_ORDER_REQUEST });
     sendOrderRequest(arrayId, getCookie("accessToken"))
-      .then((res) => {        
+      .then((res) => {
         dispatch({ type: GET_ORDER_SUCCESS, payload: res.order.number });
       })
-      .catch((err) => {        
-        dispatch({
-          type: GET_ORDER_FAILED,
-          errorText: "Ошибка при формировании заказа",
-        });
+      .catch((err) => {
+        if (err.message === "jwt expired" || "jwt malformed") {
+          dispatch(refreshUserToken(getCookie("refreshToken")));
+        }
+      })
+      .catch(() => {
+        sendOrderRequest(arrayId, getCookie("accessToken"))
+          .then((res) => {
+            dispatch({ type: GET_ORDER_SUCCESS, payload: res.order.number });
+          })
+          .catch(() => {
+            dispatch({
+              type: GET_ORDER_FAILED,
+              errorText: "Ошибка при формировании заказа",
+            });
+          });
       });
   };
 }

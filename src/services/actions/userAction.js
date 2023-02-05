@@ -100,7 +100,7 @@ export function registerUser(userDate, callback) {
         dispatch({ type: USER_REGISTER_FORM_SUBMIT_SUCCESS });
         callback();
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch({ type: USER_REGISTER_FORM_SUBMIT_FAILED });
       });
   };
@@ -119,7 +119,7 @@ export function loginUser(userDate, callback) {
         dispatch({ type: USER_LOGIN_FORM_SUBMIT_SUCCESS });
         callback();
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch({ type: USER_LOGIN_FORM_SUBMIT_FAILED });
       });
   };
@@ -128,16 +128,12 @@ export function loginUser(userDate, callback) {
 /* thunk выхода пользователя из аккаунта */
 export function logoutUser(refreshToken, callback) {
   return function (dispatch) {
-    logoutUserRequest(refreshToken)
-      .then((res) => {
-        dispatch({ type: USER_ACCESS_DENIED });
-        deleteCookie("accessToken");
-        deleteCookie("refreshToken");
-        callback();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    logoutUserRequest(refreshToken).then(() => {
+      dispatch({ type: USER_ACCESS_DENIED });
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+      callback();
+    });
   };
 }
 
@@ -149,7 +145,7 @@ export function checkUserAccess() {
         dispatch({ type: USER_ACCESS_ALLOWED, payload: res.user });
       })
       .catch((err) => {
-        if (err.message === "jwt expired") {
+        if (err.message === "jwt expired" || "jwt malformed") {
           dispatch(refreshUserToken(getCookie("refreshToken")));
         }
       });
@@ -157,17 +153,13 @@ export function checkUserAccess() {
 }
 
 /* thunk обновления токена */
-function refreshUserToken(refreshToken) {
+export function refreshUserToken(refreshToken) {
   return function (dispatch) {
-    refreshTokenRequest(refreshToken)
-      .then((res) => {
-        setCookie("accessToken", parseCookie(res.accessToken));
-        setCookie("refreshToken", res.refreshToken);
-        dispatch(checkUserAccess(getCookie("accessToken")));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    refreshTokenRequest(refreshToken).then((res) => {
+      setCookie("accessToken", parseCookie(res.accessToken));
+      setCookie("refreshToken", res.refreshToken);
+      dispatch(checkUserAccess(getCookie("accessToken")));
+    });
   };
 }
 
@@ -176,13 +168,12 @@ export function forgotPassword(email, callback) {
   return function (dispatch) {
     dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT });
     forgotPasswordRequest(email)
-      .then((res) => {
+      .then(() => {
         dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS });
         callback();
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT_FAILED });
-        console.log(err);
       });
   };
 }
@@ -191,17 +182,17 @@ export function resetPassword(userDate, callback) {
   return function (dispatch) {
     dispatch({ type: RESET_PASSWORD_FORM_SUBMIT });
     resetPasswordRequest(userDate)
-      .then((res) => {
+      .then(() => {
         dispatch({ type: RESET_PASSWORD_FORM_SUBMIT_SUCCESS });
         callback();
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch({ type: RESET_PASSWORD_FORM_SUBMIT_FAILED });
-        console.log(err);
       });
   };
 }
 
+/* thunk изменения данных пользователя */
 export function changeUserData(userData) {
   return function (dispatch) {
     dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT });
@@ -212,20 +203,22 @@ export function changeUserData(userData) {
           payload: res.user,
         });
       })
-      .catch(() => {
-        checkUserAccessRequest(getCookie("accessToken"))
-          .then((res) => {
-            dispatch({ type: USER_ACCESS_ALLOWED, payload: res.user });
-          })
-          .catch((err) => {
-            if (err.message === "jwt expired") {
-              dispatch(refreshUserToken(getCookie("refreshToken")));
-            }
-          });
-      })
       .catch((err) => {
-        dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT_FAILED });
-        console.log(err);
+        if (err.message === "jwt expired" || "jwt malformed") {
+          dispatch(refreshUserToken(getCookie("refreshToken")));
+        }
+      })
+      .catch(() => {
+        changeUserDataRequest(userData, getCookie("accessToken"))
+          .then((res) => {
+            dispatch({
+              type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
+              payload: res.user,
+            });
+          })
+          .catch(() => {
+            dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT_FAILED });
+          });
       });
   };
 }
