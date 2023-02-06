@@ -4,6 +4,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import AppHeader from "../../components/app-header/app-header";
 import {
   setForgotPasswordFormValue,
   forgotPassword,
@@ -29,27 +30,32 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <main className={style.main}>
-      <div className={style.container}>
-        <p className="text text_type_main-medium mb-6">Восстановление пароля</p>
-        <form className={style.form} onSubmit={forgotPasswordFormSubmit}>
-          <EmailInput
-            placeholder="Укажите e-mail"
-            value={forgotPasswordForm.email}
-            name="email"
-            onChange={onFormChange}
-          />
-          <Button htmlType="submit" type="primary" size="medium">
-            Восстановить
-          </Button>
-        </form>
-        <p className="text text_type_main-default">
-          Вспомнили пароль?
-          <Link to="/login" className={style.link}>
-            Войти
-          </Link>
-        </p>
-      </div>
-    </main>
+    <>
+      <AppHeader />
+      <main className={style.main}>
+        <div className={style.container}>
+          <p className="text text_type_main-medium mb-6">
+            Восстановление пароля
+          </p>
+          <form className={style.form} onSubmit={forgotPasswordFormSubmit}>
+            <EmailInput
+              placeholder="Укажите e-mail"
+              value={forgotPasswordForm.email}
+              name="email"
+              onChange={onFormChange}
+            />
+            <Button htmlType="submit" type="primary" size="medium">
+              Восстановить
+            </Button>
+          </form>
+          <p className="text text_type_main-default">
+            Вспомнили пароль?
+            <Link to="/login" className={style.link}>
+              Войти
+            </Link>
+          </p>
+        </div>
+      </main>
+    </>
   );
 }

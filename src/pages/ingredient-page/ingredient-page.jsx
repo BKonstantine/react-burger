@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
+import AppHeader from "../../components/app-header/app-header";
 import IngredientDetails from "../../components/ingredient-details/ingredient-details";
 import MainPage from "../main-page/main-page";
 import style from "./ingredient-page.module.css";
@@ -13,21 +14,24 @@ export default function IngredientPage() {
 
   const currentIngredient = ingredients.find((item) => item._id === id);
 
-  const location = useLocation();  
+  const location = useLocation();
 
   return location.state?.from === "/" ? (
     <MainPage />
   ) : (
     currentIngredient && (
-      <main className={style.main}>
-        <div className={style.container}>
-          <IngredientDetails
-            ingredient={currentIngredient}
-            titleClassName={style.title}
-            subtitleClassName={style.subtitle}
-          />
-        </div>
-      </main>
+      <>
+        <AppHeader />
+        <main className={style.main}>
+          <div className={style.container}>
+            <IngredientDetails
+              ingredient={currentIngredient}
+              titleClassName={style.title}
+              subtitleClassName={style.subtitle}
+            />
+          </div>
+        </main>
+      </>
     )
   );
 }
