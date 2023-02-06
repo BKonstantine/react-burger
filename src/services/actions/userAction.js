@@ -155,7 +155,7 @@ export function checkUserAccess() {
 /* thunk обновления токена */
 export function refreshUserToken(refreshToken) {
   return function (dispatch) {
-    refreshTokenRequest(refreshToken).then((res) => {
+    return refreshTokenRequest(refreshToken).then((res) => {
       setCookie("accessToken", parseCookie(res.accessToken));
       setCookie("refreshToken", res.refreshToken);
       dispatch(checkUserAccess(getCookie("accessToken")));
@@ -195,30 +195,29 @@ export function resetPassword(userDate, callback) {
 /* thunk изменения данных пользователя */
 export function changeUserData(userData) {
   return function (dispatch) {
-    dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT });
+    dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT });   
     changeUserDataRequest(userData, getCookie("accessToken"))
-      .then((res) => {
+      .then((res) => {        
         dispatch({
           type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
           payload: res.user,
         });
       })
-      .catch((err) => {
+      .catch((err) => {        
         if (err.message === "jwt expired" || "jwt malformed") {
-          dispatch(refreshUserToken(getCookie("refreshToken")));
-        }
-      })
-      .catch(() => {
-        changeUserDataRequest(userData, getCookie("accessToken"))
-          .then((res) => {
-            dispatch({
-              type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
-              payload: res.user,
-            });
-          })
-          .catch(() => {
-            dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT_FAILED });
+          dispatch(refreshUserToken(getCookie("refreshToken"))).then(() => {            
+            changeUserDataRequest(userData, getCookie("accessToken"))
+              .then((res) => {                
+                dispatch({
+                  type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
+                  payload: res.user,
+                });
+              })
+              .catch(() => {
+                dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT_FAILED });
+              });
           });
+        }
       });
   };
 }

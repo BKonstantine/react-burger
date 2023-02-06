@@ -15,27 +15,29 @@ export function makeOrder(ingredients) {
       ingredients.burgerConstructorBunElement._id,
     ];
 
-    dispatch({ type: GET_ORDER_REQUEST });
+    dispatch({ type: GET_ORDER_REQUEST });    
     sendOrderRequest(arrayId, getCookie("accessToken"))
       .then((res) => {
         dispatch({ type: GET_ORDER_SUCCESS, payload: res.order.number });
       })
-      .catch((err) => {
+      .catch((err) => {        
         if (err.message === "jwt expired" || "jwt malformed") {
-          dispatch(refreshUserToken(getCookie("refreshToken")));
-        }
-      })
-      .catch(() => {
-        sendOrderRequest(arrayId, getCookie("accessToken"))
-          .then((res) => {
-            dispatch({ type: GET_ORDER_SUCCESS, payload: res.order.number });
-          })
-          .catch(() => {
-            dispatch({
-              type: GET_ORDER_FAILED,
-              errorText: "Ошибка при формировании заказа",
-            });
+          dispatch(refreshUserToken(getCookie("refreshToken"))).then(() => {            
+            sendOrderRequest(arrayId, getCookie("accessToken"))
+              .then((res) => {
+                dispatch({
+                  type: GET_ORDER_SUCCESS,
+                  payload: res.order.number,
+                });
+              })
+              .catch(() => {                
+                dispatch({
+                  type: GET_ORDER_FAILED,
+                  errorText: "Ошибка при формировании заказа",
+                });
+              });
           });
+        }
       });
   };
 }
