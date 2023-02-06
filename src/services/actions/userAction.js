@@ -115,10 +115,8 @@ export function loginUser(userDate, callback) {
         dispatch({ type: USER_LOGIN_FORM_SUBMIT_SUCCESS, payload: res.user });
         setCookie("accessToken", parseCookie(res.accessToken));
         setCookie("refreshToken", res.refreshToken);
-      })
-      .then(() => {
         callback();
-      })
+      })      
       .catch(() => {
         dispatch({ type: USER_LOGIN_FORM_SUBMIT_FAILED });
       });
