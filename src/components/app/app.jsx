@@ -9,7 +9,7 @@ import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password
 import ResetPasswordPage from "../../pages/reset-password-page/reset-password-page";
 import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import ProfilePage from "../../pages/profile-page/profile-page";
-import OrderListPage from "../../pages/order-list-page/order-list-page";
+import FeedPage from "../../pages/feed-page/feed-page";
 import ProtectedRoute from "../protected-route/protected-route";
 import OrderPage from "../../pages/order-page/order-page";
 import IngredientPage from "../../pages/ingredient-page/ingredient-page";
@@ -31,12 +31,8 @@ export default function App() {
   const router = createBrowserRouter([
     { path: "/", element: <MainPage /> },
     {
-      path: "/order_list",
-      element: (
-        <ProtectedRoute isAuth={isAuth} to="/login">
-          <OrderListPage />
-        </ProtectedRoute>
-      ),
+      path: "/feed",
+      element: <FeedPage />,
     },
     {
       path: "/profile",

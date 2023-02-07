@@ -42,11 +42,11 @@ export default function AppHeader() {
             Конструктор
           </NavLink>
           <NavLink
-            to="/order_list"
+            to="/feed"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
             className={`text text_type_main-default ${style.button}`}
           >
-            <ListIcon type={toggleStyleIcon("/order_list")} />
+            <ListIcon type={toggleStyleIcon("/feed")} />
             Лента заказов
           </NavLink>
           <div className={style.logo}>

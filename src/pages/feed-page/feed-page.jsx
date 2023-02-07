@@ -1,7 +1,7 @@
 import AppHeader from "../../components/app-header/app-header";
-import style from "./order-list-page.module.css";
+import style from "./feed-page.module.css";
 
-export default function OrderListPage() {
+export default function FeedPage() {
   return (
     <>
       <AppHeader />
