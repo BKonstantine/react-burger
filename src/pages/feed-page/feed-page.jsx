@@ -5,7 +5,7 @@ export default function FeedPage() {
   return (
     <>
       <AppHeader />
-      <p className={`text text_type_main-large ${style.text}`}>Лента заказов</p>
+      <main className={style.main}></main>
     </>
   );
 }
