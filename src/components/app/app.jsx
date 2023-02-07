@@ -10,6 +10,7 @@ import ResetPasswordPage from "../../pages/reset-password-page/reset-password-pa
 import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import ProfilePage from "../../pages/profile-page/profile-page";
 import FeedPage from "../../pages/feed-page/feed-page";
+import OrderPage from "../../pages/order-page/order-page";
 import ProtectedRoute from "../protected-route/protected-route";
 import UserOrderPage from "../../pages/user-order-page/user-order-page";
 import IngredientPage from "../../pages/ingredient-page/ingredient-page";
@@ -33,6 +34,10 @@ export default function App() {
     {
       path: "/feed",
       element: <FeedPage />,
+    },
+    {
+      path: "/feed/:id",
+      element: <OrderPage />,
     },
     {
       path: "/profile",
