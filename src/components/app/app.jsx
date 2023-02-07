@@ -11,7 +11,7 @@ import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import ProfilePage from "../../pages/profile-page/profile-page";
 import FeedPage from "../../pages/feed-page/feed-page";
 import ProtectedRoute from "../protected-route/protected-route";
-import OrderPage from "../../pages/order-page/order-page";
+import UserOrderPage from "../../pages/user-order-page/user-order-page";
 import IngredientPage from "../../pages/ingredient-page/ingredient-page";
 import { checkUserAccess } from "../../services/actions/userAction";
 
@@ -44,7 +44,7 @@ export default function App() {
       children: [
         {
           path: "order-page",
-          element: <OrderPage />,
+          element: <UserOrderPage />,
         },
       ],
     },

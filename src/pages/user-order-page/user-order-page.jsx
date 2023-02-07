@@ -1,6 +1,6 @@
-import style from "./order-page.module.css";
+import style from "./user-order-page.module.css";
 
-export default function OrderPage() {
+export default function UserOrderPage() {
   return (
     <p className={`text text_type_main-large ${style.text}`}>В разработке...</p>
   );
