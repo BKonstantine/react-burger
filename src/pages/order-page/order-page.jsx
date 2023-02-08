@@ -146,7 +146,7 @@ export default function OrderPage() {
       <main className={style.main}>
         <div className={style.container}>
           <div className={style.container__title}>
-            <p className="text text_type_digits-default mb-10">{`#${orderNumber}`}</p>
+            <p className={`text text_type_digits-default mb-10 ${style.title}`}>{`#${orderNumber}`}</p>
             <p className="text text_type_main-medium mb-3">{`${burgerName}`}</p>
             <p
               className={`text text_type_main-default ${style.color}`}

@@ -1,3 +1,42 @@
-.element {
+.container {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container__element {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.container__image {
+  width: 64px;
+  height: 64px;
+  background: #131316;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+  box-sizing: border-box;
+  border: 2px solid rgba(128, 26, 178, 1);
+}
+
+.container__counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.image {
+  width: 112px;
+  height: 56px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+}
+
+.text {
+  max-width: 320px;
 }
