@@ -6,6 +6,12 @@ export default function OrderFeedList({ listClassName }) {
   return (
     <ul className={cn(style.list, listClassName)}>
       <OrderFeedElement isFeedList={false} />
+      <OrderFeedElement isFeedList={false} />
+      <OrderFeedElement isFeedList={false} />
+      <OrderFeedElement isFeedList={false} />
+      <OrderFeedElement isFeedList={false} />
+      <OrderFeedElement isFeedList={false} />
+      <OrderFeedElement isFeedList={false} />
     </ul>
   );
 }
