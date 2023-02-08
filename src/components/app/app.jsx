@@ -33,7 +33,8 @@ export default function App() {
     { path: "/", element: <MainPage /> },
     {
       path: "/feed",
-      element: <FeedPage />,
+      element: <OrderPage />,
+      /* element: <FeedPage />, */
     },
     {
       path: "/feed/:id",
