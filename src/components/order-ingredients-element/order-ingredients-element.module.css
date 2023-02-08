@@ -1,0 +1,39 @@
+.element {
+  margin-left: -15px;
+  width: 64px;
+  height: 64px;
+  background: #131316;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+  box-sizing: border-box;
+  border: 2px solid rgba(128, 26, 178, 1);
+}
+
+.element:first-child {
+  margin: 0;
+}
+
+.element:last-child {
+  opacity: 0.6;
+}
+
+.image {
+  width: 112px;
+  height: 56px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  z-index: 1;
+}
+
+.text {  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  z-index: 15;
+}
