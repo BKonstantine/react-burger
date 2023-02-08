@@ -9,6 +9,7 @@
 }
 
 .container__date {
+  margin-top: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,7 +19,7 @@
   color: #00cccc;
 }
 
-.price {
+.price {  
   display: flex;
   align-items: center;
   gap: 8px;
