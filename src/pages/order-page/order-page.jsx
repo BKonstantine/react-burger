@@ -7,7 +7,7 @@ export default function OrderPage() {
     <>
       <AppHeader />
       <main className={style.main}>
-        <BurgerDetails />
+        <BurgerDetails titleClassName={style.title}/>
       </main>
     </>
   );
