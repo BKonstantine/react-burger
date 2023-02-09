@@ -7,12 +7,8 @@ export default function OrderFeedElement({ isFeedList, order }) {
   function checkStatus(status) {
     if (status === "done") {
       return "Выполнен";
-    } else if (status === "canseled") {
-      return "Отменен";
-    } else if (status === "pending") {
+    } else {
       return "Готовится";
-    } else if (status === "created") {
-      return "Создан";
     }
   }
 
@@ -27,7 +23,11 @@ export default function OrderFeedElement({ isFeedList, order }) {
       <div className={style.container__burger}>
         <p className="text text_type_main-medium">{order.name}</p>
         {isFeedList && (
-          <p className="text text_type_main-default">
+          <p
+            className={`text text_type_main-default ${
+              order.status === "done" ? style.status : undefined
+            }`}
+          >
             {checkStatus(order.status)}
           </p>
         )}
