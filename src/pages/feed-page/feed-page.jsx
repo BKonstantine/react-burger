@@ -1,9 +1,18 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import AppHeader from "../../components/app-header/app-header";
 import OrderFeedList from "../../components/order-feed-list/order-feed-list";
 import OrderCounters from "../../components/order-counters/order-counters";
+import { wsConnectionStart } from "../../services/actions/socketAction";
 import style from "./feed-page.module.css";
 
 export default function FeedPage() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(wsConnectionStart());
+  }, []);
+
   return (
     <>
       <AppHeader />

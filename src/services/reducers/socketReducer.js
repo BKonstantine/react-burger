@@ -7,36 +7,28 @@ import {
 } from "../actions/socketAction";
 
 const initialState = {
-  wsConnecting: false,
-  wsOpen: false,
+  wsConnected: false,
   messages: [],
 };
 
 export default function socketReducer(state = initialState, action) {
   switch (action.type) {
-    case WS_CONNECTION_START:
-      return {
-        ...state,
-        wsConnecting: true,
-      };
-
     case WS_CONNECTION_SUCCESS:
       return {
         ...state,
-        wsConnecting: false,
-        wsOpen: true,
+        wsConnected: true,
       };
 
     case WS_CONNECTION_ERROR:
       return {
-        ...state,        
-        wsOpen: false,
+        ...state,
+        wsConnected: false,
       };
 
     case WS_CONNECTION_CLOSED:
       return {
-        ...state,        
-        wsOpen: false,
+        ...state,
+        wsConnected: false,
       };
 
     case WS_GET_MESSAGE:
