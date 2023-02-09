@@ -8,15 +8,14 @@ export const socketMiddleware = (wsUrl, wsActions) => {
       const { dispatch, getState } = store;
       const { type } = action;
       const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
-      /* const { isAuth } = getState().userReducer;
-      const accessToken = getCookie("accessToken"); */
+      const { isAuth } = getState().userReducer;
+      const accessToken = getCookie("accessToken");
 
-      if (type === wsInit) {
-        socket = new WebSocket(`${wsUrl}/all`);
-        console.log(socket);
-      } /* else if (type === wsInit && isAuth) {
+      if (type === wsInit && isAuth) {
         socket = new WebSocket(`${wsUrl}?token=${accessToken}`);
-      } */ else if (type === onClose) {
+      } else if (type === wsInit) {
+        socket = new WebSocket(`${wsUrl}/all`);
+      } else if (type === onClose) {
         socket.close(1000, "CLOSE_NORMAL");
       }
 
