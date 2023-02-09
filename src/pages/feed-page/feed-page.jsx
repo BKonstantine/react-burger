@@ -23,7 +23,7 @@ export default function FeedPage() {
           case "done":
             count.doneList.push(item.number);
             break;
-          case "work":
+          case "pending":
             count.workList.push(item.number);
             break;
         }
