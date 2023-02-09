@@ -35,10 +35,27 @@
 .orders {
   margin: 0;
   padding: 0;
+  height: 300px;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  flex-wrap: wrap;
+  column-gap: 25px;
+  row-gap: 8px;
+  overflow-y: scroll;
+}
+
+.orders::-webkit-scrollbar {
+  width: 0px;
+}
+
+.orders::-webkit-scrollbar-track {
+  background-color: #2f2f37;  
+}
+
+.orders::-webkit-scrollbar-thumb {  
+  background: #8585ad;
+  border: 1px solid #8585ad;
 }
 
 .order {
