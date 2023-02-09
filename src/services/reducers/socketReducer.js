@@ -1,4 +1,4 @@
-import {  
+import {
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
@@ -7,7 +7,9 @@ import {
 
 const initialState = {
   wsConnected: false,
-  messages: [],
+  orders: [],
+  total: 0,
+  totalToday: 0,
 };
 
 export default function socketReducer(state = initialState, action) {
@@ -33,9 +35,9 @@ export default function socketReducer(state = initialState, action) {
     case WS_GET_MESSAGE:
       return {
         ...state,
-        messages: state.messages.length
-          ? [...state.messages, { ...action.payload }]
-          : [{ ...action.payload }],
+        orders: action.payload.orders,
+        total: action.payload.total,
+        totalToday: action.payload.totalToday,
       };
 
     default:
