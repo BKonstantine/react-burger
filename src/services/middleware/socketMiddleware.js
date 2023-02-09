@@ -13,10 +13,12 @@ export const socketMiddleware = (wsUrl, wsActions) => {
 
       if (type === wsInit) {
         socket = new WebSocket(`${wsUrl}/all`);
-        console.log("Соединение");
+        console.log(socket);
       } /* else if (type === wsInit && isAuth) {
         socket = new WebSocket(`${wsUrl}?token=${accessToken}`);
-      } */
+      } */ else if (type === onClose) {
+        socket.close(1000, "CLOSE_NORMAL");
+      }
 
       if (socket) {
         socket.onopen = (event) => {
@@ -39,6 +41,7 @@ export const socketMiddleware = (wsUrl, wsActions) => {
         };
 
         socket.onclose = (event) => {
+          console.log("Закрыто");
           dispatch({ type: onClose, payload: event });
         };
       }
