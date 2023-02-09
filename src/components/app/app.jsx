@@ -32,9 +32,8 @@ export default function App() {
   const router = createBrowserRouter([
     { path: "/", element: <MainPage /> },
     {
-      path: "/feed",
-      element: <OrderPage />,
-      /* element: <FeedPage />, */
+      path: "/feed",      
+      element: <FeedPage />,
     },
     {
       path: "/feed/:id",
@@ -87,6 +86,7 @@ export default function App() {
       ),
     },
     { path: "/ingredients/:id", element: <IngredientPage /> },
+    { path: "/:page/:id", element: <OrderPage /> },
     { path: "*", element: <NotFoundPage /> },
   ]);
 
