@@ -3,28 +3,3 @@
   display: flex;
   justify-content: center;
 }
-
-.container {
-  width: 640px;
-}
-
-.title {
-  text-align: center;
-}
-
-.container__date {
-  margin-top: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.color {
-  color: #00cccc;
-}
-
-.price {  
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
