@@ -42,12 +42,13 @@ export default function App() {
         <Route path="feed/:id" element={<OrderPage />} />
         <Route path="profile" element={<ProtectedRoute isAuth={isAuth} to="/login"><ProfilePage /></ProtectedRoute>}>
           <Route path="orders" element={<UserOrderPage />} />
-        </Route>       
+        </Route>
+        <Route path="profile/orders/:id" element={<ProtectedRoute isAuth={isAuth} to="/login"><OrderPage /></ProtectedRoute>}/>
         <Route path="login" element={<ProtectedRoute isAuth={!isAuth} to="/"><LoginPage /></ProtectedRoute>}/>
         <Route path="register" element={<ProtectedRoute isAuth={!isAuth} to="/"><RegistrationPage /></ProtectedRoute>}/>
         <Route path="forgot-password" element={<ProtectedRoute isAuth={!isAuth} to="/"><ForgotPasswordPage /></ProtectedRoute>}/>
         <Route path="reset-password" element={<ProtectedRoute isAuth={resetEmailSent} to="/login"><ResetPasswordPage /></ProtectedRoute>}/>
-        <Route path="ingredients/:id" element={<IngredientPage />}/>          
+        <Route path="ingredients/:id" element={<IngredientPage />}/>
         <Route path="*" element={<NotFoundPage /> }/>
       </Route>
     </Routes>
