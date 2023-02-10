@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getIngridients } from "../../services/actions/burgerIngredientsAction";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import MainPage from "../../pages/main-page/main-page";
 import LoginPage from "../../pages/login-page/login-page";
 import RegistrationPage from "../../pages/registration-page/registration-page";
@@ -15,9 +15,14 @@ import ProtectedRoute from "../protected-route/protected-route";
 import UserOrderPage from "../../pages/user-order-page/user-order-page";
 import IngredientPage from "../../pages/ingredient-page/ingredient-page";
 import { checkUserAccess } from "../../services/actions/userAction";
+import Wrapper from "../../pages/wrapper";
 
 export default function App() {
   const dispatch = useDispatch();
+
+  const location = useLocation();
+
+  const background = location;
 
   const { isAuth, resetEmailSent } = useSelector((store) => ({
     isAuth: store.userReducer.isAuth,
@@ -29,8 +34,7 @@ export default function App() {
     dispatch(checkUserAccess());
   }, []);
 
-  const router = createBrowserRouter([
-    { path: "/", element: <MainPage /> },
+  const router = [    
     {
       path: "/feed",
       element: <FeedPage />,
@@ -87,13 +91,15 @@ export default function App() {
         </ProtectedRoute>
       ),
     },
-    { path: "/ingredients/:id", element: <IngredientPage /> },    
+    { path: "/ingredients/:id", element: <IngredientPage /> },
     { path: "*", element: <NotFoundPage /> },
-  ]);
+  ];
 
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
+    <Routes location={background}>
+      <Route path="/" element={<Wrapper />}>
+        <Route index element={<MainPage />} />
+      </Route>
+    </Routes>
   );
 }
