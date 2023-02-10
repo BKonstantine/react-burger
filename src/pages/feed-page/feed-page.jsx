@@ -53,25 +53,27 @@ export default function FeedPage() {
   }
 
   return (
-    <>
-      <AppHeader />
-      <main className={style.main}>
-        <p className="text text_type_main-large pt-10 pb-5">Лента заказов</p>
-        <div className={style.container}>
-          <OrderFeedList orders={orders} isFeedList={false} />
-          <OrderCounters
-            doneList={doneList}
-            workList={workList}
-            total={total}
-            totalToday={totalToday}
-          />
-        </div>
-      </main>
-      {currenOrder && (
-        <Modal onCloseModal={closeModal}>
-          <BurgerDetails order={currenOrder}/>
-        </Modal>
-      )}
-    </>
+    orders && (
+      <>
+        <AppHeader />
+        <main className={style.main}>
+          <p className="text text_type_main-large pt-10 pb-5">Лента заказов</p>
+          <div className={style.container}>
+            <OrderFeedList orders={orders} isFeedList={false} />
+            <OrderCounters
+              doneList={doneList}
+              workList={workList}
+              total={total}
+              totalToday={totalToday}
+            />
+          </div>
+        </main>
+        {currenOrder && (
+          <Modal onCloseModal={closeModal}>
+            <BurgerDetails order={currenOrder} />
+          </Modal>
+        )}
+      </>
+    )
   );
 }

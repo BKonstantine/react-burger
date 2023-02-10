@@ -18,10 +18,12 @@ export default function UserOrderPage() {
   }, []);
 
   return (
-    <OrderFeedList
-      orders={orders}
-      isFeedList={true}
-      listClassName={style.list}
-    />
+    orders && (
+      <OrderFeedList
+        orders={orders}
+        isFeedList={true}
+        listClassName={style.list}
+      />
+    )
   );
 }
