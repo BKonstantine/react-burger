@@ -16,7 +16,7 @@ export default function OrderIngredientsElement({
       />
       {showCounter && (
         <p className={`text text_type_main-default ${style.text}`}>{`+${
-          length - (index + 1)
+          length - 6
         }`}</p>
       )}
     </li>

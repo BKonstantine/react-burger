@@ -3,6 +3,8 @@ import OrderIngredientsElement from "../order-ingredients-element/order-ingredie
 import style from "./order-ingredients-list.module.css";
 
 export default function OrderIngredientsList({ ingredients }) {
+  console.log(ingredients);
+
   return (
     <ul className={style.list}>
       {ingredients.map((item, index) => {
