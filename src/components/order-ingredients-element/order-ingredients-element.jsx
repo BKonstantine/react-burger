@@ -6,9 +6,10 @@ export default function OrderIngredientsElement({
   index,
   length,
   showCounter,
+  extraClass
 }) {
   return (
-    <li className={style.element} style={{ zIndex: 15 - index }}>
+    <li className={cn(style.element, extraClass)} style={{ zIndex: 15 - index }}>
       <img
         className={style.image}
         src={ingredient.image_mobile}
