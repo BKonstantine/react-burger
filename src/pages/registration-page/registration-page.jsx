@@ -30,8 +30,7 @@ export default function RegistrationPage() {
   }
 
   return (
-    <>
-      <AppHeader />
+    <>      
       <main className={style.main}>
         <div className={style.container}>
           <p className="text text_type_main-medium mb-6">Регистрация</p>

@@ -43,19 +43,7 @@ export default function App() {
           element: <UserOrderPage />,
         },
       ],
-    },
-    {
-      path: "/login",
-      
-    },
-    {
-      path: "/register",
-      element: (
-        <ProtectedRoute isAuth={!isAuth} to="/">
-          <RegistrationPage />
-        </ProtectedRoute>
-      ),
-    },
+    },        
     {
       path: "/forgot-password",
       element: (
@@ -82,7 +70,7 @@ export default function App() {
         <Route path="feed" element={<FeedPage />} />
         <Route path="profile" element={<ProtectedRoute isAuth={isAuth} to="/login"><ProfilePage /></ProtectedRoute>}/>        
         <Route path="login" element={<ProtectedRoute isAuth={!isAuth} to="/"><LoginPage /></ProtectedRoute>}/>
-
+        <Route path="register" element={<ProtectedRoute isAuth={!isAuth} to="/"><RegistrationPage /></ProtectedRoute>}/>
 
         {/* <Route path="feed/:id" element={<OrderPage />} /> */}
         <Route path="*" element={<NotFoundPage /> }/>
