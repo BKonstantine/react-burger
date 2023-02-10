@@ -3,6 +3,14 @@ import OrderIngredientsElement from "../order-ingredients-element/order-ingredie
 import style from "./order-ingredients-list.module.css";
 
 export default function OrderIngredientsList({ ingredients }) {
+  function showCounter() {
+    if (ingredients.length - 6 === 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   return (
     <ul className={style.list}>
       {ingredients.map((item, index) => {
@@ -16,14 +24,14 @@ export default function OrderIngredientsList({ ingredients }) {
               showCounter={false}
             />
           );
-        } else if (index === 6) {
+        } else if (index === 5) {
           return (
             <OrderIngredientsElement
               ingredient={item}
               index={index}
               key={uuidv4()}
               length={ingredients.length}
-              showCounter={true}
+              showCounter={showCounter()}
               extraClass={style.opacity}
             />
           );
