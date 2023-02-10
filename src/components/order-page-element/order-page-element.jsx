@@ -1,9 +1,7 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./order-page-element.module.css";
 
-export default function OrderPageElement({ ingredient }) {
-  const counter = "1";
-
+export default function OrderPageElement({ ingredient, counter }) { 
   return (
     <li className={style.container}>
       <div className={style.container__element}>
