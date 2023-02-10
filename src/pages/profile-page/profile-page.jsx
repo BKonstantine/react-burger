@@ -9,6 +9,9 @@ import AppHeader from "../../components/app-header/app-header";
 import style from "./profile-page.module.css";
 import { getCookie } from "../../utils/cookie";
 import { logoutUser, changeUserData } from "../../services/actions/userAction";
+import Modal from "../../components/modal/modal";
+import BurgerDetails from "../../components/burger-details/burger-details";
+import { RESET_CURRENT_ORDER } from "../../services/actions/currentOrderAction";
 
 export default function ProfilePage() {
   const { user } = useSelector((store) => store.userReducer);
@@ -29,6 +32,10 @@ export default function ProfilePage() {
     color: "#f2f2f3",
   };
 
+  const currenOrder = useSelector(
+    (store) => store.currentOrderReducer.currentOrder
+  );
+
   function onFormReset() {
     setUserDate({ name: user.name, email: user.email });
   }
@@ -44,6 +51,11 @@ export default function ProfilePage() {
 
   function checkButton() {
     return JSON.stringify(user) === JSON.stringify(userData);
+  }
+
+  function closeModal(e) {
+    e.stopPropagation();
+    dispatch({ type: RESET_CURRENT_ORDER });
   }
 
   return (
@@ -138,6 +150,11 @@ export default function ProfilePage() {
           )}
         </div>
       </main>
+      {currenOrder && (
+        <Modal onCloseModal={closeModal}>
+          <BurgerDetails order={currenOrder}/>
+        </Modal>
+      )}
     </>
   );
 }
