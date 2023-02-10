@@ -72,8 +72,7 @@ export default function App() {
         </ProtectedRoute>
       ),
     },
-    { path: "/ingredients/:id", element: <IngredientPage /> },
-    { path: "*", element: <NotFoundPage /> },
+    { path: "/ingredients/:id", element: <IngredientPage /> },    
   ];
 
   return (
@@ -86,6 +85,7 @@ export default function App() {
 
 
         {/* <Route path="feed/:id" element={<OrderPage />} /> */}
+        <Route path="*" element={<NotFoundPage /> }/>
       </Route>
     </Routes>
   );
