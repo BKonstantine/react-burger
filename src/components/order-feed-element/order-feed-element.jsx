@@ -5,22 +5,15 @@ import style from "./order-feed-element.module.css";
 import useOrder from "../../hooks/useOrder";
 
 export default function OrderFeedElement({ isFeedList, order }) {
-  const { orderIngredientsList, orderPrice } = useOrder(order.ingredients);
-
-  function checkStatus(status) {
-    if (status === "done") {
-      return "Выполнен";
-    } else {
-      return "Готовится";
-    }
-  }
+  const { orderIngredientsList, orderPrice, orderStatus, orderDate } =
+    useOrder(order);
 
   return (
     <li className={cn(style.container)}>
       <div className={style.container__order}>
         <p className="text text_type_digits-default">{`#${order.number}`}</p>
         <p className="text text_type_main-default text_color_inactive">
-          {order.createdAt}
+          {orderDate}
         </p>
       </div>
       <div className={style.container__burger}>
@@ -31,7 +24,7 @@ export default function OrderFeedElement({ isFeedList, order }) {
               order.status === "done" ? style.status : undefined
             }`}
           >
-            {checkStatus(order.status)}
+            {orderStatus}
           </p>
         )}
       </div>
