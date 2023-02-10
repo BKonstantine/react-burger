@@ -36,21 +36,7 @@ export default function App() {
 
   const router = [
     {
-      
-      children: [
-        {
-          path: ":id",
-          element: <OrderPage />,
-        },
-      ],
-    },
-    {
-      path: "/profile",
-      element: (
-        <ProtectedRoute isAuth={isAuth} to="/login">
-          <ProfilePage />
-        </ProtectedRoute>
-      ),
+      path: "/profile",      
       children: [
         {
           path: "order-page",
@@ -60,11 +46,7 @@ export default function App() {
     },
     {
       path: "/login",
-      element: (
-        <ProtectedRoute isAuth={!isAuth} to="/">
-          <LoginPage />
-        </ProtectedRoute>
-      ),
+      
     },
     {
       path: "/register",
@@ -99,6 +81,11 @@ export default function App() {
       <Route path="/" element={<Wrapper />}>
         <Route index element={<MainPage />} />
         <Route path="feed" element={<FeedPage />} />
+        <Route path="profile" element={<ProtectedRoute isAuth={isAuth} to="/login"><ProfilePage /></ProtectedRoute>}/>        
+        <Route path="login" element={<ProtectedRoute isAuth={!isAuth} to="/"><LoginPage /></ProtectedRoute>}/>
+
+
+        {/* <Route path="feed/:id" element={<OrderPage />} /> */}
       </Route>
     </Routes>
   );

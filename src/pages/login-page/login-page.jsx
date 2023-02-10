@@ -29,8 +29,7 @@ export default function LoginPage() {
   }
 
   return (
-    <>
-      <AppHeader />
+    <>      
       <main className={style.main}>
         <div className={style.container}>
           <p className="text text_type_main-medium mb-6">Вход</p>
@@ -51,7 +50,7 @@ export default function LoginPage() {
           </form>
           <div className={style.links}>
             <p className="text text_type_main-default">
-              Вы — новый пользователь?
+              Вы — новый пользователь?
               <Link to="/register" className={style.link}>
                 Зарегистрироваться
               </Link>
