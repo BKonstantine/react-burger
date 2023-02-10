@@ -7,12 +7,19 @@ import {
   wsConnectionStart,
   wsConnectionClosed,
 } from "../../services/actions/socketAction";
+import Modal from "../../components/modal/modal";
+import BurgerDetails from "../../components/burger-details/burger-details";
+import { RESET_CURRENT_ORDER } from "../../services/actions/currentOrderAction";
 import style from "./feed-page.module.css";
 
 export default function FeedPage() {
   const dispatch = useDispatch();
   const { orders, total, totalToday } = useSelector(
     (store) => store.socketReducer
+  );
+
+  const currenOrder = useSelector(
+    (store) => store.currentOrderReducer.currentOrder
   );
 
   const { doneList, workList } = useMemo(() => {
@@ -38,7 +45,12 @@ export default function FeedPage() {
     return () => {
       dispatch(wsConnectionClosed());
     };
-  }, []);  
+  }, []);
+
+  function closeModal(e) {
+    e.stopPropagation();
+    dispatch({ type: RESET_CURRENT_ORDER });
+  }
 
   return (
     <>
@@ -55,6 +67,11 @@ export default function FeedPage() {
           />
         </div>
       </main>
+      {currenOrder && (
+        <Modal onCloseModal={closeModal}>
+          <BurgerDetails order={currenOrder}/>
+        </Modal>
+      )}
     </>
   );
 }
