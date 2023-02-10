@@ -1,4 +1,3 @@
-import AppHeader from "../../components/app-header/app-header";
 import style from "./not-found-page.module.css";
 
 export default function NotFoundPage() {

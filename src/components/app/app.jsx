@@ -32,47 +32,22 @@ export default function App() {
   useEffect(() => {
     dispatch(getIngridients());
     dispatch(checkUserAccess());
-  }, []);
-
-  const router = [
-    {
-      path: "/profile",      
-      children: [
-        {
-          path: "order-page",
-          element: <UserOrderPage />,
-        },
-      ],
-    },        
-    {
-      path: "/forgot-password",
-      element: (
-        <ProtectedRoute isAuth={!isAuth} to="/">
-          <ForgotPasswordPage />
-        </ProtectedRoute>
-      ),
-    },
-    {
-      path: "/reset-password",
-      element: (
-        <ProtectedRoute isAuth={resetEmailSent} to="/login">
-          <ResetPasswordPage />
-        </ProtectedRoute>
-      ),
-    },
-    { path: "/ingredients/:id", element: <IngredientPage /> },    
-  ];
+  }, []);  
 
   return (
     <Routes location={background}>
       <Route path="/" element={<Wrapper />}>
         <Route index element={<MainPage />} />
         <Route path="feed" element={<FeedPage />} />
-        <Route path="profile" element={<ProtectedRoute isAuth={isAuth} to="/login"><ProfilePage /></ProtectedRoute>}/>        
+        <Route path="feed/:id" element={<OrderPage />} />
+        <Route path="profile" element={<ProtectedRoute isAuth={isAuth} to="/login"><ProfilePage /></ProtectedRoute>}>
+          <Route path="orders" element={<UserOrderPage />} />
+        </Route>       
         <Route path="login" element={<ProtectedRoute isAuth={!isAuth} to="/"><LoginPage /></ProtectedRoute>}/>
         <Route path="register" element={<ProtectedRoute isAuth={!isAuth} to="/"><RegistrationPage /></ProtectedRoute>}/>
-
-        {/* <Route path="feed/:id" element={<OrderPage />} /> */}
+        <Route path="forgot-password" element={<ProtectedRoute isAuth={!isAuth} to="/"><ForgotPasswordPage /></ProtectedRoute>}/>
+        <Route path="reset-password" element={<ProtectedRoute isAuth={resetEmailSent} to="/login"><ResetPasswordPage /></ProtectedRoute>}/>
+        <Route path="ingredients/:id" element={<IngredientPage />}/>          
         <Route path="*" element={<NotFoundPage /> }/>
       </Route>
     </Routes>

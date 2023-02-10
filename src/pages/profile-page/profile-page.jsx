@@ -5,7 +5,6 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
-import AppHeader from "../../components/app-header/app-header";
 import style from "./profile-page.module.css";
 import { getCookie } from "../../utils/cookie";
 import { logoutUser, changeUserData } from "../../services/actions/userAction";
@@ -59,8 +58,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <>
-      <AppHeader />
+    <>      
       <main className={style.main}>
         <div className={style.container}>
           <div className={style.container__nav}>
@@ -74,7 +72,7 @@ export default function ProfilePage() {
                 Профиль
               </NavLink>
               <NavLink
-                to="order-page"
+                to="orders"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
                 className={`text text_type_main-medium text_color_inactive ${style.link}`}
                 state={{ order: true }}
