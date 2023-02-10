@@ -87,8 +87,7 @@ export default function App() {
         </ProtectedRoute>
       ),
     },
-    { path: "/ingredients/:id", element: <IngredientPage /> },
-    { path: "/:page/:id", element: <OrderPage /> },
+    { path: "/ingredients/:id", element: <IngredientPage /> },    
     { path: "*", element: <NotFoundPage /> },
   ]);
 
