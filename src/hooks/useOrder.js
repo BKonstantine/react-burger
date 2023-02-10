@@ -3,14 +3,19 @@ import { useSelector } from "react-redux";
 export default function useOrder(ingredientsIdList) {
   const ingredients = useSelector(
     (store) => store.burgerIngredientsReducer.burgerIngredientsList
-  );
+  );  
 
-  const getOrderIngredientsList = () =>
-    ingredients.filter((ingredient) => {
-      return ingredientsIdList.find(
-        (ingredientId) => ingredientId === ingredient._id
-      );
-    });
+  const getOrderIngredientsList = () => {
+    const list = [];
+    ingredientsIdList.forEach((ingredientId) => {
+      ingredients.forEach((ingredient) => {
+        if (ingredient._id === ingredientId) {
+          list.push(ingredient);
+        }
+      });
+    });    
+    return list;
+  };
 
   const orderIngredientsList = getOrderIngredientsList();
 
