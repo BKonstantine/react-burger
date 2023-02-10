@@ -34,10 +34,9 @@ export default function App() {
     dispatch(checkUserAccess());
   }, []);
 
-  const router = [    
+  const router = [
     {
-      path: "/feed",
-      element: <FeedPage />,
+      
       children: [
         {
           path: ":id",
@@ -99,6 +98,7 @@ export default function App() {
     <Routes location={background}>
       <Route path="/" element={<Wrapper />}>
         <Route index element={<MainPage />} />
+        <Route path="feed" element={<FeedPage />} />
       </Route>
     </Routes>
   );
