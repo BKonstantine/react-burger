@@ -1,9 +1,13 @@
+import { useEffect, useMemo } from "react";
 import cn from "classnames";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderIngredientsList from "../order-ingredients-list/order-ingredients-list";
 import style from "./order-feed-element.module.css";
+import useOrder from "../../hooks/useOrder";
 
 export default function OrderFeedElement({ isFeedList, order }) {
+  const { orderIngredientsList } = useOrder();
+
   function checkStatus(status) {
     if (status === "done") {
       return "Выполнен";
@@ -11,6 +15,9 @@ export default function OrderFeedElement({ isFeedList, order }) {
       return "Готовится";
     }
   }
+
+
+  console.log(orderIngredientsList(order.ingredients))
 
   return (
     <li className={cn(style.container)}>
