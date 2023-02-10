@@ -32,12 +32,14 @@ export default function App() {
   const router = createBrowserRouter([
     { path: "/", element: <MainPage /> },
     {
-      path: "/feed",      
+      path: "/feed",
       element: <FeedPage />,
-    },
-    {
-      path: "/feed/:id",
-      element: <OrderPage />,
+      children: [
+        {
+          path: ":id",
+          element: <OrderPage />,
+        },
+      ],
     },
     {
       path: "/profile",
