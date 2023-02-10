@@ -1,4 +1,3 @@
-import { useEffect, useMemo } from "react";
 import cn from "classnames";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderIngredientsList from "../order-ingredients-list/order-ingredients-list";
@@ -6,7 +5,7 @@ import style from "./order-feed-element.module.css";
 import useOrder from "../../hooks/useOrder";
 
 export default function OrderFeedElement({ isFeedList, order }) {
-  const { orderIngredientsList } = useOrder();
+  const { orderIngredientsList, orderPrice } = useOrder(order.ingredients);
 
   function checkStatus(status) {
     if (status === "done") {
@@ -15,9 +14,6 @@ export default function OrderFeedElement({ isFeedList, order }) {
       return "Готовится";
     }
   }
-
-
-  console.log(orderIngredientsList(order.ingredients))
 
   return (
     <li className={cn(style.container)}>
@@ -40,10 +36,10 @@ export default function OrderFeedElement({ isFeedList, order }) {
         )}
       </div>
       <div className={style.container__ingredients}>
-        {/* <OrderIngredientsList ingredients={fillingList} /> */}
+        <OrderIngredientsList ingredients={orderIngredientsList} />
         <div className={style.price}>
           <CurrencyIcon type="primary" />
-          <p className="text text_type_digits-default">500</p>
+          <p className="text text_type_digits-default">{orderPrice}</p>
         </div>
       </div>
     </li>

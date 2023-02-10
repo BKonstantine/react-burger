@@ -1,19 +1,22 @@
 import { useSelector } from "react-redux";
 
-export default function useOrder() {
+export default function useOrder(ingredientsIdList) {
   const ingredients = useSelector(
     (store) => store.burgerIngredientsReducer.burgerIngredientsList
   );
 
-  function orderIngredientsList(ingredientsIdList) {
-    const orderIngredientsList = ingredients.filter((ingredient) => {
+  const getOrderIngredientsList = () =>
+    ingredients.filter((ingredient) => {
       return ingredientsIdList.find(
         (ingredientId) => ingredientId === ingredient._id
       );
     });
 
-    return orderIngredientsList;
-  }
+  const orderIngredientsList = getOrderIngredientsList();
 
-  return { orderIngredientsList };
+  const orderPrice = orderIngredientsList.reduce((count, item) => {
+    return count + item.price;
+  }, 0);
+
+  return { orderIngredientsList, orderPrice };
 }
