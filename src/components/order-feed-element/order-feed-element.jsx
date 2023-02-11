@@ -1,20 +1,25 @@
 import { Link, useLocation } from "react-router-dom";
 import cn from "classnames";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  CurrencyIcon,
+  FormattedDate,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderIngredientsList from "../order-ingredients-list/order-ingredients-list";
 import style from "./order-feed-element.module.css";
 import useOrder from "../../hooks/useOrder";
 
 export default function OrderFeedElement({ isFeedList, order }) {
-  const { orderIngredientsList, orderPrice, orderStatus, orderDate } =
-    useOrder(order);
+  const { orderIngredientsList, orderPrice, orderStatus } = useOrder(order);
 
   const location = useLocation();
+
+  const curOffset = new Date().getTimezoneOffset() / 60;
+  const GMT = "i-GTM" + (curOffset > 0 ? "-" + curOffset : "+" + -curOffset);
 
   return (
     <li className={cn(style.container)}>
       <Link
-      className={`text_color_primary ${style.link}`}
+        className={`text_color_primary ${style.link}`}
         to={isFeedList ? `/profile/orders/${order._id}` : `/feed/${order._id}`}
         state={
           isFeedList
@@ -25,7 +30,7 @@ export default function OrderFeedElement({ isFeedList, order }) {
         <div className={style.container__order}>
           <p className="text text_type_digits-default">{`#${order.number}`}</p>
           <p className="text text_type_main-default text_color_inactive">
-            {orderDate}
+            <FormattedDate date={new Date(order.createdAt)} /> {`${GMT}`}
           </p>
         </div>
         <div className={style.container__burger}>

@@ -35,7 +35,7 @@ export default function socketReducer(state = initialState, action) {
     case WS_GET_MESSAGE:
       return {
         ...state,
-        orders: action.payload.orders.reverse(),
+        orders: action.payload.orders,
         total: action.payload.total,
         totalToday: action.payload.totalToday,
       };

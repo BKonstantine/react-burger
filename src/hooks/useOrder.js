@@ -26,12 +26,6 @@ export default function useOrder(order) {
     }
   };
 
-  const getOrderDate = () => {
-    return new Date(order.createdAt).toLocaleString();
-  };
-
-  const orderDate = getOrderDate();
-
   const orderStatus = getOrderStatus();
 
   const orderIngredientsList = getOrderIngredientsList();
@@ -40,5 +34,5 @@ export default function useOrder(order) {
     return count + item.price;
   }, 0);
 
-  return { orderIngredientsList, orderPrice, orderStatus, orderDate };
+  return { orderIngredientsList, orderPrice, orderStatus };
 }
