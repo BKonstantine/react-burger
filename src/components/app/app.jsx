@@ -61,7 +61,7 @@ export default function App() {
           <Route
             path="profile/orders/:id"
             element={
-              <ProtectedRoute isAuth={isAuth} to="/login">
+              <ProtectedRoute isAuth={!isAuth} to="/login">
                 <OrderPage />
               </ProtectedRoute>
             }
