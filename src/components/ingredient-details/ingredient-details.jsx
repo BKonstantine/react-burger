@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import cn from "classnames";
 import PropTypes from "prop-types";
-import cardPropTypes from "../../utils/prop-types";
 import style from "./ingredient-details.module.css";
 
 export default function IngredientDetails({
@@ -15,7 +14,7 @@ export default function IngredientDetails({
 
   const { id } = useParams();
 
-  const ingredient = ingredients.find((item) => item._id === id);  
+  const ingredient = ingredients.find((item) => item._id === id);
 
   return (
     <>
@@ -68,7 +67,7 @@ export default function IngredientDetails({
   );
 }
 
-IngredientDetails.propTypes = {  
+IngredientDetails.propTypes = {
   titleClassName: PropTypes.string,
   subtitleClassName: PropTypes.string,
 };

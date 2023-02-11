@@ -18,13 +18,18 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import { checkUserAccess } from "../../services/actions/userAction";
 import Wrapper from "../../pages/wrapper";
+import BurgerDetails from "../burger-details/burger-details";
 
 export default function App() {
   const dispatch = useDispatch();
 
   const location = useLocation();
 
-  const background = location.state?.locationIngredient || location;
+  const background =
+    location.state?.locationIngredient ||
+    location.state?.locationFeed ||
+    location.state?.locationProfile ||
+    location;
 
   const { isAuth, resetEmailSent } = useSelector((store) => ({
     isAuth: store.userReducer.isAuth,
@@ -104,6 +109,30 @@ export default function App() {
             element={
               <Modal route>
                 <IngredientDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+      {location.state?.locationFeed && (
+        <Routes>
+          <Route
+            path="/feed/:id"
+            element={
+              <Modal route>
+                <BurgerDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+      {location.state?.locationProfile && (
+        <Routes>
+          <Route
+            path="/profile/orders/:id"
+            element={
+              <Modal route>
+                <BurgerDetails />
               </Modal>
             }
           />

@@ -1,9 +1,15 @@
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderPageList from "../order-page-list/order-page-list";
 import style from "./burger-details.module.css";
 import useOrder from "../../hooks/useOrder";
 
-export default function BurgerDetails({ titleClassName, order }) {
+export default function BurgerDetails({ titleClassName }) {
+  const orders = useSelector((store) => store.socketReducer.orders);
+  const { id } = useParams();
+  const order = orders.find((item) => item._id === id);
+
   const { orderIngredientsList, orderPrice, orderStatus, orderDate } =
     useOrder(order);
 

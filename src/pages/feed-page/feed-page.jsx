@@ -6,20 +6,13 @@ import {
   wsConnectionStart,
   wsConnectionClosed,
 } from "../../services/actions/socketAction";
-import Modal from "../../components/modal/modal";
-import BurgerDetails from "../../components/burger-details/burger-details";
-import { RESET_CURRENT_ORDER } from "../../services/actions/currentOrderAction";
 import style from "./feed-page.module.css";
 
 export default function FeedPage() {
   const dispatch = useDispatch();
   const { orders, total, totalToday } = useSelector(
     (store) => store.socketReducer
-  );
-
-  const currenOrder = useSelector(
-    (store) => store.currentOrderReducer.currentOrder
-  );
+  );  
 
   const { doneList, workList } = useMemo(() => {
     return orders.reduce(
@@ -46,32 +39,20 @@ export default function FeedPage() {
     };
   }, []);
 
-  function closeModal(e) {
-    e.stopPropagation();
-    dispatch({ type: RESET_CURRENT_ORDER });
-  }
-
   return (
     orders && (
-      <>        
-        <main className={style.main}>
-          <p className="text text_type_main-large pt-10 pb-5">Лента заказов</p>
-          <div className={style.container}>
-            <OrderFeedList orders={orders} isFeedList={false} />
-            <OrderCounters
-              doneList={doneList}
-              workList={workList}
-              total={total}
-              totalToday={totalToday}
-            />
-          </div>
-        </main>
-        {currenOrder && (
-          <Modal onCloseModal={closeModal}>
-            <BurgerDetails order={currenOrder} />
-          </Modal>
-        )}
-      </>
+      <main className={style.main}>
+        <p className="text text_type_main-large pt-10 pb-5">Лента заказов</p>
+        <div className={style.container}>
+          <OrderFeedList orders={orders} isFeedList={false} />
+          <OrderCounters
+            doneList={doneList}
+            workList={workList}
+            total={total}
+            totalToday={totalToday}
+          />
+        </div>
+      </main>
     )
   );
 }
