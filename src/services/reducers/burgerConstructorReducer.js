@@ -2,6 +2,7 @@ import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   SORT_INGREDIENTS,
+  RESET_INGREDIENT,
 } from "../actions/burgerConstructorAction";
 
 const constructorInitialState = {
@@ -43,6 +44,13 @@ export default function burgerConstructorReducer(
         ...state,
         burgerConstructorFillingList: action.payload,
       };
+
+    case RESET_INGREDIENT:
+      return {
+        burgerConstructorBunElement: undefined,
+        burgerConstructorFillingList: [],
+      };
+
     default:
       return state;
   }
