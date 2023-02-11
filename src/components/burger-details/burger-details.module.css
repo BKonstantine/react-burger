@@ -1,5 +1,8 @@
 .container {
   width: 640px;
+}
+
+.container_position_modal {
   margin-top: 60px;
 }
 
@@ -15,7 +18,7 @@
   color: #00cccc;
 }
 
-.price {  
+.price {
   display: flex;
   align-items: center;
   gap: 8px;

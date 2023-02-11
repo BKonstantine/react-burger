@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import OrderFeedList from "../../components/order-feed-list/order-feed-list";
 import OrderCounters from "../../components/order-counters/order-counters";
 import {
-  wsConnectionStart,
+  wsConnectionStartAll,
   wsConnectionClosed,
 } from "../../services/actions/socketAction";
 import style from "./feed-page.module.css";
@@ -33,7 +33,7 @@ export default function FeedPage() {
   }, [orders]);
 
   useEffect(() => {
-    dispatch(wsConnectionStart());
+    dispatch(wsConnectionStartAll());
     return () => {
       dispatch(wsConnectionClosed());
     };

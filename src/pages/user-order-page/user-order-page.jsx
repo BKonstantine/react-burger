@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  wsConnectionStart,
+  wsConnectionStartProfile,
   wsConnectionClosed,
 } from "../../services/actions/socketAction";
 import OrderFeedList from "../../components/order-feed-list/order-feed-list";
@@ -11,7 +11,7 @@ export default function UserOrderPage() {
   const dispatch = useDispatch();
   const { orders } = useSelector((store) => store.socketReducer);
   useEffect(() => {
-    dispatch(wsConnectionStart());
+    dispatch(wsConnectionStartProfile());
     return () => {
       dispatch(wsConnectionClosed());
     };

@@ -14,7 +14,11 @@ export default function BurgerDetails({ titleClassName }) {
     useOrder(order);
 
   return (
-    <div className={style.container}>
+    <div
+      className={`${style.container} ${
+        titleClassName ? undefined : style.container_position_modal
+      }`}
+    >
       <div className={style.container__title}>
         <p
           className={`text text_type_digits-default mb-10 ${titleClassName}`}

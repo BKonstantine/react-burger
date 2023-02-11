@@ -7,7 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import { rootReducer } from "./services/reducers/index";
 import { socketMiddleware } from "./services/middleware/socketMiddleware";
 import {
-  WS_CONNECTION_START,
+  WS_CONNECTION_START_ALL,
+  WS_CONNECTION_START_PROFILE,
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
@@ -15,7 +16,8 @@ import {
 } from "./services/actions/socketAction";
 
 const wsActions = {
-  wsInit: WS_CONNECTION_START,
+  wsInitAll: WS_CONNECTION_START_ALL,
+  wsInitProfile: WS_CONNECTION_START_PROFILE,
   onOpen: WS_CONNECTION_SUCCESS,
   onClose: WS_CONNECTION_CLOSED,
   onError: WS_CONNECTION_ERROR,

@@ -47,7 +47,7 @@ export default function App() {
         <Route path="/" element={<Wrapper />}>
           <Route index element={<MainPage />} />
           <Route path="feed" element={<FeedPage />} />
-          <Route path="feed/:id" element={<OrderPage />} />
+          <Route path="feed/:id" element={<OrderPage isAuth={false} />} />
           <Route
             path="profile"
             element={
@@ -58,13 +58,17 @@ export default function App() {
           >
             <Route path="orders" element={<UserOrderPage />} />
           </Route>
-          <Route
+          {/* <Route
             path="profile/orders/:id"
             element={
-              <ProtectedRoute isAuth={!isAuth} to="/login">
+              <ProtectedRoute isAuth={isAuth} to="/login">
                 <OrderPage />
               </ProtectedRoute>
             }
+          /> */}
+          <Route
+            path="profile/orders/:id"
+            element={<OrderPage isAuth={true} />}
           />
           <Route
             path="login"
