@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useDrag } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import {
   CurrencyIcon,
   Counter,
@@ -11,6 +12,8 @@ import { SET_CURRENT_INGREDIENT } from "../../services/actions/currentIngredient
 import { Link } from "react-router-dom";
 
 export default function Card({ ingredient }) {
+  const location = useLocation();
+
   const burgerConstructorIngredients = useSelector(
     (store) => store.burgerConstructorReducer
   );
@@ -56,7 +59,7 @@ export default function Card({ ingredient }) {
       <Link
         to={`/ingredients/${ingredient._id}`}
         className={`text_color_primary ${style.link}`}
-        state={{ from: "/" }}
+        state={{ locationIngredient: location }}
       >
         <img
           ref={dragPreviewRef}

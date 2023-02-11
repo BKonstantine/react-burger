@@ -14,6 +14,8 @@ import OrderPage from "../../pages/order-page/order-page";
 import ProtectedRoute from "../protected-route/protected-route";
 import UserOrderPage from "../../pages/user-order-page/user-order-page";
 import IngredientPage from "../../pages/ingredient-page/ingredient-page";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
 import { checkUserAccess } from "../../services/actions/userAction";
 import Wrapper from "../../pages/wrapper";
 
@@ -22,7 +24,7 @@ export default function App() {
 
   const location = useLocation();
 
-  const background = location;
+  const background = location.state?.locationIngredient || location;
 
   const { isAuth, resetEmailSent } = useSelector((store) => ({
     isAuth: store.userReducer.isAuth,
@@ -32,25 +34,81 @@ export default function App() {
   useEffect(() => {
     dispatch(getIngridients());
     dispatch(checkUserAccess());
-  }, []);  
+  }, []);
 
   return (
-    <Routes location={background}>
-      <Route path="/" element={<Wrapper />}>
-        <Route index element={<MainPage />} />
-        <Route path="feed" element={<FeedPage />} />
-        <Route path="feed/:id" element={<OrderPage />} />
-        <Route path="profile" element={<ProtectedRoute isAuth={isAuth} to="/login"><ProfilePage /></ProtectedRoute>}>
-          <Route path="orders" element={<UserOrderPage />} />
+    <>
+      <Routes location={background}>
+        <Route path="/" element={<Wrapper />}>
+          <Route index element={<MainPage />} />
+          <Route path="feed" element={<FeedPage />} />
+          <Route path="feed/:id" element={<OrderPage />} />
+          <Route
+            path="profile"
+            element={
+              <ProtectedRoute isAuth={isAuth} to="/login">
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="orders" element={<UserOrderPage />} />
+          </Route>
+          <Route
+            path="profile/orders/:id"
+            element={
+              <ProtectedRoute isAuth={isAuth} to="/login">
+                <OrderPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <ProtectedRoute isAuth={!isAuth} to="/">
+                <LoginPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <ProtectedRoute isAuth={!isAuth} to="/">
+                <RegistrationPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="forgot-password"
+            element={
+              <ProtectedRoute isAuth={!isAuth} to="/">
+                <ForgotPasswordPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="reset-password"
+            element={
+              <ProtectedRoute isAuth={resetEmailSent} to="/login">
+                <ResetPasswordPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="ingredients/:id" element={<IngredientPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
-        <Route path="profile/orders/:id" element={<ProtectedRoute isAuth={isAuth} to="/login"><OrderPage /></ProtectedRoute>}/>
-        <Route path="login" element={<ProtectedRoute isAuth={!isAuth} to="/"><LoginPage /></ProtectedRoute>}/>
-        <Route path="register" element={<ProtectedRoute isAuth={!isAuth} to="/"><RegistrationPage /></ProtectedRoute>}/>
-        <Route path="forgot-password" element={<ProtectedRoute isAuth={!isAuth} to="/"><ForgotPasswordPage /></ProtectedRoute>}/>
-        <Route path="reset-password" element={<ProtectedRoute isAuth={resetEmailSent} to="/login"><ResetPasswordPage /></ProtectedRoute>}/>
-        <Route path="ingredients/:id" element={<IngredientPage />}/>
-        <Route path="*" element={<NotFoundPage /> }/>
-      </Route>
-    </Routes>
+      </Routes>
+      {location.state?.locationIngredient && (
+        <Routes>
+          <Route
+            path="/ingredients/:id"
+            element={
+              <Modal route>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+    </>
   );
 }
