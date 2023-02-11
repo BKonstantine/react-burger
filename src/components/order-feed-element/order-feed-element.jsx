@@ -14,6 +14,7 @@ export default function OrderFeedElement({ isFeedList, order }) {
   return (
     <li className={cn(style.container)}>
       <Link
+      className={`text_color_primary ${style.link}`}
         to={isFeedList ? `/profile/orders/${order._id}` : `/feed/${order._id}`}
         state={
           isFeedList
