@@ -21,26 +21,21 @@ export const socketMiddleware = (wsUrl, wsActions) => {
 
       if (socket) {
         socket.onopen = (event) => {
-          dispatch({ type: onOpen, payload: event });
-          console.log("Октрыто");
+          dispatch({ type: onOpen, payload: event });          
         };
 
         socket.onerror = (event) => {
-          dispatch({ type: onError, payload: event });
-          console.log("Ошибка");
+          dispatch({ type: onError, payload: event });          
         };
 
-        socket.onmessage = (event) => {
-          console.log("Сообщение");
+        socket.onmessage = (event) => {          
           const { data } = event;
           const parsedData = JSON.parse(data);
-          const { success, ...restParsedData } = parsedData;
-          console.log(parsedData);
+          const { success, ...restParsedData } = parsedData;          
           dispatch({ type: onMessage, payload: restParsedData });
         };
 
-        socket.onclose = (event) => {
-          console.log("Закрыто");
+        socket.onclose = (event) => {          
           dispatch({ type: onClose, payload: event });
         };
       }
