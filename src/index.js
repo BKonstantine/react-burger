@@ -10,6 +10,7 @@ import {
   WS_CONNECTION_START,  
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
+  WS_CONNECTION_CLOSE,
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE,
 } from "./services/actions/socketAction";
@@ -17,12 +18,11 @@ import {
 const wsActions = {
   wsInit: WS_CONNECTION_START,  
   onOpen: WS_CONNECTION_SUCCESS,
-  onClose: WS_CONNECTION_CLOSED,
+  onClose: WS_CONNECTION_CLOSE,
+  onClosed: WS_CONNECTION_CLOSED,
   onError: WS_CONNECTION_ERROR,
   onMessage: WS_GET_MESSAGE,
 };
-
-
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

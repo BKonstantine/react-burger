@@ -5,7 +5,8 @@ export const socketMiddleware = (wsActions) => {
     return (next) => (action) => {
       const { dispatch } = store;
       const { type, payload } = action;
-      const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
+      const { wsInit, onOpen, onClose, onClosed, onError, onMessage } =
+        wsActions;
 
       if (type === wsInit) {
         socket = new WebSocket(payload);
@@ -34,7 +35,7 @@ export const socketMiddleware = (wsActions) => {
 
         socket.onclose = (event) => {
           console.log("Закрыт");
-          dispatch({ type: onClose, payload: event });
+          dispatch({ type: onClosed, payload: event });
         };
       }
 

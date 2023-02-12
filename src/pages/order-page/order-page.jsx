@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   wsConnectionStart,
-  wsConnectionClosed,
+  wsConnectionClose,
 } from "../../services/actions/socketAction";
 import { getIngridients } from "../../services/actions/burgerIngredientsAction";
 import BurgerDetails from "../../components/burger-details/burger-details";
@@ -19,7 +19,7 @@ export default function OrderPage({ isAuth }) {
       ? dispatch(wsConnectionStart(WS_URL_PROFILE))
       : dispatch(wsConnectionStart(WS_URL_ALL));
     return () => {
-      dispatch(wsConnectionClosed());
+      dispatch(wsConnectionClose());
     };
   }, []);
 

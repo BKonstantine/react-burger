@@ -4,7 +4,7 @@ import OrderFeedList from "../../components/order-feed-list/order-feed-list";
 import OrderCounters from "../../components/order-counters/order-counters";
 import {
   wsConnectionStart,
-  wsConnectionClosed,
+  wsConnectionClose,
 } from "../../services/actions/socketAction";
 import style from "./feed-page.module.css";
 import { WS_URL_ALL } from "../../utils/variables";
@@ -16,6 +16,9 @@ export default function FeedPage() {
   );
 
   const { doneList, workList } = useMemo(() => {
+    if (!orders.length) {
+      return { doneList: [], workList: [] };
+    }
     return orders.reduce(
       (count, item) => {
         // eslint-disable-next-line default-case
@@ -36,7 +39,7 @@ export default function FeedPage() {
   useEffect(() => {
     dispatch(wsConnectionStart(WS_URL_ALL));
     return () => {
-      dispatch(wsConnectionClosed());
+      dispatch(wsConnectionClose());
     };
   }, []);
 
