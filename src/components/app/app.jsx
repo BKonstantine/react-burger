@@ -57,15 +57,7 @@ export default function App() {
             }
           >
             <Route path="orders" element={<UserOrderPage />} />
-          </Route>
-          {/* <Route
-            path="profile/orders/:id"
-            element={
-              <ProtectedRoute isAuth={isAuth} to="/login">
-                <OrderPage />
-              </ProtectedRoute>
-            }
-          /> */}
+          </Route>          
           <Route
             path="profile/orders/:id"
             element={<OrderPage isAuth={true} />}

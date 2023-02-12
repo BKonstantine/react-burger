@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import OrderFeedList from "../../components/order-feed-list/order-feed-list";
 import OrderCounters from "../../components/order-counters/order-counters";
 import {
-  wsConnectionStartAll,
+  wsConnectionStart,
   wsConnectionClosed,
 } from "../../services/actions/socketAction";
 import style from "./feed-page.module.css";
+import { WS_URL_ALL } from "../../utils/variables";
 
 export default function FeedPage() {
   const dispatch = useDispatch();
   const { orders, total, totalToday } = useSelector(
     (store) => store.socketReducer
-  );  
+  );
 
   const { doneList, workList } = useMemo(() => {
     return orders.reduce(
@@ -33,7 +34,7 @@ export default function FeedPage() {
   }, [orders]);
 
   useEffect(() => {
-    dispatch(wsConnectionStartAll());
+    dispatch(wsConnectionStart(WS_URL_ALL));
     return () => {
       dispatch(wsConnectionClosed());
     };

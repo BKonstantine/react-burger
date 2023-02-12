@@ -2,14 +2,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
-  wsConnectionStartAll,
-  wsConnectionStartProfile,
+  wsConnectionStart,
   wsConnectionClosed,
 } from "../../services/actions/socketAction";
-import { checkUserAccess } from "../../services/actions/userAction";
 import { getIngridients } from "../../services/actions/burgerIngredientsAction";
 import BurgerDetails from "../../components/burger-details/burger-details";
 import style from "./order-page.module.css";
+import { WS_URL_ALL, WS_URL_PROFILE } from "../../utils/variables";
 
 export default function OrderPage({ isAuth }) {
   const dispatch = useDispatch();
@@ -17,8 +16,8 @@ export default function OrderPage({ isAuth }) {
   useEffect(() => {
     dispatch(getIngridients());
     isAuth
-      ? dispatch(wsConnectionStartProfile())
-      : dispatch(wsConnectionStartAll());
+      ? dispatch(wsConnectionStart(WS_URL_PROFILE))
+      : dispatch(wsConnectionStart(WS_URL_ALL));
     return () => {
       dispatch(wsConnectionClosed());
     };
