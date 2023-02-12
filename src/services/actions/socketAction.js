@@ -8,7 +8,7 @@ export const WS_GET_MESSAGE = "WS_GET_MESSAGE";
 export const wsConnectionStart = (url) => {
   return {
     type: WS_CONNECTION_START,
-    payload: url
+    payload: url,
   };
 };
 
@@ -18,9 +18,10 @@ export const wsConnectionSuccess = () => {
   };
 };
 
-export const wsConnectionError = () => {
+export const wsConnectionError = (event) => {
   return {
     type: WS_CONNECTION_ERROR,
+    payload: event,
   };
 };
 
