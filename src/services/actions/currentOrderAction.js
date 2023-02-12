@@ -6,6 +6,8 @@ export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST";
 export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
 export const GET_ORDER_FAILED = "GET_ORDER_FAILED";
 export const RESET_ORDER = "RESET_ORDER";
+export const SET_CURRENT_ORDER = "SET_CURRENT_ORDER";
+export const RESET_CURRENT_ORDER = "RESET_CURRENT_ORDER";
 
 export function makeOrder(ingredients) {
   return function (dispatch) {
@@ -15,14 +17,14 @@ export function makeOrder(ingredients) {
       ingredients.burgerConstructorBunElement._id,
     ];
 
-    dispatch({ type: GET_ORDER_REQUEST });    
+    dispatch({ type: GET_ORDER_REQUEST });
     sendOrderRequest(arrayId, getCookie("accessToken"))
       .then((res) => {
         dispatch({ type: GET_ORDER_SUCCESS, payload: res.order.number });
       })
-      .catch((err) => {        
+      .catch((err) => {
         if (err.message === "jwt expired" || "jwt malformed") {
-          dispatch(refreshUserToken(getCookie("refreshToken"))).then(() => {            
+          dispatch(refreshUserToken(getCookie("refreshToken"))).then(() => {
             sendOrderRequest(arrayId, getCookie("accessToken"))
               .then((res) => {
                 dispatch({
@@ -30,7 +32,7 @@ export function makeOrder(ingredients) {
                   payload: res.order.number,
                 });
               })
-              .catch(() => {                
+              .catch(() => {
                 dispatch({
                   type: GET_ORDER_FAILED,
                   errorText: "Ошибка при формировании заказа",

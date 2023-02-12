@@ -15,7 +15,7 @@
     0px 0px 1px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
   border-radius: 40px;
-  z-index: 2;
+  z-index: 21;
   animation: open 0.3s;
 }
 

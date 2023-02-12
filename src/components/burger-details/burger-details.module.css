@@ -1,0 +1,25 @@
+.container {
+  width: 640px;
+}
+
+.container_position_modal {
+  margin-top: 60px;
+}
+
+.container__date {
+  margin-top: 40px;
+  padding-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.color {
+  color: #00cccc;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

@@ -5,7 +5,6 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import AppHeader from "../../components/app-header/app-header";
 import {
   setLoginFormValue,
   loginUser,
@@ -29,8 +28,7 @@ export default function LoginPage() {
   }
 
   return (
-    <>
-      <AppHeader />
+    <>      
       <main className={style.main}>
         <div className={style.container}>
           <p className="text text_type_main-medium mb-6">Вход</p>
@@ -51,7 +49,7 @@ export default function LoginPage() {
           </form>
           <div className={style.links}>
             <p className="text text_type_main-default">
-              Вы — новый пользователь?
+              Вы — новый пользователь?
               <Link to="/register" className={style.link}>
                 Зарегистрироваться
               </Link>

@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #1c1c21;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06),
+    0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 40px;
+
+  cursor: pointer;
+}
+
+.container__order {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container__burger {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.container__ingredients {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status {
+  color: #00cccc;
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-decoration: none;
+}

@@ -8,6 +8,7 @@ import icon from "../../image/icon.svg";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { makeOrder } from "../../services/actions/currentOrderAction";
 import { RESET_ORDER } from "../../services/actions/currentOrderAction";
+import { RESET_INGREDIENT } from "../../services/actions/burgerConstructorAction";
 
 export default function BurgerConstructorOrder({ price }) {
   const order = useSelector((store) => store.currentOrderReducer.order);
@@ -22,6 +23,7 @@ export default function BurgerConstructorOrder({ price }) {
 
   function closeModal() {
     dispatch({ type: RESET_ORDER });
+    dispatch({ type: RESET_INGREDIENT });
   }
 
   function sendOrder() {

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { useNavigate } from "react-router-dom";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./modal.module.css";
@@ -7,10 +8,20 @@ import PropTypes from "prop-types";
 
 const modal = document.querySelector("#modal");
 
-export default function Modal({ onCloseModal, children }) {
-  function handleEscClose(evt) {    
-    if (evt.key === "Escape") {
+export default function Modal({ onCloseModal, children, route }) {
+  const navigate = useNavigate();
+
+  function handleClose(evt) {
+    if (route) {
+      return navigate(-1);
+    } else {
       onCloseModal(evt);
+    }
+  }
+
+  function handleEscClose(evt) {
+    if (evt.key === "Escape") {
+      handleClose(evt);
     }
   }
 
@@ -20,24 +31,28 @@ export default function Modal({ onCloseModal, children }) {
     return () => {
       document.removeEventListener("keydown", handleEscClose);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return ReactDOM.createPortal(
     <>
       <div className={style.container} onClick={(e) => e.stopPropagation()}>
-        <button type="button" className={style.button} onClick={onCloseModal}>
+        <button
+          type="button"
+          className={style.button}
+          onClick={(evt) => handleClose(evt)}
+        >
           <CloseIcon />
         </button>
         {children}
       </div>
-      <ModalOverlay onCloseModal={onCloseModal} />
+      <ModalOverlay onCloseModal={(evt) => handleClose(evt)} />
     </>,
     modal
   );
 }
 
 Modal.propTypes = {
-  onCloseModal: PropTypes.func.isRequired,
+  onCloseModal: PropTypes.func,
   children: PropTypes.element.isRequired,
 };

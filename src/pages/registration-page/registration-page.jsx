@@ -6,7 +6,6 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import AppHeader from "../../components/app-header/app-header";
 import {
   setRegisterFormValue,
   registerUser,
@@ -30,8 +29,7 @@ export default function RegistrationPage() {
   }
 
   return (
-    <>
-      <AppHeader />
+    <>      
       <main className={style.main}>
         <div className={style.container}>
           <p className="text text_type_main-medium mb-6">Регистрация</p>

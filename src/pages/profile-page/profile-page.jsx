@@ -5,10 +5,12 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
-import AppHeader from "../../components/app-header/app-header";
 import style from "./profile-page.module.css";
 import { getCookie } from "../../utils/cookie";
 import { logoutUser, changeUserData } from "../../services/actions/userAction";
+import Modal from "../../components/modal/modal";
+import BurgerDetails from "../../components/burger-details/burger-details";
+import { RESET_CURRENT_ORDER } from "../../services/actions/currentOrderAction";
 
 export default function ProfilePage() {
   const { user } = useSelector((store) => store.userReducer);
@@ -29,6 +31,10 @@ export default function ProfilePage() {
     color: "#f2f2f3",
   };
 
+  const currenOrder = useSelector(
+    (store) => store.currentOrderReducer.currentOrder
+  );
+
   function onFormReset() {
     setUserDate({ name: user.name, email: user.email });
   }
@@ -46,9 +52,13 @@ export default function ProfilePage() {
     return JSON.stringify(user) === JSON.stringify(userData);
   }
 
+  function closeModal(e) {
+    e.stopPropagation();
+    dispatch({ type: RESET_CURRENT_ORDER });
+  }
+
   return (
-    <>
-      <AppHeader />
+    <>      
       <main className={style.main}>
         <div className={style.container}>
           <div className={style.container__nav}>
@@ -62,7 +72,7 @@ export default function ProfilePage() {
                 Профиль
               </NavLink>
               <NavLink
-                to="order-page"
+                to="orders"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
                 className={`text text_type_main-medium text_color_inactive ${style.link}`}
                 state={{ order: true }}
@@ -138,6 +148,11 @@ export default function ProfilePage() {
           )}
         </div>
       </main>
+      {currenOrder && (
+        <Modal onCloseModal={closeModal}>
+          <BurgerDetails order={currenOrder}/>
+        </Modal>
+      )}
     </>
   );
 }

@@ -116,7 +116,7 @@ export function loginUser(userDate, callback) {
         setCookie("accessToken", parseCookie(res.accessToken));
         setCookie("refreshToken", res.refreshToken);
         callback();
-      })      
+      })
       .catch(() => {
         dispatch({ type: USER_LOGIN_FORM_SUBMIT_FAILED });
       });
@@ -138,7 +138,7 @@ export function logoutUser(refreshToken, callback) {
 /* thunk проверки пользователя */
 export function checkUserAccess() {
   return function (dispatch) {
-    checkUserAccessRequest(getCookie("accessToken"))
+    return checkUserAccessRequest(getCookie("accessToken"))
       .then((res) => {
         dispatch({ type: USER_ACCESS_ALLOWED, payload: res.user });
       })
@@ -193,19 +193,19 @@ export function resetPassword(userDate, callback) {
 /* thunk изменения данных пользователя */
 export function changeUserData(userData) {
   return function (dispatch) {
-    dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT });   
+    dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT });
     changeUserDataRequest(userData, getCookie("accessToken"))
-      .then((res) => {        
+      .then((res) => {
         dispatch({
           type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
           payload: res.user,
         });
       })
-      .catch((err) => {        
+      .catch((err) => {
         if (err.message === "jwt expired" || "jwt malformed") {
-          dispatch(refreshUserToken(getCookie("refreshToken"))).then(() => {            
+          dispatch(refreshUserToken(getCookie("refreshToken"))).then(() => {
             changeUserDataRequest(userData, getCookie("accessToken"))
-              .then((res) => {                
+              .then((res) => {
                 dispatch({
                   type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
                   payload: res.user,

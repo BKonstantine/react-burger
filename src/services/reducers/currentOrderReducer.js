@@ -2,7 +2,9 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILED,
-  RESET_ORDER
+  RESET_ORDER,
+  SET_CURRENT_ORDER,
+  RESET_CURRENT_ORDER,
 } from "../actions/currentOrderAction";
 
 const currentOrderInitialState = {
@@ -10,6 +12,7 @@ const currentOrderInitialState = {
   orderRequest: false,
   orderFailed: false,
   orderFailedText: undefined,
+  currentOrder: undefined,
 };
 
 export default function currentOrderReducer(
@@ -38,6 +41,13 @@ export default function currentOrderReducer(
 
     case RESET_ORDER:
       return { ...state, order: undefined };
+
+    case SET_CURRENT_ORDER:
+      return { ...state, currentOrder: action.payload };
+
+    case RESET_CURRENT_ORDER:
+      return { ...state, currentOrder: undefined };
+
     default:
       return state;
   }

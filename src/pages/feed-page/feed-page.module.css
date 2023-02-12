@@ -1,0 +1,9 @@
+.main {
+  margin: auto;
+  max-width: 1240px;
+}
+
+.container {
+  display: flex;
+  gap: 60px;
+}
