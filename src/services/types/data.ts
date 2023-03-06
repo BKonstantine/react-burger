@@ -3,6 +3,9 @@ import {
   SORT_INGREDIENTS,
   DELETE_INGREDIENT,
   RESET_INGREDIENT,
+  GET_INGREDIENTS_FAILED,
+  GET_INGREDIENTS_REQUEST,
+  GET_INGREDIENTS_SUCCESS,
   CHANGE_USER_DATA_FORM_SUBMIT,
   CHANGE_USER_DATA_FORM_SUBMIT_FAILED,
   CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
@@ -10,9 +13,6 @@ import {
   FORGOT_PASSWORD_FORM_SUBMIT,
   FORGOT_PASSWORD_FORM_SUBMIT_FAILED,
   FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS,
-  GET_INGREDIENTS_FAILED,
-  GET_INGREDIENTS_REQUEST,
-  GET_INGREDIENTS_SUCCESS,
   GET_ORDER_FAILED,
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
@@ -110,3 +110,16 @@ export type TIngredientsAction =
   | IGetIngredientsRequest
   | IGetIngredientsSuccess
   | IGetIngredientsFailed;
+
+export interface ISetCurrentIngredient {
+  readonly type: typeof SET_CURRENT_INGREDIENT;
+  readonly payload: IIngredient;
+}
+
+export interface IResetCurrentIngredient {
+  readonly type: typeof RESET_CURRENT_INGREDIENT;
+}
+
+export type TCurrenIngredientAction =
+  | ISetCurrentIngredient
+  | IResetCurrentIngredient;
