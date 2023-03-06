@@ -37,132 +37,174 @@ import {
   CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
   CHANGE_USER_DATA_FORM_SUBMIT_FAILED,
 } from "../constants/index";
+import {
+  IUser,
+  ISetRegisterFormValue,
+  IUserRegisterFormSubmit,
+  IUserRegisterFormSubmitSuccess,
+  IUserRegisterFormSubmitFailed,
+  ISetLoginFormValue,
+  IUserLoginFormSubmit,
+  IUserLoginFormSubmitSuccess,
+  IUserLoginFormSubmitFailed,
+  IUserAccessDenied,
+  IUserAccessAllowed,
+  ISetForgotPasswordFormValue,
+  IForgotPasswordFormSubmit,
+  IForgotPasswordFormSubmitSuccess,
+  IForgotPasswordFormSubmitFailed,
+  ISetResetPasswordFormValue,
+  IResetPasswordFormSubmit,
+  IResetPasswordFormSubmitSuccess,
+  IResetPasswordFormSubmitFailed,
+  IChangeUserDataFormSubmit,
+  IChangeUserDataFormSubmitSuccess,
+  IChangeUserDataFormSubmitFailed,
+} from "../types/data";
+import { AppDispatch } from "../types/index";
 
-export function setRegisterFormValue(field, value) {
+export const setRegisterFormValue = (
+  field: string,
+  value: string
+): ISetRegisterFormValue => {
   return {
     type: USER_REGISTER_FORM_SET_VALUE,
     field,
     value,
   };
-}
-function userRegisterFormSubmit() {
+};
+const userRegisterFormSubmit = (): IUserRegisterFormSubmit => {
   return {
     type: USER_REGISTER_FORM_SUBMIT,
   };
-}
-function userRegisterFormSubmitSuccess() {
+};
+const userRegisterFormSubmitSuccess = (): IUserRegisterFormSubmitSuccess => {
   return {
     type: USER_REGISTER_FORM_SUBMIT_SUCCESS,
   };
-}
-function userRegisterFormSubmitFailed() {
+};
+const userRegisterFormSubmitFailed = (): IUserRegisterFormSubmitFailed => {
   return {
     type: USER_REGISTER_FORM_SUBMIT_FAILED,
   };
-}
+};
 
-export function setLoginFormValue(field, value) {
+export const setLoginFormValue = (
+  field: string,
+  value: string
+): ISetLoginFormValue => {
   return {
     type: USER_LOGIN_FORM_SET_VALUE,
     field,
     value,
   };
-}
-function userLoginFormSubmit() {
+};
+const userLoginFormSubmit = (): IUserLoginFormSubmit => {
   return {
     type: USER_LOGIN_FORM_SUBMIT,
   };
-}
-function userLoginFormSubmitSuccess(user) {
+};
+const userLoginFormSubmitSuccess = (
+  user: IUser
+): IUserLoginFormSubmitSuccess => {
   return {
     type: USER_LOGIN_FORM_SUBMIT_SUCCESS,
     payload: user,
   };
-}
-function userLoginFormSubmitFailed() {
+};
+const userLoginFormSubmitFailed = (): IUserLoginFormSubmitFailed => {
   return {
     type: USER_LOGIN_FORM_SUBMIT_FAILED,
   };
-}
+};
 
-function userAccessDenied() {
+const userAccessDenied = (): IUserAccessDenied => {
   return {
     type: USER_ACCESS_DENIED,
   };
-}
-function userAccessAllowed(user) {
+};
+const userAccessAllowed = (user: IUser): IUserAccessAllowed => {
   return {
     type: USER_ACCESS_ALLOWED,
     payload: user,
   };
-}
+};
 
-export function setForgotPasswordFormValue(field, value) {
+export const setForgotPasswordFormValue = (
+  field: string,
+  value: string
+): ISetForgotPasswordFormValue => {
   return {
     type: FORGOT_PASSWORD_FORM_SET_VALUE,
     field,
     value,
   };
-}
-function forgotPasswordFormSubmit() {
+};
+const forgotPasswordFormSubmit = (): IForgotPasswordFormSubmit => {
   return {
     type: FORGOT_PASSWORD_FORM_SUBMIT,
   };
-}
-function forgotPasswordFormSubmitSuccess() {
-  return {
-    type: FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS,
+};
+const forgotPasswordFormSubmitSuccess =
+  (): IForgotPasswordFormSubmitSuccess => {
+    return {
+      type: FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS,
+    };
   };
-}
-function forgotPasswordFormSubmitFailed() {
+const forgotPasswordFormSubmitFailed = (): IForgotPasswordFormSubmitFailed => {
   return {
     type: FORGOT_PASSWORD_FORM_SUBMIT_FAILED,
   };
-}
+};
 
-export function setResetPasswordFormValue(field, value) {
+export const setResetPasswordFormValue = (
+  field: string,
+  value: string
+): ISetResetPasswordFormValue => {
   return {
     type: RESET_PASSWORD_FORM_SET_VALUE,
     field,
     value,
   };
-}
-function resetPasswordFormSubmit() {
+};
+const resetPasswordFormSubmit = (): IResetPasswordFormSubmit => {
   return {
     type: RESET_PASSWORD_FORM_SUBMIT,
   };
-}
-function resetPasswordFormSubmitSuccess() {
+};
+const resetPasswordFormSubmitSuccess = (): IResetPasswordFormSubmitSuccess => {
   return {
     type: RESET_PASSWORD_FORM_SUBMIT_SUCCESS,
   };
-}
-function resetPasswordFormSubmitFailed() {
+};
+const resetPasswordFormSubmitFailed = (): IResetPasswordFormSubmitFailed => {
   return {
     type: RESET_PASSWORD_FORM_SUBMIT_FAILED,
   };
-}
+};
 
-function changeUserDataFormSubmit() {
+const changeUserDataFormSubmit = (): IChangeUserDataFormSubmit => {
   return {
     type: CHANGE_USER_DATA_FORM_SUBMIT,
   };
-}
-function changeUserDataFormSubmitSuccess(user) {
+};
+const changeUserDataFormSubmitSuccess = (
+  user: IUser
+): IChangeUserDataFormSubmitSuccess => {
   return {
     type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
     payload: user,
   };
-}
-function changeUserDataFormSubmitFailed() {
+};
+const changeUserDataFormSubmitFailed = (): IChangeUserDataFormSubmitFailed => {
   return {
     type: CHANGE_USER_DATA_FORM_SUBMIT_FAILED,
   };
-}
+};
 
 /* thunk формы регистрации */
-export function registerUser(userDate, callback) {
-  return function (dispatch) {
+export function registerUser(userDate: IUser, callback: () => void) {
+  return function (dispatch: AppDispatch) {
     dispatch(userRegisterFormSubmit());
     registerUserRequest(userDate)
       .then((res) => {
@@ -180,8 +222,8 @@ export function registerUser(userDate, callback) {
 }
 
 /* thunk формы авторизации */
-export function loginUser(userDate, callback) {
-  return function (dispatch) {
+export function loginUser(userDate: IUser, callback: () => void) {
+  return function (dispatch: AppDispatch) {
     dispatch(userLoginFormSubmit());
     loginUserRequest(userDate)
       .then((res) => {
@@ -197,8 +239,8 @@ export function loginUser(userDate, callback) {
 }
 
 /* thunk выхода пользователя из аккаунта */
-export function logoutUser(refreshToken, callback) {
-  return function (dispatch) {
+export function logoutUser(refreshToken: string, callback: () => void) {
+  return function (dispatch: AppDispatch) {
     logoutUserRequest(refreshToken).then(() => {
       dispatch(userAccessDenied());
       deleteCookie("accessToken");
@@ -210,7 +252,7 @@ export function logoutUser(refreshToken, callback) {
 
 /* thunk проверки пользователя */
 export function checkUserAccess() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     return checkUserAccessRequest(getCookie("accessToken"))
       .then((res) => {
         dispatch(userAccessAllowed(res.user));
@@ -224,8 +266,8 @@ export function checkUserAccess() {
 }
 
 /* thunk обновления токена */
-export function refreshUserToken(refreshToken) {
-  return function (dispatch) {
+export function refreshUserToken(refreshToken: string) {
+  return function (dispatch: AppDispatch) {
     return refreshTokenRequest(refreshToken).then((res) => {
       setCookie("accessToken", parseCookie(res.accessToken));
       setCookie("refreshToken", res.refreshToken);
@@ -235,8 +277,8 @@ export function refreshUserToken(refreshToken) {
 }
 
 /* thunks восстановления пароля */
-export function forgotPassword(email, callback) {
-  return function (dispatch) {
+export function forgotPassword(email: string, callback: () => void) {
+  return function (dispatch: AppDispatch) {
     dispatch(forgotPasswordFormSubmit());
     forgotPasswordRequest(email)
       .then(() => {
@@ -249,8 +291,8 @@ export function forgotPassword(email, callback) {
   };
 }
 
-export function resetPassword(userDate, callback) {
-  return function (dispatch) {
+export function resetPassword(userDate: IUser, callback: () => void) {
+  return function (dispatch: AppDispatch) {
     dispatch(resetPasswordFormSubmit());
     resetPasswordRequest(userDate)
       .then(() => {
@@ -264,8 +306,8 @@ export function resetPassword(userDate, callback) {
 }
 
 /* thunk изменения данных пользователя */
-export function changeUserData(userData) {
-  return function (dispatch) {
+export function changeUserData(userData: IUser) {
+  return function (dispatch: AppDispatch) {
     dispatch(changeUserDataFormSubmit());
     changeUserDataRequest(userData, getCookie("accessToken"))
       .then((res) => {

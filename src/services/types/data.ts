@@ -182,3 +182,103 @@ export type TSocketAction =
   | IWsConnectionClose
   | IWsConnectionClosed
   | IWsGetMessage;
+
+export interface IUser {
+  readonly email: string;
+  readonly name: string;
+}
+
+export interface ISetRegisterFormValue {
+  readonly type: typeof USER_REGISTER_FORM_SET_VALUE;
+  readonly field: string;
+  readonly value: string;
+}
+
+export interface IUserRegisterFormSubmit {
+  readonly type: typeof USER_REGISTER_FORM_SUBMIT;
+}
+
+export interface IUserRegisterFormSubmitSuccess {
+  readonly type: typeof USER_REGISTER_FORM_SUBMIT_SUCCESS;
+}
+
+export interface IUserRegisterFormSubmitFailed {
+  readonly type: typeof USER_REGISTER_FORM_SUBMIT_FAILED;
+}
+
+export interface ISetLoginFormValue {
+  readonly type: typeof USER_LOGIN_FORM_SET_VALUE;
+  readonly field: string;
+  readonly value: string;
+}
+
+export interface IUserLoginFormSubmit {
+  readonly type: typeof USER_LOGIN_FORM_SUBMIT;
+}
+
+export interface IUserLoginFormSubmitSuccess {
+  readonly type: typeof USER_LOGIN_FORM_SUBMIT_SUCCESS;
+  readonly payload: IUser;
+}
+
+export interface IUserLoginFormSubmitFailed {
+  readonly type: typeof USER_LOGIN_FORM_SUBMIT_FAILED;
+}
+
+export interface IUserAccessDenied {
+  readonly type: typeof USER_ACCESS_DENIED;
+}
+
+export interface IUserAccessAllowed {
+  readonly type: typeof USER_ACCESS_ALLOWED;
+  readonly payload: IUser;
+}
+
+export interface ISetForgotPasswordFormValue {
+  readonly type: typeof FORGOT_PASSWORD_FORM_SET_VALUE;
+  readonly field: string;
+  readonly value: string;
+}
+
+export interface IForgotPasswordFormSubmit {
+  readonly type: typeof FORGOT_PASSWORD_FORM_SUBMIT;
+}
+
+export interface IForgotPasswordFormSubmitSuccess {
+  readonly type: typeof FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS;
+}
+
+export interface IForgotPasswordFormSubmitFailed {
+  readonly type: typeof FORGOT_PASSWORD_FORM_SUBMIT_FAILED;
+}
+
+export interface ISetResetPasswordFormValue {
+  readonly type: typeof RESET_PASSWORD_FORM_SET_VALUE;
+  readonly field: string;
+  readonly value: string;
+}
+
+export interface IResetPasswordFormSubmit {
+  readonly type: typeof RESET_PASSWORD_FORM_SUBMIT;
+}
+
+export interface IResetPasswordFormSubmitSuccess {
+  readonly type: typeof RESET_PASSWORD_FORM_SUBMIT_SUCCESS;
+}
+
+export interface IResetPasswordFormSubmitFailed {
+  readonly type: typeof RESET_PASSWORD_FORM_SUBMIT_FAILED;
+}
+
+export interface IChangeUserDataFormSubmit {
+  readonly type: typeof CHANGE_USER_DATA_FORM_SUBMIT;
+}
+
+export interface IChangeUserDataFormSubmitSuccess {
+  readonly type: typeof CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS;
+  readonly payload: IUser;
+}
+
+export interface IChangeUserDataFormSubmitFailed {
+  readonly type: typeof CHANGE_USER_DATA_FORM_SUBMIT_FAILED;
+}
