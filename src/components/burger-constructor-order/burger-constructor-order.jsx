@@ -7,7 +7,7 @@ import style from "./burger-constructor-order.module.css";
 import icon from "../../image/icon.svg";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { makeOrder } from "../../services/actions/currentOrderAction";
-import { RESET_ORDER } from "../../services/actions/currentOrderAction";
+import { resetOrder } from "../../services/actions/currentOrderAction";
 import { resetIngredient } from "../../services/actions/burgerConstructorAction";
 
 export default function BurgerConstructorOrder({ price }) {
@@ -22,7 +22,7 @@ export default function BurgerConstructorOrder({ price }) {
   const navigate = useNavigate();
 
   function closeModal() {
-    dispatch({ type: RESET_ORDER });
+    dispatch(resetOrder());
     dispatch(resetIngredient());
   }
 
