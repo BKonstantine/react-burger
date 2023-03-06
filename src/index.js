@@ -13,7 +13,7 @@ import {
   WS_CONNECTION_CLOSE,
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE,
-} from "./services/actions/socketAction";
+} from "./services/constants/index";
 
 const wsActions = {
   wsInit: WS_CONNECTION_START,  
