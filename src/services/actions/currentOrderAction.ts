@@ -1,41 +1,49 @@
 import { sendOrderRequest } from "../../utils/api";
-import { refreshUserToken } from "../actions/userAction";
+import { refreshUserToken } from "./userAction";
 import { getCookie } from "../../utils/cookie";
 import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILED,
-  RESET_ORDER,  
+  RESET_ORDER,
 } from "../constants/index";
+import {
+  IGetOrderRequest,
+  IGetOrderSuccess,
+  IGetOrderFailed,
+  IResetOrder,
+  IIngredient,
+} from "../types/data";
+import { AppDispatch } from "../types";
 
-function getOrderRequest() {
+const getOrderRequest = (): IGetOrderRequest => {
   return {
     type: GET_ORDER_REQUEST,
   };
-}
+};
 
-function getOrderSuccess(orderNumber) {
+const getOrderSuccess = (orderNumber: number): IGetOrderSuccess => {
   return {
     type: GET_ORDER_SUCCESS,
     payload: orderNumber,
   };
-}
+};
 
-function getOrderFailed(text) {
+const getOrderFailed = (text: string): IGetOrderFailed => {
   return {
     type: GET_ORDER_FAILED,
     errorText: text,
   };
-}
+};
 
-export function resetOrder() {
+export const resetOrder = (): IResetOrder => {
   return {
     type: RESET_ORDER,
   };
-}
+};
 
-export function makeOrder(ingredients) {
-  return function (dispatch) {
+export function makeOrder(ingredients: ReadonlyArray<IIngredient>) {
+  return function (dispatch: AppDispatch) {
     const arrayId = [
       ingredients.burgerConstructorBunElement._id,
       ...ingredients.burgerConstructorFillingList.map((item) => item._id),

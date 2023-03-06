@@ -6,6 +6,8 @@ import {
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
+  SET_CURRENT_INGREDIENT,
+  RESET_CURRENT_INGREDIENT,
   CHANGE_USER_DATA_FORM_SUBMIT,
   CHANGE_USER_DATA_FORM_SUBMIT_FAILED,
   CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
@@ -16,13 +18,11 @@ import {
   GET_ORDER_FAILED,
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
-  RESET_CURRENT_INGREDIENT,
   RESET_ORDER,
   RESET_PASSWORD_FORM_SET_VALUE,
   RESET_PASSWORD_FORM_SUBMIT,
   RESET_PASSWORD_FORM_SUBMIT_FAILED,
   RESET_PASSWORD_FORM_SUBMIT_SUCCESS,
-  SET_CURRENT_INGREDIENT,
   USER_ACCESS_ALLOWED,
   USER_ACCESS_DENIED,
   USER_LOGIN_FORM_SET_VALUE,
@@ -123,3 +123,27 @@ export interface IResetCurrentIngredient {
 export type TCurrenIngredientAction =
   | ISetCurrentIngredient
   | IResetCurrentIngredient;
+
+export interface IGetOrderRequest {
+  readonly type: typeof GET_ORDER_REQUEST;
+}
+
+export interface IGetOrderSuccess {
+  readonly type: typeof GET_ORDER_SUCCESS;
+  readonly payload: number;
+}
+
+export interface IGetOrderFailed {
+  readonly type: typeof GET_ORDER_FAILED;
+  readonly errorText: string;
+}
+
+export interface IResetOrder {
+  readonly type: typeof RESET_ORDER;
+}
+
+export type TCurrentOrderAction =
+  | IGetOrderRequest
+  | IGetOrderSuccess
+  | IGetOrderFailed
+  | IResetOrder;

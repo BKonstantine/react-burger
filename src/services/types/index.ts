@@ -1,11 +1,20 @@
 import { ThunkAction } from "redux-thunk";
 import { Action, ActionCreator } from "redux";
 import { store } from "../store";
-import { TConstructorAction, TIngredientsAction } from "../types/data";
+import {
+  TConstructorAction,
+  TIngredientsAction,
+  TCurrenIngredientAction,
+  TCurrentOrderAction,
+} from "../types/data";
 
-type TApplicationActions = TConstructorAction | TIngredientsAction;
+type TApplicationActions =
+  | TConstructorAction
+  | TIngredientsAction
+  | TCurrenIngredientAction
+  | TCurrentOrderAction;
 
-export type DispatchFunc = () => AppDispatch
+export type DispatchFunc = () => AppDispatch;
 
 export type RootState = ReturnType<typeof store.getState>;
 
