@@ -6,13 +6,15 @@ import {
   TIngredientsAction,
   TCurrenIngredientAction,
   TCurrentOrderAction,
+  TSocketAction,
 } from "../types/data";
 
 type TApplicationActions =
   | TConstructorAction
   | TIngredientsAction
   | TCurrenIngredientAction
-  | TCurrentOrderAction;
+  | TCurrentOrderAction
+  | TSocketAction;
 
 export type DispatchFunc = () => AppDispatch;
 

@@ -147,3 +147,38 @@ export type TCurrentOrderAction =
   | IGetOrderSuccess
   | IGetOrderFailed
   | IResetOrder;
+
+export interface IWsConnectionStart {
+  readonly type: typeof WS_CONNECTION_START;
+  readonly payload: string;
+}
+
+export interface IWsConnectionSuccess {
+  readonly type: typeof WS_CONNECTION_SUCCESS;
+}
+
+export interface IWsConnectionError {
+  readonly type: typeof WS_CONNECTION_ERROR;
+  readonly payload: string;
+}
+
+export interface IWsConnectionClose {
+  readonly type: typeof WS_CONNECTION_CLOSE;
+}
+
+export interface IWsConnectionClosed {
+  readonly type: typeof WS_CONNECTION_CLOSED;
+}
+
+export interface IWsGetMessage {
+  readonly type: typeof WS_GET_MESSAGE;
+  readonly payload: string;
+}
+
+export type TSocketAction =
+  | IWsConnectionStart
+  | IWsConnectionSuccess
+  | IWsConnectionError
+  | IWsConnectionClose
+  | IWsConnectionClosed
+  | IWsGetMessage;
