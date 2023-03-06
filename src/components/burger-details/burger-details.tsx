@@ -1,11 +1,16 @@
+import { FC } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderPageList from "../order-page-list/order-page-list";
 import style from "./burger-details.module.css";
 import useOrder from "../../hooks/useOrder";
 
-export default function BurgerDetails({ titleClassName }) {
+interface IBurgerDetails {
+  titleClassName?: string;
+}
+
+const BurgerDetails: FC<IBurgerDetails> = ({ titleClassName }) => {
   const orders = useSelector((store) => store.socketReducer.orders);
   const { id } = useParams();
   const order = orders.find((item) => item._id === id);
@@ -40,4 +45,6 @@ export default function BurgerDetails({ titleClassName }) {
       </div>
     </div>
   );
-}
+};
+
+export default BurgerDetails;
