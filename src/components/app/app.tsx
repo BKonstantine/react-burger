@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { getIngridients } from "../../services/actions/burgerIngredientsAction";
 import { Routes, Route, useLocation } from "react-router-dom";
 import MainPage from "../../pages/main-page/main-page";
@@ -22,7 +22,6 @@ import BurgerDetails from "../burger-details/burger-details";
 
 export default function App() {
   const dispatch = useDispatch();
-
   const location = useLocation();
 
   const background =
@@ -57,7 +56,7 @@ export default function App() {
             }
           >
             <Route path="orders" element={<UserOrderPage />} />
-          </Route>          
+          </Route>
           <Route
             path="profile/orders/:id"
             element={<OrderPage isAuth={true} />}

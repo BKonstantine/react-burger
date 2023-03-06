@@ -56,6 +56,16 @@ export interface IIngredient {
   __v: number;
 }
 
+export interface IOrder {
+  _id: string;
+  ingredients: Array<string>;
+  status: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  number: number;
+}
+
 export interface IAddIngredient {
   readonly type: typeof ADD_INGREDIENT;
   readonly id: string;
@@ -82,12 +92,21 @@ export type TConstructorAction =
   | IDeleteIngredient
   | IResetIngredient;
 
-export interface IOrder {
-  _id: string;
-  ingredients: Array<string>;
-  status: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-  number: number;
+export interface IGetIngredientsRequest {
+  readonly type: typeof GET_INGREDIENTS_REQUEST;
 }
+
+export interface IGetIngredientsSuccess {
+  readonly type: typeof GET_INGREDIENTS_SUCCESS;
+  payload: ReadonlyArray<IIngredient>;
+}
+
+export interface IGetIngredientsFailed {
+  readonly type: typeof GET_INGREDIENTS_FAILED;
+  readonly errorText: string;
+}
+
+export type TIngredientsAction =
+  | IGetIngredientsRequest
+  | IGetIngredientsSuccess
+  | IGetIngredientsFailed;

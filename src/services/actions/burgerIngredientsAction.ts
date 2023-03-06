@@ -4,29 +4,38 @@ import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
 } from "../constants/index";
+import {
+  IGetIngredientsRequest,
+  IIngredient,
+  IGetIngredientsSuccess,
+  IGetIngredientsFailed,
+} from "../types/data";
+import { AppDispatch } from "../types";
 
-function getIngredientsRequest() {
+const getIngredientsRequest = (): IGetIngredientsRequest => {
   return {
     type: GET_INGREDIENTS_REQUEST,
   };
-}
+};
 
-function getIngredientsSuccess(ingredients) {
+const getIngredientsSuccess = (
+  ingredients: ReadonlyArray<IIngredient>
+): IGetIngredientsSuccess => {
   return {
     type: GET_INGREDIENTS_SUCCESS,
     payload: ingredients,
   };
-}
+};
 
-function getIngredientsFailed(text) {
+const getIngredientsFailed = (text: string): IGetIngredientsFailed => {
   return {
     type: GET_INGREDIENTS_FAILED,
     errorText: text,
   };
-}
+};
 
 export function getIngridients() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch(getIngredientsRequest());
     getIngridientsRequest()
       .then((res) => {
