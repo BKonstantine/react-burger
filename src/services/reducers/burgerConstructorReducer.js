@@ -3,7 +3,7 @@ import {
   DELETE_INGREDIENT,
   SORT_INGREDIENTS,
   RESET_INGREDIENT,
-} from "../actions/burgerConstructorAction";
+} from "../constants/index";
 
 const constructorInitialState = {
   burgerConstructorBunElement: undefined,

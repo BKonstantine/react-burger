@@ -7,8 +7,8 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import BurgerConstructorFillingList from "../burger-constructor-filling-list/burger-constructor-filling-list";
 import loader from "../../image/double-ring-loader.svg";
 import {
-  ADD_INGREDIENT,
-  SORT_INGREDIENTS,
+  addIngredient,
+  sortIngredients,
 } from "../../services/actions/burgerConstructorAction";
 import { v4 as uuidv4 } from "uuid";
 import { Reorder } from "framer-motion";
@@ -22,7 +22,7 @@ export default function BurgerConstructor() {
   }));
 
   function onDropHandler(ingredient) {
-    dispatch({ type: ADD_INGREDIENT, id: uuidv4(), payload: ingredient });
+    dispatch(addIngredient(uuidv4(), ingredient));
   }
 
   const [{ isHover }, dropTarget] = useDrop({
@@ -66,7 +66,7 @@ export default function BurgerConstructor() {
           values={fillingList}
           className={style.container_constructor}
           onReorder={(sortFillingList) =>
-            dispatch({ type: SORT_INGREDIENTS, payload: sortFillingList })
+            dispatch(sortIngredients(sortFillingList))
           }
         >
           {fillingList.map((item) => {

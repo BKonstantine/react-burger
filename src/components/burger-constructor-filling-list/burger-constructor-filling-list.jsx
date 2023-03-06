@@ -5,7 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-constructor-filling-list.module.css";
 import cardPropTypes from "../../utils/prop-types";
-import { DELETE_INGREDIENT } from "../../services/actions/burgerConstructorAction";
+import { deleteIngredient } from "../../services/actions/burgerConstructorAction";
 import { Reorder } from "framer-motion";
 
 export default function BurgerConstructorFillingList({ filling }) {
@@ -22,9 +22,7 @@ export default function BurgerConstructorFillingList({ filling }) {
         text={filling.name}
         price={filling.price}
         thumbnail={filling.image}
-        handleClose={() =>
-          dispatch({ type: DELETE_INGREDIENT, payload: filling })
-        }
+        handleClose={() => dispatch(deleteIngredient(filling))}
       />
     </Reorder.Item>
   );

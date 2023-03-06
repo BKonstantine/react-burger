@@ -1,4 +1,34 @@
-export const ADD_INGREDIENT = "ADD_INGREDIENT";
-export const SORT_INGREDIENTS = "SORT_INGREDIENTS";
-export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
-export const RESET_INGREDIENT = "RESET_INGREDIENT";
+import {
+  ADD_INGREDIENT,
+  DELETE_INGREDIENT,
+  RESET_INGREDIENT,
+  SORT_INGREDIENTS,
+} from "../constants/index";
+
+export function addIngredient(ingredientId, ingredient) {
+  return {
+    type: ADD_INGREDIENT,
+    id: ingredientId,
+    payload: ingredient,
+  };
+}
+
+export function sortIngredients(ingredients) {
+  return {
+    type: SORT_INGREDIENTS,
+    payload: ingredients,
+  };
+}
+
+export function deleteIngredient(ingredient) {
+  return {
+    type: DELETE_INGREDIENT,
+    payload: ingredient,
+  };
+}
+
+export function resetIngredient() {
+  return {
+    type: RESET_INGREDIENT,
+  };
+}
