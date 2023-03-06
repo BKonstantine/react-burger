@@ -17,7 +17,7 @@ export default function AppHeader() {
   const { pathname } = useLocation();
 
   const toggleStyleIcon = useCallback(
-    (url) => {
+    (url: string) => {
       if (pathname === "/" && url === "/") {
         return "primary";
       } else if (pathname.includes(url) && url !== "/") {
