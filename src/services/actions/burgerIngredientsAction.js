@@ -1,18 +1,39 @@
 import { getIngridientsRequest } from "../../utils/api";
+import {
+  GET_INGREDIENTS_REQUEST,
+  GET_INGREDIENTS_SUCCESS,
+  GET_INGREDIENTS_FAILED,
+} from "../constants/index";
 
-export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
-export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
-export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
+function getIngredientsRequest() {
+  return {
+    type: GET_INGREDIENTS_REQUEST,
+  };
+}
+
+function getIngredientsSuccess(ingredients) {
+  return {
+    type: GET_INGREDIENTS_SUCCESS,
+    payload: ingredients,
+  };
+}
+
+function getIngredientsFailed(text) {
+  return {
+    type: GET_INGREDIENTS_FAILED,
+    errorText: text,
+  };
+}
 
 export function getIngridients() {
   return function (dispatch) {
-    dispatch({ type: GET_INGREDIENTS_REQUEST });
+    dispatch(getIngredientsRequest());
     getIngridientsRequest()
-      .then((res) => {        
-        dispatch({ type: GET_INGREDIENTS_SUCCESS, payload: res.data });        
+      .then((res) => {
+        dispatch(getIngredientsSuccess(res.data));
       })
       .catch((err) => {
-        dispatch({ type: GET_INGREDIENTS_FAILED, errorText: err });
+        dispatch(getIngredientsFailed(err));
       });
   };
 }
