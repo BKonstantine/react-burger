@@ -8,7 +8,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./card.module.css";
 import cardPropTypes from "../../utils/prop-types";
-import { SET_CURRENT_INGREDIENT } from "../../services/actions/currentIngredientAction";
+import { setCurrentIngredient } from "../../services/actions/currentIngredientAction";
 import { Link } from "react-router-dom";
 
 export default function Card({ ingredient }) {
@@ -48,7 +48,7 @@ export default function Card({ ingredient }) {
   });
 
   function openModal() {
-    dispatch({ type: SET_CURRENT_INGREDIENT, payload: ingredient });
+    dispatch(setCurrentIngredient(ingredient));
   }
 
   return (

@@ -1,7 +1,7 @@
 import {
   SET_CURRENT_INGREDIENT,
   RESET_CURRENT_INGREDIENT,
-} from "../actions/currentIngredientAction";
+} from "../constants/index";
 
 const currentIngredientInitialState = {
   currentIngredient: undefined,
