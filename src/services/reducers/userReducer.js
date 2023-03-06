@@ -20,7 +20,7 @@ import {
   CHANGE_USER_DATA_FORM_SUBMIT,
   CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
   CHANGE_USER_DATA_FORM_SUBMIT_FAILED,
-} from "../actions/userAction";
+} from "../constants/index";
 
 const initialState = {
   registerForm: {

@@ -14,14 +14,29 @@ import {
   setCookie,
   deleteCookie,
 } from "../../utils/cookie";
-
-/* Экшены управления формой регистрации */
-export const USER_REGISTER_FORM_SET_VALUE = "USER_REGISTER_FORM_SET_VALUE";
-export const USER_REGISTER_FORM_SUBMIT = "USER_REGISTER_FORM_SUBMIT";
-export const USER_REGISTER_FORM_SUBMIT_SUCCESS =
-  "USER_REGISTER_FORM_SUBMIT_SUCCESS";
-export const USER_REGISTER_FORM_SUBMIT_FAILED =
-  "USER_REGISTER_FORM_SUBMIT_FAILED";
+import {
+  USER_REGISTER_FORM_SET_VALUE,
+  USER_REGISTER_FORM_SUBMIT,
+  USER_REGISTER_FORM_SUBMIT_SUCCESS,
+  USER_REGISTER_FORM_SUBMIT_FAILED,
+  USER_LOGIN_FORM_SET_VALUE,
+  USER_LOGIN_FORM_SUBMIT,
+  USER_LOGIN_FORM_SUBMIT_SUCCESS,
+  USER_LOGIN_FORM_SUBMIT_FAILED,
+  USER_ACCESS_ALLOWED,
+  USER_ACCESS_DENIED,
+  FORGOT_PASSWORD_FORM_SET_VALUE,
+  FORGOT_PASSWORD_FORM_SUBMIT,
+  FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS,
+  FORGOT_PASSWORD_FORM_SUBMIT_FAILED,
+  RESET_PASSWORD_FORM_SET_VALUE,
+  RESET_PASSWORD_FORM_SUBMIT,
+  RESET_PASSWORD_FORM_SUBMIT_SUCCESS,
+  RESET_PASSWORD_FORM_SUBMIT_FAILED,
+  CHANGE_USER_DATA_FORM_SUBMIT,
+  CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
+  CHANGE_USER_DATA_FORM_SUBMIT_FAILED,
+} from "../constants/index";
 
 export function setRegisterFormValue(field, value) {
   return {
@@ -30,12 +45,21 @@ export function setRegisterFormValue(field, value) {
     value,
   };
 }
-
-/* Экшены управления формой авторизации */
-export const USER_LOGIN_FORM_SET_VALUE = "USER_LOGIN_FORM_SET_VALUE";
-export const USER_LOGIN_FORM_SUBMIT = "USER_LOGIN_FORM_SUBMIT";
-export const USER_LOGIN_FORM_SUBMIT_SUCCESS = "USER_LOGIN_FORM_SUBMIT_SUCCESS";
-export const USER_LOGIN_FORM_SUBMIT_FAILED = "USER_LOGIN_FORM_SUBMIT_FAILED";
+function userRegisterFormSubmit() {
+  return {
+    type: USER_REGISTER_FORM_SUBMIT,
+  };
+}
+function userRegisterFormSubmitSuccess() {
+  return {
+    type: USER_REGISTER_FORM_SUBMIT_SUCCESS,
+  };
+}
+function userRegisterFormSubmitFailed() {
+  return {
+    type: USER_REGISTER_FORM_SUBMIT_FAILED,
+  };
+}
 
 export function setLoginFormValue(field, value) {
   return {
@@ -44,18 +68,34 @@ export function setLoginFormValue(field, value) {
     value,
   };
 }
+function userLoginFormSubmit() {
+  return {
+    type: USER_LOGIN_FORM_SUBMIT,
+  };
+}
+function userLoginFormSubmitSuccess(user) {
+  return {
+    type: USER_LOGIN_FORM_SUBMIT_SUCCESS,
+    payload: user,
+  };
+}
+function userLoginFormSubmitFailed() {
+  return {
+    type: USER_LOGIN_FORM_SUBMIT_FAILED,
+  };
+}
 
-/* Экшены управления доступом пользователя */
-export const USER_ACCESS_ALLOWED = "USER_ACCESS_ALLOWED";
-export const USER_ACCESS_DENIED = "USER_ACCESS_DENIED";
-
-/* Экшены управления формой forgot password */
-export const FORGOT_PASSWORD_FORM_SET_VALUE = "FORGOT_PASSWORD_FORM_SET_VALUE";
-export const FORGOT_PASSWORD_FORM_SUBMIT = "FORGOT_PASSWORD_FORM_SUBMIT";
-export const FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS =
-  "FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS";
-export const FORGOT_PASSWORD_FORM_SUBMIT_FAILED =
-  "FORGOT_PASSWORD_FORM_SUBMIT_FAILED";
+function userAccessDenied() {
+  return {
+    type: USER_ACCESS_DENIED,
+  };
+}
+function userAccessAllowed(user) {
+  return {
+    type: USER_ACCESS_ALLOWED,
+    payload: user,
+  };
+}
 
 export function setForgotPasswordFormValue(field, value) {
   return {
@@ -64,14 +104,21 @@ export function setForgotPasswordFormValue(field, value) {
     value,
   };
 }
-
-/* Экшены управления формой reset password */
-export const RESET_PASSWORD_FORM_SET_VALUE = "RESET_PASSWORD_FORM_SET_VALUE";
-export const RESET_PASSWORD_FORM_SUBMIT = "RESET_PASSWORD_FORM_SUBMIT";
-export const RESET_PASSWORD_FORM_SUBMIT_SUCCESS =
-  "RESET_PASSWORD_FORM_SUBMIT_SUCCESS";
-export const RESET_PASSWORD_FORM_SUBMIT_FAILED =
-  "RESET_PASSWORD_FORM_SUBMIT_FAILED";
+function forgotPasswordFormSubmit() {
+  return {
+    type: FORGOT_PASSWORD_FORM_SUBMIT,
+  };
+}
+function forgotPasswordFormSubmitSuccess() {
+  return {
+    type: FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS,
+  };
+}
+function forgotPasswordFormSubmitFailed() {
+  return {
+    type: FORGOT_PASSWORD_FORM_SUBMIT_FAILED,
+  };
+}
 
 export function setResetPasswordFormValue(field, value) {
   return {
@@ -80,28 +127,54 @@ export function setResetPasswordFormValue(field, value) {
     value,
   };
 }
+function resetPasswordFormSubmit() {
+  return {
+    type: RESET_PASSWORD_FORM_SUBMIT,
+  };
+}
+function resetPasswordFormSubmitSuccess() {
+  return {
+    type: RESET_PASSWORD_FORM_SUBMIT_SUCCESS,
+  };
+}
+function resetPasswordFormSubmitFailed() {
+  return {
+    type: RESET_PASSWORD_FORM_SUBMIT_FAILED,
+  };
+}
 
-export const CHANGE_USER_DATA_FORM_SUBMIT = "CHANGE_USER_DATA_FORM_SUBMIT";
-export const CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS =
-  "CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS";
-export const CHANGE_USER_DATA_FORM_SUBMIT_FAILED =
-  "CHANGE_USER_DATA_FORM_SUBMIT_FAILED";
+function changeUserDataFormSubmit() {
+  return {
+    type: CHANGE_USER_DATA_FORM_SUBMIT,
+  };
+}
+function changeUserDataFormSubmitSuccess(user) {
+  return {
+    type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
+    payload: user,
+  };
+}
+function changeUserDataFormSubmitFailed() {
+  return {
+    type: CHANGE_USER_DATA_FORM_SUBMIT_FAILED,
+  };
+}
 
 /* thunk формы регистрации */
 export function registerUser(userDate, callback) {
   return function (dispatch) {
-    dispatch({ type: USER_REGISTER_FORM_SUBMIT });
+    dispatch(userRegisterFormSubmit());
     registerUserRequest(userDate)
       .then((res) => {
         setCookie("accessToken", parseCookie(res.accessToken));
         setCookie("refreshToken", res.refreshToken);
       })
       .then(() => {
-        dispatch({ type: USER_REGISTER_FORM_SUBMIT_SUCCESS });
+        dispatch(userRegisterFormSubmitSuccess());
         callback();
       })
       .catch(() => {
-        dispatch({ type: USER_REGISTER_FORM_SUBMIT_FAILED });
+        dispatch(userRegisterFormSubmitFailed());
       });
   };
 }
@@ -109,16 +182,16 @@ export function registerUser(userDate, callback) {
 /* thunk формы авторизации */
 export function loginUser(userDate, callback) {
   return function (dispatch) {
-    dispatch({ type: USER_LOGIN_FORM_SUBMIT });
+    dispatch(userLoginFormSubmit());
     loginUserRequest(userDate)
       .then((res) => {
-        dispatch({ type: USER_LOGIN_FORM_SUBMIT_SUCCESS, payload: res.user });
+        dispatch(userLoginFormSubmitSuccess(res.user));
         setCookie("accessToken", parseCookie(res.accessToken));
         setCookie("refreshToken", res.refreshToken);
         callback();
       })
       .catch(() => {
-        dispatch({ type: USER_LOGIN_FORM_SUBMIT_FAILED });
+        dispatch(userLoginFormSubmitFailed());
       });
   };
 }
@@ -127,7 +200,7 @@ export function loginUser(userDate, callback) {
 export function logoutUser(refreshToken, callback) {
   return function (dispatch) {
     logoutUserRequest(refreshToken).then(() => {
-      dispatch({ type: USER_ACCESS_DENIED });
+      dispatch(userAccessDenied());
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
       callback();
@@ -140,7 +213,7 @@ export function checkUserAccess() {
   return function (dispatch) {
     return checkUserAccessRequest(getCookie("accessToken"))
       .then((res) => {
-        dispatch({ type: USER_ACCESS_ALLOWED, payload: res.user });
+        dispatch(userAccessAllowed(res.user));
       })
       .catch((err) => {
         if (err.message === "jwt expired" || "jwt malformed") {
@@ -164,28 +237,28 @@ export function refreshUserToken(refreshToken) {
 /* thunks восстановления пароля */
 export function forgotPassword(email, callback) {
   return function (dispatch) {
-    dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT });
+    dispatch(forgotPasswordFormSubmit());
     forgotPasswordRequest(email)
       .then(() => {
-        dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT_SUCCESS });
+        dispatch(forgotPasswordFormSubmitSuccess());
         callback();
       })
       .catch(() => {
-        dispatch({ type: FORGOT_PASSWORD_FORM_SUBMIT_FAILED });
+        dispatch(forgotPasswordFormSubmitFailed());
       });
   };
 }
 
 export function resetPassword(userDate, callback) {
   return function (dispatch) {
-    dispatch({ type: RESET_PASSWORD_FORM_SUBMIT });
+    dispatch(resetPasswordFormSubmit());
     resetPasswordRequest(userDate)
       .then(() => {
-        dispatch({ type: RESET_PASSWORD_FORM_SUBMIT_SUCCESS });
+        dispatch(resetPasswordFormSubmitSuccess());
         callback();
       })
       .catch(() => {
-        dispatch({ type: RESET_PASSWORD_FORM_SUBMIT_FAILED });
+        dispatch(resetPasswordFormSubmitFailed());
       });
   };
 }
@@ -193,26 +266,20 @@ export function resetPassword(userDate, callback) {
 /* thunk изменения данных пользователя */
 export function changeUserData(userData) {
   return function (dispatch) {
-    dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT });
+    dispatch(changeUserDataFormSubmit());
     changeUserDataRequest(userData, getCookie("accessToken"))
       .then((res) => {
-        dispatch({
-          type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
-          payload: res.user,
-        });
+        dispatch(changeUserDataFormSubmitSuccess(res.user));
       })
       .catch((err) => {
         if (err.message === "jwt expired" || "jwt malformed") {
           dispatch(refreshUserToken(getCookie("refreshToken"))).then(() => {
             changeUserDataRequest(userData, getCookie("accessToken"))
               .then((res) => {
-                dispatch({
-                  type: CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
-                  payload: res.user,
-                });
+                dispatch(changeUserDataFormSubmitSuccess(res.user));
               })
               .catch(() => {
-                dispatch({ type: CHANGE_USER_DATA_FORM_SUBMIT_FAILED });
+                dispatch(changeUserDataFormSubmitFailed());
               });
           });
         }
