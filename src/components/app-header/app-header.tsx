@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import { useCallback } from "react";
+import { FC, useCallback } from "react";
 import {
   Logo,
   BurgerIcon,
@@ -9,7 +8,7 @@ import {
 import { NavLink, useLocation } from "react-router-dom";
 import style from "./app-header.module.css";
 
-export default function AppHeader() {
+const AppHeader: FC = () => {
   const activeStyle = {
     color: "#f2f2f3",
   };
@@ -27,7 +26,7 @@ export default function AppHeader() {
       }
     },
     [pathname]
-  );  
+  );
 
   return (
     <header className={style.header}>
@@ -64,4 +63,6 @@ export default function AppHeader() {
       </div>
     </header>
   );
-}
+};
+
+export default AppHeader;
