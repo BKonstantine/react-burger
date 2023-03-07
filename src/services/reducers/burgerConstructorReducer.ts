@@ -7,12 +7,12 @@ import {
 
 import { TConstructorAction, IIngredient } from "../types/data";
 
-interface IBurgerConstructorReducer {
+interface IConstructorInitialState {
   burgerConstructorBunElement: IIngredient | undefined;
   burgerConstructorFillingList: Array<IIngredient>;
 }
 
-const constructorInitialState: IBurgerConstructorReducer = {
+const constructorInitialState: IConstructorInitialState = {
   burgerConstructorBunElement: undefined,
   burgerConstructorFillingList: [],
 };
@@ -20,7 +20,7 @@ const constructorInitialState: IBurgerConstructorReducer = {
 export default function burgerConstructorReducer(
   state = constructorInitialState,
   action: TConstructorAction
-): IBurgerConstructorReducer {
+): IConstructorInitialState {
   switch (action.type) {
     case ADD_INGREDIENT:
       if (action.payload.type === "bun") {

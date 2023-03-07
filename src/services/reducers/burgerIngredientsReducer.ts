@@ -3,8 +3,16 @@ import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
 } from "../constants/index";
+import { TIngredientsAction, IIngredient } from "../types/data";
 
-const ingredientsInitialState = {
+interface IIngredientsInitialState {
+  burgerIngredientsList?: Array<IIngredient>;
+  burgerIngredientsListRequest: boolean;
+  burgerIngredientsListFailed: boolean;
+  burgerIngredientsListFailedText: string | undefined;
+}
+
+const ingredientsInitialState: IIngredientsInitialState = {
   burgerIngredientsList: [],
   burgerIngredientsListRequest: false,
   burgerIngredientsListFailed: false,
@@ -13,8 +21,8 @@ const ingredientsInitialState = {
 
 export default function burgerIngredientsReducer(
   state = ingredientsInitialState,
-  action
-) {
+  action: TIngredientsAction
+): IIngredientsInitialState {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
       return { ...state, burgerIngredientsListRequest: true };
@@ -28,7 +36,7 @@ export default function burgerIngredientsReducer(
       };
 
     case GET_INGREDIENTS_FAILED:
-      return {
+      return {        
         burgerIngredientsListRequest: false,
         burgerIngredientsListFailed: true,
         burgerIngredientsListFailedText: action.errorText,

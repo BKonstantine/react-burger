@@ -125,7 +125,7 @@ export interface IGetIngredientsRequest {
 
 export interface IGetIngredientsSuccess {
   readonly type: typeof GET_INGREDIENTS_SUCCESS;
-  payload: ReadonlyArray<IIngredient>;
+  payload: Array<IIngredient>;
 }
 
 export interface IGetIngredientsFailed {
