@@ -365,3 +365,25 @@ export type TUserActions =
   | IChangeUserDataFormSubmit
   | IChangeUserDataFormSubmitSuccess
   | IChangeUserDataFormSubmitFailed;
+
+export interface IUserInitialState {
+  registerForm: IRegisterUserRequest;
+  loginForm: ILoginUserRequest;
+  user: IUser;
+  forgotPasswordForm: {
+    email: string;
+  };
+  resetPasswordForm: IResetPasswordRequest;
+  isAuth: undefined | boolean;
+  registrationSubmit: boolean;
+  registrationFailed: boolean;
+  loginSubmit: boolean;
+  loginFailed: boolean;
+  forgotPasswordSubmit: boolean;
+  forgotPasswordFailed: boolean;
+  resetEmailSent: boolean;
+  resetPasswordSubmit: boolean;
+  resetPasswordFailed: boolean;
+  changeUserDataSubmit: boolean;
+  changeUserDataFailed: boolean;
+}

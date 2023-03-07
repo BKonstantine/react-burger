@@ -21,8 +21,9 @@ import {
   CHANGE_USER_DATA_FORM_SUBMIT_SUCCESS,
   CHANGE_USER_DATA_FORM_SUBMIT_FAILED,
 } from "../constants/index";
+import { IUserInitialState, TUserActions } from "../types/data";
 
-const initialState = {
+const initialState: IUserInitialState = {
   registerForm: {
     name: "",
     email: "",
@@ -67,7 +68,10 @@ const initialState = {
   changeUserDataFailed: false,
 };
 
-export default function userReducer(state = initialState, action) {
+export default function userReducer(
+  state = initialState,
+  action: TUserActions
+): IUserInitialState {
   switch (action.type) {
     case USER_REGISTER_FORM_SET_VALUE: {
       return {
