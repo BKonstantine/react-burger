@@ -27,7 +27,10 @@ function getIngridientsRequest() {
 }
 
 // TODO: Создание заказа
-function sendOrderRequest(idList: Array<string>, accessToken: string) {
+function sendOrderRequest(
+  idList: Array<string>,
+  accessToken: string | undefined
+) {
   return fetch(ORDER_URL, {
     method: "POST",
     headers: {

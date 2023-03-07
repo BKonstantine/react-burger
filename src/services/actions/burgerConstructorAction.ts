@@ -24,7 +24,7 @@ export const addIngredient = (
 };
 
 export const sortIngredients = (
-  ingredients: ReadonlyArray<IIngredient>
+  ingredients: Array<IIngredient>
 ): ISortIngredients => {
   return {
     type: SORT_INGREDIENTS,

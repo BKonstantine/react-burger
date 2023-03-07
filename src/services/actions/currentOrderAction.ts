@@ -13,6 +13,7 @@ import {
   IGetOrderFailed,
   IResetOrder,
   IIngredient,
+  IConstructorInitialState,
 } from "../types/data";
 import { AppDispatch } from "../types";
 
@@ -42,7 +43,7 @@ export const resetOrder = (): IResetOrder => {
   };
 };
 
-export function makeOrder(ingredients: ReadonlyArray<IIngredient>) {
+export function makeOrder(ingredients: IConstructorInitialState ) {
   return function (dispatch: AppDispatch) {
     const arrayId = [
       ingredients.burgerConstructorBunElement._id,

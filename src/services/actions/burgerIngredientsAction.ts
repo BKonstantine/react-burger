@@ -19,7 +19,7 @@ const getIngredientsRequest = (): IGetIngredientsRequest => {
 };
 
 const getIngredientsSuccess = (
-  ingredients: ReadonlyArray<IIngredient>
+  ingredients: Array<IIngredient>
 ): IGetIngredientsSuccess => {
   return {
     type: GET_INGREDIENTS_SUCCESS,

@@ -5,12 +5,7 @@ import {
   RESET_INGREDIENT,
 } from "../constants/index";
 
-import { TConstructorAction, IIngredient } from "../types/data";
-
-interface IConstructorInitialState {
-  burgerConstructorBunElement: IIngredient | undefined;
-  burgerConstructorFillingList: Array<IIngredient>;
-}
+import { TConstructorAction, IConstructorInitialState } from "../types/data";
 
 const constructorInitialState: IConstructorInitialState = {
   burgerConstructorBunElement: undefined,

@@ -9,8 +9,7 @@ const currentOrderInitialState = {
   order: undefined,
   orderRequest: false,
   orderFailed: false,
-  orderFailedText: undefined,
-  currentOrder: undefined,
+  orderFailedText: undefined,  
 };
 
 export default function currentOrderReducer(

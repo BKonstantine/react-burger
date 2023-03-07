@@ -93,6 +93,11 @@ export interface IChangeUserDataRequest {
   readonly name: string;
 }
 
+export interface IConstructorInitialState {
+  burgerConstructorBunElement?: IIngredient | undefined;
+  burgerConstructorFillingList: Array<IIngredient>;
+}
+
 export interface IAddIngredient {
   readonly type: typeof ADD_INGREDIENT;
   readonly id: string;
