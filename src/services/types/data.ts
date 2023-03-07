@@ -282,3 +282,26 @@ export interface IChangeUserDataFormSubmitSuccess {
 export interface IChangeUserDataFormSubmitFailed {
   readonly type: typeof CHANGE_USER_DATA_FORM_SUBMIT_FAILED;
 }
+
+export type TUserActions =
+  | ISetRegisterFormValue
+  | IUserRegisterFormSubmit
+  | IUserRegisterFormSubmitSuccess
+  | IUserRegisterFormSubmitFailed
+  | ISetLoginFormValue
+  | IUserLoginFormSubmit
+  | IUserLoginFormSubmitSuccess
+  | IUserLoginFormSubmitFailed
+  | IUserAccessDenied
+  | IUserAccessAllowed
+  | ISetForgotPasswordFormValue
+  | IForgotPasswordFormSubmit
+  | IForgotPasswordFormSubmitSuccess
+  | IForgotPasswordFormSubmitFailed
+  | ISetResetPasswordFormValue
+  | IResetPasswordFormSubmit
+  | IResetPasswordFormSubmitSuccess
+  | IResetPasswordFormSubmitFailed
+  | IChangeUserDataFormSubmit
+  | IChangeUserDataFormSubmitSuccess
+  | IChangeUserDataFormSubmitFailed;

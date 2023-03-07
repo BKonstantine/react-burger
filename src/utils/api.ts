@@ -10,7 +10,7 @@ import {
   RESET_PASSWORD_URL,
 } from "./variables";
 
-const checkResponse = (res) => {
+const checkResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
@@ -20,7 +20,7 @@ function getIngridientsRequest() {
 }
 
 // TODO: Создание заказа
-function sendOrderRequest(idList, accessToken) {
+function sendOrderRequest(idList: Array<string>, accessToken: string) {
   return fetch(ORDER_URL, {
     method: "POST",
     headers: {
@@ -33,8 +33,14 @@ function sendOrderRequest(idList, accessToken) {
   }).then(checkResponse);
 }
 
+interface IRegisterUserRequest {
+  name: string;
+  email: string;
+  password: string;
+}
+
 // ТОDO: Регистрация пользователя
-function registerUserRequest(userDate) {
+function registerUserRequest(userDate: IRegisterUserRequest) {
   return fetch(REGISTER_URL, {
     method: "POST",
     headers: {
@@ -44,8 +50,13 @@ function registerUserRequest(userDate) {
   }).then(checkResponse);
 }
 
+interface ILoginUserRequest {
+  email: string;
+  password: string;
+}
+
 // TODO: Авторизация пользователя
-function loginUserRequest(userDate) {
+function loginUserRequest(userDate: ILoginUserRequest) {
   return fetch(LOGIN_URL, {
     method: "POST",
     headers: {
@@ -56,7 +67,7 @@ function loginUserRequest(userDate) {
 }
 
 // TODO: Выход пользователя из аккаунта
-function logoutUserRequest(refreshToken) {
+function logoutUserRequest(refreshToken: string) {
   return fetch(LOGOUT_URL, {
     method: "POST",
     headers: {
@@ -69,7 +80,7 @@ function logoutUserRequest(refreshToken) {
 }
 
 // TODO: Запрос данных пользователя
-function checkUserAccessRequest(accessToken) {
+function checkUserAccessRequest(accessToken: string) {
   return fetch(CHECK_ACCESS_URL, {
     headers: {
       "Content-Type": "application/json",
@@ -79,7 +90,7 @@ function checkUserAccessRequest(accessToken) {
 }
 
 // TODO: Запрос обновления токена
-function refreshTokenRequest(refreshToken) {
+function refreshTokenRequest(refreshToken: string) {
   return fetch(TOKEN_URL, {
     method: "POST",
     headers: {
@@ -92,7 +103,7 @@ function refreshTokenRequest(refreshToken) {
 }
 
 // TODO: Запросы на восстановление пароля
-function forgotPasswordRequest(email) {
+function forgotPasswordRequest(email: string) {
   return fetch(FORGOT_PASSWORD_URL, {
     method: "POST",
     headers: {
@@ -102,7 +113,12 @@ function forgotPasswordRequest(email) {
   }).then(checkResponse);
 }
 
-function resetPasswordRequest(userDate) {
+interface IResetPasswordRequest {
+  password: string;
+  token: string;
+}
+
+function resetPasswordRequest(userDate: IResetPasswordRequest) {
   return fetch(RESET_PASSWORD_URL, {
     method: "POST",
     headers: {
@@ -112,8 +128,16 @@ function resetPasswordRequest(userDate) {
   }).then(checkResponse);
 }
 
+interface IChangeUserDataRequest {
+  email: string;
+  name: string;
+}
+
 // TODO: Запрос на изменение данных пользователя
-function changeUserDataRequest(userDate, accessToken) {
+function changeUserDataRequest(
+  userDate: IChangeUserDataRequest,
+  accessToken: string
+) {
   return fetch(CHECK_ACCESS_URL, {
     method: "PATCH",
     headers: {
