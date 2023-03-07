@@ -38,6 +38,10 @@ import {
   CHANGE_USER_DATA_FORM_SUBMIT_FAILED,
 } from "../constants/index";
 import {
+  IRegisterUserRequest,
+  ILoginUserRequest,
+  IResetPasswordRequest,
+  IChangeUserDataRequest,
   IUser,
   ISetRegisterFormValue,
   IUserRegisterFormSubmit,
@@ -203,7 +207,10 @@ const changeUserDataFormSubmitFailed = (): IChangeUserDataFormSubmitFailed => {
 };
 
 /* thunk формы регистрации */
-export function registerUser(userDate: IUser, callback: () => void) {
+export function registerUser(
+  userDate: IRegisterUserRequest,
+  callback: () => void
+) {
   return function (dispatch: AppDispatch) {
     dispatch(userRegisterFormSubmit());
     registerUserRequest(userDate)
@@ -222,7 +229,7 @@ export function registerUser(userDate: IUser, callback: () => void) {
 }
 
 /* thunk формы авторизации */
-export function loginUser(userDate: IUser, callback: () => void) {
+export function loginUser(userDate: ILoginUserRequest, callback: () => void) {
   return function (dispatch: AppDispatch) {
     dispatch(userLoginFormSubmit());
     loginUserRequest(userDate)
@@ -291,7 +298,10 @@ export function forgotPassword(email: string, callback: () => void) {
   };
 }
 
-export function resetPassword(userDate: IUser, callback: () => void) {
+export function resetPassword(
+  userDate: IResetPasswordRequest,
+  callback: () => void
+) {
   return function (dispatch: AppDispatch) {
     dispatch(resetPasswordFormSubmit());
     resetPasswordRequest(userDate)
@@ -306,7 +316,7 @@ export function resetPassword(userDate: IUser, callback: () => void) {
 }
 
 /* thunk изменения данных пользователя */
-export function changeUserData(userData: IUser) {
+export function changeUserData(userData: IChangeUserDataRequest) {
   return function (dispatch: AppDispatch) {
     dispatch(changeUserDataFormSubmit());
     changeUserDataRequest(userData, getCookie("accessToken"))

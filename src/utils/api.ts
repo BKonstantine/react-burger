@@ -10,6 +10,13 @@ import {
   RESET_PASSWORD_URL,
 } from "./variables";
 
+import {
+  IRegisterUserRequest,
+  ILoginUserRequest,
+  IResetPasswordRequest,
+  IChangeUserDataRequest,
+} from "../services/types/data";
+
 const checkResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
@@ -33,12 +40,6 @@ function sendOrderRequest(idList: Array<string>, accessToken: string) {
   }).then(checkResponse);
 }
 
-interface IRegisterUserRequest {
-  name: string;
-  email: string;
-  password: string;
-}
-
 // ТОDO: Регистрация пользователя
 function registerUserRequest(userDate: IRegisterUserRequest) {
   return fetch(REGISTER_URL, {
@@ -48,11 +49,6 @@ function registerUserRequest(userDate: IRegisterUserRequest) {
     },
     body: JSON.stringify(userDate),
   }).then(checkResponse);
-}
-
-interface ILoginUserRequest {
-  email: string;
-  password: string;
 }
 
 // TODO: Авторизация пользователя
@@ -113,11 +109,6 @@ function forgotPasswordRequest(email: string) {
   }).then(checkResponse);
 }
 
-interface IResetPasswordRequest {
-  password: string;
-  token: string;
-}
-
 function resetPasswordRequest(userDate: IResetPasswordRequest) {
   return fetch(RESET_PASSWORD_URL, {
     method: "POST",
@@ -126,11 +117,6 @@ function resetPasswordRequest(userDate: IResetPasswordRequest) {
     },
     body: JSON.stringify(userDate),
   }).then(checkResponse);
-}
-
-interface IChangeUserDataRequest {
-  email: string;
-  name: string;
 }
 
 // TODO: Запрос на изменение данных пользователя

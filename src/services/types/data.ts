@@ -42,28 +42,54 @@ import {
 } from "../constants/index";
 
 export interface IIngredient {
-  _id: string;
-  name: string;
-  type: string;
-  proteins: number;
-  fat: number;
-  carbohydrates: number;
-  calories: number;
-  price: number;
-  image: string;
-  image_mobile: string;
-  image_large: string;
-  __v: number;
+  readonly _id: string;
+  readonly name: string;
+  readonly type: string;
+  readonly proteins: number;
+  readonly fat: number;
+  readonly carbohydrates: number;
+  readonly calories: number;
+  readonly price: number;
+  readonly image: string;
+  readonly image_mobile: string;
+  readonly image_large: string;
+  readonly __v: number;
 }
 
 export interface IOrder {
-  _id: string;
-  ingredients: Array<string>;
-  status: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-  number: number;
+  readonly _id: string;
+  readonly ingredients: Array<string>;
+  readonly status: string;
+  readonly name: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly number: number;
+}
+
+export interface IRegisterUserRequest {
+  readonly name: string;
+  readonly email: string;
+  readonly password: string;
+}
+
+export interface ILoginUserRequest {
+  readonly email: string;
+  readonly password: string;
+}
+
+export interface IUser {
+  readonly email: string;
+  readonly name: string;
+}
+
+export interface IResetPasswordRequest {
+  readonly password: string;
+  readonly token: string;
+}
+
+export interface IChangeUserDataRequest {
+  readonly email: string;
+  readonly name: string;
 }
 
 export interface IAddIngredient {
@@ -182,11 +208,6 @@ export type TSocketAction =
   | IWsConnectionClose
   | IWsConnectionClosed
   | IWsGetMessage;
-
-export interface IUser {
-  readonly email: string;
-  readonly name: string;
-}
 
 export interface ISetRegisterFormValue {
   readonly type: typeof USER_REGISTER_FORM_SET_VALUE;
