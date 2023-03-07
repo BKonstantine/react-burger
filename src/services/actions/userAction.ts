@@ -273,12 +273,12 @@ export function checkUserAccess() {
 }
 
 /* thunk обновления токена */
-export function refreshUserToken(refreshToken: string) {
+export function refreshUserToken(refreshToken: string | undefined) {
   return function (dispatch: AppDispatch) {
     return refreshTokenRequest(refreshToken).then((res) => {
       setCookie("accessToken", parseCookie(res.accessToken));
       setCookie("refreshToken", res.refreshToken);
-      dispatch(checkUserAccess(getCookie("accessToken")));
+      dispatch(checkUserAccess());
     });
   };
 }

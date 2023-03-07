@@ -76,7 +76,7 @@ function logoutUserRequest(refreshToken: string) {
 }
 
 // TODO: Запрос данных пользователя
-function checkUserAccessRequest(accessToken: string) {
+function checkUserAccessRequest(accessToken: string | undefined) {
   return fetch(CHECK_ACCESS_URL, {
     headers: {
       "Content-Type": "application/json",
@@ -86,7 +86,7 @@ function checkUserAccessRequest(accessToken: string) {
 }
 
 // TODO: Запрос обновления токена
-function refreshTokenRequest(refreshToken: string) {
+function refreshTokenRequest(refreshToken: string | undefined) {
   return fetch(TOKEN_URL, {
     method: "POST",
     headers: {
@@ -122,7 +122,7 @@ function resetPasswordRequest(userDate: IResetPasswordRequest) {
 // TODO: Запрос на изменение данных пользователя
 function changeUserDataRequest(
   userDate: IChangeUserDataRequest,
-  accessToken: string
+  accessToken: string | undefined
 ) {
   return fetch(CHECK_ACCESS_URL, {
     method: "PATCH",
