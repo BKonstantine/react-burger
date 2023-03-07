@@ -5,15 +5,22 @@ import {
   RESET_INGREDIENT,
 } from "../constants/index";
 
-const constructorInitialState = {
+import { TConstructorAction, IIngredient } from "../types/data";
+
+interface IBurgerConstructorReducer {
+  burgerConstructorBunElement: IIngredient | undefined;
+  burgerConstructorFillingList: Array<IIngredient>;
+}
+
+const constructorInitialState: IBurgerConstructorReducer = {
   burgerConstructorBunElement: undefined,
   burgerConstructorFillingList: [],
 };
 
 export default function burgerConstructorReducer(
   state = constructorInitialState,
-  action
-) {
+  action: TConstructorAction
+): IBurgerConstructorReducer {
   switch (action.type) {
     case ADD_INGREDIENT:
       if (action.payload.type === "bun") {
