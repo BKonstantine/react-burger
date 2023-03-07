@@ -98,6 +98,24 @@ export interface IConstructorInitialState {
   burgerConstructorFillingList: Array<IIngredient>;
 }
 
+export interface IIngredientsInitialState {
+  burgerIngredientsList?: Array<IIngredient>;
+  burgerIngredientsListRequest: boolean;
+  burgerIngredientsListFailed: boolean;
+  burgerIngredientsListFailedText: string | undefined;
+}
+
+export interface ICurrentIngredientInitialState {
+  currentIngredient: IIngredient | undefined;
+}
+
+export interface ICurrentOrderInitialState {
+  order: undefined | string;
+  orderRequest: boolean;
+  orderFailed: boolean;
+  orderFailedText: undefined | string;
+}
+
 export interface IAddIngredient {
   readonly type: typeof ADD_INGREDIENT;
   readonly id: string;
@@ -162,7 +180,7 @@ export interface IGetOrderRequest {
 
 export interface IGetOrderSuccess {
   readonly type: typeof GET_ORDER_SUCCESS;
-  readonly payload: number;
+  readonly payload: string;
 }
 
 export interface IGetOrderFailed {

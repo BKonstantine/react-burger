@@ -2,11 +2,10 @@ import {
   SET_CURRENT_INGREDIENT,
   RESET_CURRENT_INGREDIENT,
 } from "../constants/index";
-import { TCurrenIngredientAction, IIngredient } from "../types/data";
-
-interface ICurrentIngredientInitialState {
-  currentIngredient: IIngredient | undefined;
-}
+import {
+  TCurrenIngredientAction,
+  ICurrentIngredientInitialState,
+} from "../types/data";
 
 const currentIngredientInitialState: ICurrentIngredientInitialState = {
   currentIngredient: undefined,

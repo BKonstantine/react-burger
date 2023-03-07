@@ -2,20 +2,21 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILED,
-  RESET_ORDER,  
+  RESET_ORDER,
 } from "../constants/index";
+import { ICurrentOrderInitialState, TCurrentOrderAction } from "../types/data";
 
-const currentOrderInitialState = {
+const currentOrderInitialState: ICurrentOrderInitialState = {
   order: undefined,
   orderRequest: false,
   orderFailed: false,
-  orderFailedText: undefined,  
+  orderFailedText: undefined,
 };
 
 export default function currentOrderReducer(
   state = currentOrderInitialState,
-  action
-) {
+  action: TCurrentOrderAction
+): ICurrentOrderInitialState {
   switch (action.type) {
     case GET_ORDER_REQUEST:
       return { ...state, orderRequest: true };
@@ -37,7 +38,7 @@ export default function currentOrderReducer(
       };
 
     case RESET_ORDER:
-      return { ...state, order: undefined };    
+      return { ...state, order: undefined };
 
     default:
       return state;
