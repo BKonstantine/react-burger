@@ -67,6 +67,12 @@ export interface IOrder {
   readonly number: number;
 }
 
+export interface IWsMessage {
+  readonly orders: Array<IOrder>;
+  readonly total: number;
+  readonly totalToday: number;
+}
+
 export interface IRegisterUserRequest {
   readonly name: string;
   readonly email: string;
@@ -114,6 +120,15 @@ export interface ICurrentOrderInitialState {
   orderRequest: boolean;
   orderFailed: boolean;
   orderFailedText: undefined | string;
+}
+
+export interface ISocketInitialState {
+  wsConnected: boolean;
+  orders: Array<IOrder>;
+  total: number;
+  totalToday: number;
+  errorState: boolean;
+  errorMessage: null | string;
 }
 
 export interface IAddIngredient {
@@ -222,7 +237,7 @@ export interface IWsConnectionClosed {
 
 export interface IWsGetMessage {
   readonly type: typeof WS_GET_MESSAGE;
-  readonly payload: string;
+  readonly payload: IWsMessage;
 }
 
 export type TSocketAction =

@@ -4,8 +4,9 @@ import {
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE,
 } from "../constants/index";
+import { ISocketInitialState, TSocketAction } from "../types/data";
 
-const initialState = {
+const initialState: ISocketInitialState = {
   wsConnected: false,
   orders: [],
   total: 0,
@@ -14,12 +15,15 @@ const initialState = {
   errorMessage: null,
 };
 
-export default function socketReducer(state = initialState, action) {
+export default function socketReducer(
+  state = initialState,
+  action: TSocketAction
+): ISocketInitialState {
   switch (action.type) {
     case WS_CONNECTION_SUCCESS:
       return {
         ...state,
-        wsConnected: true,        
+        wsConnected: true,
       };
 
     case WS_CONNECTION_ERROR:
@@ -43,7 +47,7 @@ export default function socketReducer(state = initialState, action) {
         ...state,
         orders: action.payload.orders,
         total: action.payload.total,
-        totalToday: action.payload.totalToday,        
+        totalToday: action.payload.totalToday,
       };
 
     default:
