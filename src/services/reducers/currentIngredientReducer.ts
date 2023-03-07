@@ -2,15 +2,20 @@ import {
   SET_CURRENT_INGREDIENT,
   RESET_CURRENT_INGREDIENT,
 } from "../constants/index";
+import { TCurrenIngredientAction, IIngredient } from "../types/data";
 
-const currentIngredientInitialState = {
+interface ICurrentIngredientInitialState {
+  currentIngredient: IIngredient | undefined;
+}
+
+const currentIngredientInitialState: ICurrentIngredientInitialState = {
   currentIngredient: undefined,
 };
 
 export default function currentIngredientReducer(
   state = currentIngredientInitialState,
-  action
-) {
+  action: TCurrenIngredientAction
+): ICurrentIngredientInitialState {
   switch (action.type) {
     case SET_CURRENT_INGREDIENT:
       return { ...state, currentIngredient: action.payload };
