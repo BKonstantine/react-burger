@@ -15,6 +15,14 @@ export default function BurgerConstructorOrder({ price }) {
 
   const ingredients = useSelector((store) => store.burgerConstructorReducer);
 
+  const arrayId = ingredients.burgerConstructorBunElement
+    ? [
+        ingredients.burgerConstructorBunElement._id,
+        ...ingredients.burgerConstructorFillingList.map((item) => item._id),
+        ingredients.burgerConstructorBunElement._id,
+      ]
+    : [];
+
   const isAuth = useSelector((store) => store.userReducer.isAuth);
 
   const dispatch = useDispatch();
@@ -27,7 +35,7 @@ export default function BurgerConstructorOrder({ price }) {
   }
 
   function sendOrder() {
-    isAuth ? dispatch(makeOrder(ingredients)) : navigate("/login");
+    isAuth ? dispatch(makeOrder(arrayId)) : navigate("/login");
   }
 
   return (

@@ -12,8 +12,6 @@ import {
   IGetOrderSuccess,
   IGetOrderFailed,
   IResetOrder,
-  IIngredient,
-  IConstructorInitialState,
 } from "../types/data";
 import { AppDispatch } from "../types";
 
@@ -43,14 +41,8 @@ export const resetOrder = (): IResetOrder => {
   };
 };
 
-export function makeOrder(ingredients: IConstructorInitialState ) {
+export function makeOrder(arrayId: Array<string>) {
   return function (dispatch: AppDispatch) {
-    const arrayId = [
-      ingredients.burgerConstructorBunElement._id,
-      ...ingredients.burgerConstructorFillingList.map((item) => item._id),
-      ingredients.burgerConstructorBunElement._id,
-    ];
-
     dispatch(getOrderRequest());
     sendOrderRequest(arrayId, getCookie("accessToken"))
       .then((res) => {

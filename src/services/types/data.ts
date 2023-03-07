@@ -94,7 +94,7 @@ export interface IChangeUserDataRequest {
 }
 
 export interface IConstructorInitialState {
-  burgerConstructorBunElement?: IIngredient | undefined;
+  burgerConstructorBunElement: IIngredient | undefined;
   burgerConstructorFillingList: Array<IIngredient>;
 }
 
