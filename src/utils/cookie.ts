@@ -4,7 +4,7 @@ export function parseCookie(name: string) {
   return authToken;
 }
 
-export function getCookie(name: string) {
+export function getCookie(name: string): string | undefined {
   const matches = document.cookie.match(
     new RegExp(
       "(?:^|; )" +
@@ -17,8 +17,8 @@ export function getCookie(name: string) {
 
 export function setCookie(
   name: string,
-  value: string | number | boolean,
-  props?: any
+  value: string,
+  props: { [key: string]: any } & { expires?: number | Date | string } = {}
 ) {
   props = props || {};
   let exp = props.expires;
@@ -27,8 +27,8 @@ export function setCookie(
     d.setTime(d.getTime() + exp * 1000);
     exp = props.expires = d;
   }
-  if (exp && exp.toUTCString) {
-    props.expires = exp.toUTCString();
+  if (exp && (exp as Date).toUTCString) {
+    props.expires = (exp as Date).toUTCString();
   }
   value = encodeURIComponent(value);
   let updatedCookie = name + "=" + value;
@@ -43,5 +43,5 @@ export function setCookie(
 }
 
 export function deleteCookie(name: string) {
-  setCookie(name, false, { expires: -1 });
+  setCookie(name, "", { expires: -1 });
 }
