@@ -1,12 +1,20 @@
+import { FC } from "react";
 import { v4 as uuidv4 } from "uuid";
 import style from "./order-counters.module.css";
 
-export default function OrderCounters({
+interface IOrderCounters {
+  total: number;
+  totalToday: number;
+  doneList: Array<number>;
+  workList: Array<number>;
+}
+
+const OrderCounters: FC<IOrderCounters> = ({
   total,
   totalToday,
   doneList,
   workList,
-}) {
+}) => {
   return (
     <div className={style.container}>
       <div className={style.container__orders}>
@@ -50,4 +58,6 @@ export default function OrderCounters({
       </div>
     </div>
   );
-}
+};
+
+export default OrderCounters;
