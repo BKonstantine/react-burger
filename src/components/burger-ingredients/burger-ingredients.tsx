@@ -1,11 +1,12 @@
-import { useMemo, useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useMemo, useState, useEffect, FC } from "react";
+import { useSelector } from "../../services/hooks";
 import BurgerIngredientsList from "../burger-ingredients-list/burger-ingredients-list";
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useInView } from "react-intersection-observer";
+import { IIngredient } from "../../services/types/data";
 
-export default function BurgerIngredients() {
+const BurgerIngredients: FC = () => {
   const [current, setCurrent] = useState("one");
 
   const [bunTabRef, inViewTabBun] = useInView({ threshold: 0 });
@@ -16,8 +17,14 @@ export default function BurgerIngredients() {
     (store) => store.burgerIngredientsReducer.burgerIngredientsList
   );
 
+  interface IINgredientsSort {
+    buns: Array<IIngredient>;
+    mains: Array<IIngredient>;
+    sauces: Array<IIngredient>;
+  }
+
   const { buns, mains, sauces } = useMemo(() => {
-    return ingredients.reduce(
+    return ingredients.reduce<IINgredientsSort>(
       (count, item) => {
         // eslint-disable-next-line default-case
         switch (item.type) {
@@ -47,9 +54,9 @@ export default function BurgerIngredients() {
     }
   }, [inViewTabBun, inViewTabSauce, inViewTabMain]);
 
-  function changeIngredients(id) {
+  function changeIngredients(id: string) {
     setCurrent(id);
-    document.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth" });
+    document.querySelector(`#${id}`)?.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
@@ -99,4 +106,6 @@ export default function BurgerIngredients() {
       </div>
     </div>
   );
-}
+};
+
+export default BurgerIngredients;
