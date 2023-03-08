@@ -1,7 +1,10 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "../../services/hooks";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  CurrencyIcon,
+  FormattedDate,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderPageList from "../order-page-list/order-page-list";
 import style from "./burger-details.module.css";
 import useOrder from "../../hooks/useOrder";
@@ -15,7 +18,7 @@ const BurgerDetails: FC<IBurgerDetails> = ({ titleClassName }) => {
   const { id } = useParams();
   const order = orders.find((item) => item._id === id);
 
-  const { orderIngredientsList, orderPrice, orderStatus, orderDate } =
+  const { orderIngredientsList, orderPrice, orderStatus, GMT } =
     useOrder(order);
 
   return (
@@ -27,8 +30,8 @@ const BurgerDetails: FC<IBurgerDetails> = ({ titleClassName }) => {
       <div className={style.container__title}>
         <p
           className={`text text_type_digits-default mb-10 ${titleClassName}`}
-        >{`#${order.number}`}</p>
-        <p className="text text_type_main-medium mb-2">{`${order.name}`}</p>
+        >{`#${order?.number}`}</p>
+        <p className="text text_type_main-medium mb-2">{`${order?.name}`}</p>
         <p
           className={`text text_type_main-default ${style.color}`}
         >{`${orderStatus}`}</p>
@@ -36,7 +39,8 @@ const BurgerDetails: FC<IBurgerDetails> = ({ titleClassName }) => {
       <OrderPageList ingredients={orderIngredientsList} />
       <div className={style.container__date}>
         <p className="text text_type_main-default text_color_inactive">
-          {orderDate}
+          {order && <FormattedDate date={new Date(order.createdAt)} />}
+          {`${GMT}`}
         </p>
         <div className={style.price}>
           <CurrencyIcon type="primary" />

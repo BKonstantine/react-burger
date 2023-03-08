@@ -30,6 +30,7 @@ export default function burgerIngredientsReducer(
 
     case GET_INGREDIENTS_FAILED:
       return {
+        burgerIngredientsList: [],
         burgerIngredientsListRequest: false,
         burgerIngredientsListFailed: true,
         burgerIngredientsListFailedText: action.errorText,

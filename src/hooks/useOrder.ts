@@ -1,13 +1,14 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../services/hooks";
+import { IOrder, IIngredient } from "../services/types/data";
 
-export default function useOrder(order) {
+export default function useOrder(order: IOrder | undefined) {
   const ingredients = useSelector(
     (store) => store.burgerIngredientsReducer.burgerIngredientsList
   );
 
   const getOrderIngredientsList = () => {
-    const list = [];
-    order.ingredients.forEach((ingredientId) => {
+    const list: Array<IIngredient> = [];
+    order?.ingredients.forEach((ingredientId) => {
       ingredients.forEach((ingredient) => {
         if (ingredient._id === ingredientId) {
           list.push(ingredient);
@@ -19,7 +20,7 @@ export default function useOrder(order) {
   };
 
   const getOrderStatus = () => {
-    if (order.status === "done") {
+    if (order?.status === "done") {
       return "Выполнен";
     } else {
       return "Готовится";
@@ -34,5 +35,8 @@ export default function useOrder(order) {
     return count + item.price;
   }, 0);
 
-  return { orderIngredientsList, orderPrice, orderStatus };
+  const curOffset = new Date().getTimezoneOffset() / 60;
+  const GMT = "i-GTM" + (curOffset > 0 ? "-" + curOffset : "+" + -curOffset);
+
+  return { orderIngredientsList, orderPrice, orderStatus, GMT };
 }

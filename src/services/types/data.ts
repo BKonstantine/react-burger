@@ -105,7 +105,7 @@ export interface IConstructorInitialState {
 }
 
 export interface IIngredientsInitialState {
-  burgerIngredientsList?: Array<IIngredient>;
+  burgerIngredientsList: Array<IIngredient>;
   burgerIngredientsListRequest: boolean;
   burgerIngredientsListFailed: boolean;
   burgerIngredientsListFailedText: string | undefined;

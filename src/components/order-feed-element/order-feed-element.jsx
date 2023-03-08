@@ -9,12 +9,10 @@ import style from "./order-feed-element.module.css";
 import useOrder from "../../hooks/useOrder";
 
 export default function OrderFeedElement({ isFeedList, order }) {
-  const { orderIngredientsList, orderPrice, orderStatus } = useOrder(order);
+  const { orderIngredientsList, orderPrice, orderStatus, GMT } =
+    useOrder(order);
 
   const location = useLocation();
-
-  const curOffset = new Date().getTimezoneOffset() / 60;
-  const GMT = "i-GTM" + (curOffset > 0 ? "-" + curOffset : "+" + -curOffset);
 
   return (
     <li className={cn(style.container)}>
