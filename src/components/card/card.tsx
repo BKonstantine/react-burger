@@ -1,17 +1,21 @@
-import { useMemo } from "react";
+import { useMemo, FC } from "react";
 import { useDrag } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { useLocation } from "react-router-dom";
 import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./card.module.css";
-import cardPropTypes from "../../utils/prop-types";
 import { setCurrentIngredient } from "../../services/actions/currentIngredientAction";
 import { Link } from "react-router-dom";
+import { IIngredient } from "../../services/types/data";
 
-export default function Card({ ingredient }) {
+interface ICard {
+  ingredient: IIngredient;
+}
+
+const Card: FC<ICard> = ({ ingredient }) => {
   const location = useLocation();
 
   const burgerConstructorIngredients = useSelector(
@@ -22,8 +26,12 @@ export default function Card({ ingredient }) {
     (store) => store.burgerIngredientsReducer
   );
 
+  interface ICounters {
+    [counters: string]: number;
+  }
+
   const counter = useMemo(() => {
-    const counters = {};
+    const counters: ICounters = {};
     burgerIngredients.burgerIngredientsList.forEach((ingredient) => {
       counters[ingredient._id] =
         burgerConstructorIngredients.burgerConstructorFillingList.filter(
@@ -38,7 +46,7 @@ export default function Card({ ingredient }) {
     return counters;
   }, [burgerConstructorIngredients, burgerIngredients]);
 
-  const getCounterInredient = (ingredientId) => counter[ingredientId];
+  const getCounterInredient = (ingredientId: string) => counter[ingredientId];
 
   const dispatch = useDispatch();
 
@@ -71,7 +79,7 @@ export default function Card({ ingredient }) {
           <p className="text text_type_digits-default mt-2 mb-2">
             {ingredient.price}
           </p>
-          <CurrencyIcon />
+          <CurrencyIcon type="primary" />
         </div>
         <p className={`text text_type_main-default ${style.card_name}`}>
           {ingredient.name}
@@ -79,8 +87,6 @@ export default function Card({ ingredient }) {
       </Link>
     </li>
   );
-}
-
-Card.propTypes = {
-  ingredient: cardPropTypes,
 };
+
+export default Card;
