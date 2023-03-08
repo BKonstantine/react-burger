@@ -1,16 +1,20 @@
-import { useSelector, useDispatch } from "react-redux";
+import { FC } from "react";
+import { useSelector, useDispatch } from "../../services/hooks";
 import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import style from "./burger-constructor-order.module.css";
-import icon from "../../image/icon.svg";
+import IconPrice from "../icon-price/icon-price";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { makeOrder } from "../../services/actions/currentOrderAction";
 import { resetOrder } from "../../services/actions/currentOrderAction";
 import { resetIngredient } from "../../services/actions/burgerConstructorAction";
 
-export default function BurgerConstructorOrder({ price }) {
+interface IBurgerConstructorOrder {
+  price: number;
+}
+
+const BurgerConstructorOrder: FC<IBurgerConstructorOrder> = ({ price }) => {
   const order = useSelector((store) => store.currentOrderReducer.order);
 
   const ingredients = useSelector((store) => store.burgerConstructorReducer);
@@ -42,7 +46,7 @@ export default function BurgerConstructorOrder({ price }) {
     <div className={style.order}>
       <div className={style.price}>
         <p className="text text_type_digits-medium">{price}</p>
-        <img src={icon} alt="Иконка валюты" />
+        <IconPrice />
       </div>
       <Button
         htmlType="button"
@@ -60,8 +64,6 @@ export default function BurgerConstructorOrder({ price }) {
       )}
     </div>
   );
-}
-
-BurgerConstructorOrder.propTypes = {
-  price: PropTypes.number.isRequired,
 };
+
+export default BurgerConstructorOrder;
