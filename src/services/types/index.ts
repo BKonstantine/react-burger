@@ -7,6 +7,7 @@ import {
   TCurrenIngredientAction,
   TCurrentOrderAction,
   TSocketAction,
+  TUserActions,
 } from "../types/data";
 
 type TApplicationActions =
@@ -14,7 +15,8 @@ type TApplicationActions =
   | TIngredientsAction
   | TCurrenIngredientAction
   | TCurrentOrderAction
-  | TSocketAction;
+  | TSocketAction
+  | TUserActions;
 
 export type DispatchFunc = () => AppDispatch;
 
