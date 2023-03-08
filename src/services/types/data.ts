@@ -116,7 +116,7 @@ export interface ICurrentIngredientInitialState {
 }
 
 export interface ICurrentOrderInitialState {
-  order: undefined | string;
+  order: undefined | number;
   orderRequest: boolean;
   orderFailed: boolean;
   orderFailedText: undefined | string;
@@ -195,7 +195,7 @@ export interface IGetOrderRequest {
 
 export interface IGetOrderSuccess {
   readonly type: typeof GET_ORDER_SUCCESS;
-  readonly payload: string;
+  readonly payload: number;
 }
 
 export interface IGetOrderFailed {

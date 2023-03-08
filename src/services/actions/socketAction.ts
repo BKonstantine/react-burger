@@ -14,6 +14,7 @@ import {
   IWsConnectionClose,
   IWsConnectionClosed,
   IWsGetMessage,
+  IWsMessage,
 } from "../types/data";
 
 export const wsConnectionStart = (url: string): IWsConnectionStart => {
@@ -48,7 +49,7 @@ export const wsConnectionClosed = (): IWsConnectionClosed => {
   };
 };
 
-export const wsGetMessage = (message: string): IWsGetMessage => {
+export const wsGetMessage = (message: IWsMessage): IWsGetMessage => {
   return {
     type: WS_GET_MESSAGE,
     payload: message,
