@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 import style from "./order-details.module.css";
-import done from "../../image/done.svg";
+import IconDone from "../icon-done/icon-done";
 import Preloader from "../preloader/preloader";
 
 export default function OrderDetails() {
@@ -27,7 +27,7 @@ export default function OrderDetails() {
           <p className="text text_type_main-medium mt-8">
             идентификатор заказа
           </p>
-          <img className="mt-15 mb-15" src={done} alt="Иконка подтверждения" />
+          <IconDone className="mt-15 mb-15"/>          
           <p className="text text_type_main-default mb-2">
             Ваш заказ начали готовить
           </p>
