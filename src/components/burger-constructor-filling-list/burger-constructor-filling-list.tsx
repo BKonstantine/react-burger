@@ -1,14 +1,21 @@
-import { useDispatch } from "react-redux";
+import { FC } from "react";
+import { useDispatch } from "../../services/hooks";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-constructor-filling-list.module.css";
-import cardPropTypes from "../../utils/prop-types";
 import { deleteIngredient } from "../../services/actions/burgerConstructorAction";
 import { Reorder } from "framer-motion";
+import { IIngredient } from "../../services/types/data";
 
-export default function BurgerConstructorFillingList({ filling }) {
+interface IBurgerConstructorFillingList {
+  filling: IIngredient;
+}
+
+const BurgerConstructorFillingList: FC<IBurgerConstructorFillingList> = ({
+  filling,
+}) => {
   const dispatch = useDispatch();
 
   return (
@@ -17,7 +24,7 @@ export default function BurgerConstructorFillingList({ filling }) {
       value={filling}
       className={style.element}
     >
-      <DragIcon />
+      <DragIcon type="primary" />
       <ConstructorElement
         text={filling.name}
         price={filling.price}
@@ -26,8 +33,6 @@ export default function BurgerConstructorFillingList({ filling }) {
       />
     </Reorder.Item>
   );
-}
-
-BurgerConstructorFillingList.propTypes = {
-  filling: cardPropTypes,
 };
+
+export default BurgerConstructorFillingList;
