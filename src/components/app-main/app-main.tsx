@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useSelector } from "../../services/hooks";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -6,7 +7,7 @@ import BurgerConstructor from "../burger-constructor/burger-constructor";
 import Preloader from "../preloader/preloader";
 import style from "./app-main.module.css";
 
-export default function AppMain() {
+const AppMain: FC = () => {
   const { loading, error, errorText } = useSelector((store) => ({
     loading: store.burgerIngredientsReducer.burgerIngredientsListRequest,
     error: store.burgerIngredientsReducer.burgerIngredientsListFailed,
@@ -25,4 +26,6 @@ export default function AppMain() {
       </main>
     </DndProvider>
   );
-}
+};
+
+export default AppMain;

@@ -1,5 +1,8 @@
 import { getCookie } from "./cookie";
 
+const LOADER =
+  "https://stellarburgers.nomoreparties.site/static/media/loading.89540200.svg";
+
 const BASE_API_URL = "https://norma.nomoreparties.space/api";
 const BASE_WS_URL = "wss://norma.nomoreparties.space/orders";
 const INGREDIENTS_URL = `${BASE_API_URL}/ingredients`;
@@ -15,7 +18,6 @@ const RESET_PASSWORD_URL = `${BASE_API_URL}/password-reset/reset`;
 const WS_URL_ALL = `${BASE_WS_URL}/all`;
 const WS_URL_PROFILE = `${BASE_WS_URL}?token=${getCookie("accessToken")}`;
 
-
 export {
   INGREDIENTS_URL,
   ORDER_URL,
@@ -28,4 +30,5 @@ export {
   RESET_PASSWORD_URL,
   WS_URL_ALL,
   WS_URL_PROFILE,
+  LOADER,
 };

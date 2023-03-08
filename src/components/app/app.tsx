@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { useDispatch, useSelector } from "../../services/hooks";
 import { getIngridients } from "../../services/actions/burgerIngredientsAction";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -20,7 +20,7 @@ import { checkUserAccess } from "../../services/actions/userAction";
 import Wrapper from "../../pages/wrapper";
 import BurgerDetails from "../burger-details/burger-details";
 
-export default function App() {
+const App: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -135,4 +135,6 @@ export default function App() {
       )}
     </>
   );
-}
+};
+
+export default App;

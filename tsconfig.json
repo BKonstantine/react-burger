@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "./css-modules.d.ts"]
+  "include": ["src", "css-modules.d.ts", "svg.d.ts"]
 }
