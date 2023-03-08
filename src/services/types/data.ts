@@ -240,6 +240,15 @@ export interface IWsGetMessage {
   readonly payload: IWsMessage;
 }
 
+export interface IWebSocket {
+  wsInit: string;
+  onOpen: string;
+  onClose: string;
+  onClosed: string;
+  onError: string;
+  onMessage: string;
+}
+
 export type TSocketAction =
   | IWsConnectionStart
   | IWsConnectionSuccess

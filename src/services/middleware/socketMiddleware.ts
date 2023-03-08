@@ -1,8 +1,11 @@
-export const socketMiddleware = (wsActions) => {
+import { Middleware } from "redux";
+import { IWebSocket } from "../types/data";
+
+export const socketMiddleware = (wsActions: IWebSocket): Middleware => {
   return (store) => {
-    let socket = null;
+    let socket: WebSocket | null = null;
     let reconnectTimer = 0;
-    let url = undefined;
+    let url = "";
 
     return (next) => (action) => {
       const { dispatch } = store;
@@ -13,18 +16,19 @@ export const socketMiddleware = (wsActions) => {
       if (type === wsInit) {
         url = payload;
         socket = new WebSocket(url);
-      } else if (type === onClose) {
-        socket.close(1000, "CLOSE_NORMAL");
+      }
+      if (type === onClose) {
+        socket && socket.close(1000, "CLOSE_NORMAL");
         clearTimeout(reconnectTimer);
         reconnectTimer = 0;
       }
 
       if (socket) {
-        socket.onopen = (event) => {          
+        socket.onopen = (event) => {
           dispatch({ type: onOpen, payload: event });
         };
 
-        socket.onerror = (event) => {          
+        socket.onerror = (event) => {
           dispatch({ type: onError, payload: event });
         };
 
@@ -36,14 +40,14 @@ export const socketMiddleware = (wsActions) => {
           if (
             restParsedData.message === "Invalid or missing token" ||
             restParsedData.message === "jwt expired"
-          ) {            
+          ) {
             dispatch({ type: onError, payload: restParsedData.message });
-          } else {            
+          } else {
             dispatch({ type: onMessage, payload: restParsedData });
           }
         };
 
-        socket.onclose = (event) => {          
+        socket.onclose = (event) => {
           if (event.code !== 1000) {
             reconnectTimer = window.setTimeout(() => {
               dispatch({ type: wsInit, payload: url });
