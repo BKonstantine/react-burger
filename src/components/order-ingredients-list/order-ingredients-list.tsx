@@ -1,8 +1,14 @@
+import { FC } from "react";
 import { v4 as uuidv4 } from "uuid";
 import OrderIngredientsElement from "../order-ingredients-element/order-ingredients-element";
 import style from "./order-ingredients-list.module.css";
+import { IIngredient } from "../../services/types/data";
 
-export default function OrderIngredientsList({ ingredients }) {
+interface IOrderIngredientsList {
+  ingredients: Array<IIngredient>;
+}
+
+const OrderIngredientsList: FC<IOrderIngredientsList> = ({ ingredients }) => {
   function showCounter() {
     if (ingredients.length - 6 === 0) {
       return false;
@@ -31,12 +37,13 @@ export default function OrderIngredientsList({ ingredients }) {
               index={index}
               key={uuidv4()}
               length={ingredients.length}
-              showCounter={showCounter()}
-              extraClass={style.opacity}
+              showCounter={showCounter()}              
             />
           );
         }
       })}
     </ul>
   );
-}
+};
+
+export default OrderIngredientsList;
