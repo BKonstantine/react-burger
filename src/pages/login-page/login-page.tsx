@@ -1,10 +1,11 @@
+import { ChangeEvent, FormEvent } from "react";
 import {
   EmailInput,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import {
   setLoginFormValue,
   loginUser,
@@ -18,17 +19,17 @@ export default function LoginPage() {
 
   const { loginForm } = useSelector((store) => store.userReducer);
 
-  function onFormChange(e) {
+  function onFormChange(e: ChangeEvent<HTMLInputElement>) {
     dispatch(setLoginFormValue(e.target.name, e.target.value));
   }
 
-  function loginFormSubmit(e) {
+  function loginFormSubmit(e: FormEvent) {
     e.preventDefault();
     dispatch(loginUser(loginForm, () => navigate("/")));
   }
 
   return (
-    <>      
+    <>
       <main className={style.main}>
         <div className={style.container}>
           <p className="text text_type_main-medium mb-6">Вход</p>
