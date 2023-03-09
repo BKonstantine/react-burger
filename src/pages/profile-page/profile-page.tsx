@@ -9,7 +9,7 @@ import style from "./profile-page.module.css";
 import { getCookie } from "../../utils/cookie";
 import { logoutUser, changeUserData } from "../../services/actions/userAction";
 
-export default function ProfilePage() {
+const ProfilePage: FC = () => {
   const { user } = useSelector((store) => store.userReducer);
 
   const [userData, setUserDate] = useState(user);
@@ -140,4 +140,6 @@ export default function ProfilePage() {
       </main>
     </>
   );
-}
+};
+
+export default ProfilePage;
