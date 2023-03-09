@@ -33,3 +33,7 @@
   margin: 0;
   z-index: 15;
 }
+
+.opacity {
+  opacity: 0.6;
+}
