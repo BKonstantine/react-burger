@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 import cn from "classnames";
 import {
@@ -7,8 +8,14 @@ import {
 import OrderIngredientsList from "../order-ingredients-list/order-ingredients-list";
 import style from "./order-feed-element.module.css";
 import useOrder from "../../hooks/useOrder";
+import { IOrder } from "../../services/types/data";
 
-export default function OrderFeedElement({ isFeedList, order }) {
+interface IOrderFeedElement {
+  isFeedList: boolean;
+  order: IOrder;
+}
+
+const OrderFeedElement: FC<IOrderFeedElement> = ({ isFeedList, order }) => {
   const { orderIngredientsList, orderPrice, orderStatus, GMT } =
     useOrder(order);
 
@@ -53,4 +60,6 @@ export default function OrderFeedElement({ isFeedList, order }) {
       </Link>
     </li>
   );
-}
+};
+
+export default OrderFeedElement;

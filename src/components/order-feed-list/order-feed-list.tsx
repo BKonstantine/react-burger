@@ -1,9 +1,21 @@
+import { FC } from "react";
 import cn from "classnames";
 import { v4 as uuidv4 } from "uuid";
 import OrderFeedElement from "../order-feed-element/order-feed-element";
 import style from "./order-feed-list.module.css";
+import { IOrder } from "../../services/types/data";
 
-export default function OrderFeedList({ listClassName, isFeedList, orders }) {
+interface IOrderFeedList {
+  listClassName?: { [className: string]: string };
+  isFeedList: boolean;
+  orders: Array<IOrder>;
+}
+
+const OrderFeedList: FC<IOrderFeedList> = ({
+  listClassName,
+  isFeedList,
+  orders,
+}) => {
   return (
     <ul className={cn(style.list, listClassName)}>
       {orders.map((order) => {
@@ -17,4 +29,6 @@ export default function OrderFeedList({ listClassName, isFeedList, orders }) {
       })}
     </ul>
   );
-}
+};
+
+export default OrderFeedList;
