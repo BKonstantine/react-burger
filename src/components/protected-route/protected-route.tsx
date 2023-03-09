@@ -1,7 +1,6 @@
 import { FC, ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
-// TODO: уточнить тип children
 interface IProtectedRoute {
   children: ReactNode;
   to: string;
