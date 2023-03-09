@@ -1,34 +1,35 @@
+import { ChangeEvent, FormEvent, FC } from "react";
 import {
   Input,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import {
   setResetPasswordFormValue,
   resetPassword,
 } from "../../services/actions/userAction";
 import style from "./reset-password-page.module.css";
 
-export default function ResetPasswordPage() {
+const ResetPasswordPage: FC = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const { resetPasswordForm } = useSelector((store) => store.userReducer);
 
-  function onFormChange(e) {
+  function onFormChange(e: ChangeEvent<HTMLInputElement>) {
     dispatch(setResetPasswordFormValue(e.target.name, e.target.value));
   }
 
-  function resetFormSubmit(e) {
+  function resetFormSubmit(e: FormEvent) {
     e.preventDefault();
     dispatch(resetPassword(resetPasswordForm, () => navigate("/login")));
   }
 
   return (
-    <>      
+    <>
       <main className={style.main}>
         <div className={style.container}>
           <p className="text text_type_main-medium mb-6">
@@ -62,4 +63,6 @@ export default function ResetPasswordPage() {
       </main>
     </>
   );
-}
+};
+
+export default ResetPasswordPage;
