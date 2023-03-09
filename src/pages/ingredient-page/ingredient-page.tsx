@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 import { useParams, useLocation } from "react-router-dom";
 import IngredientDetails from "../../components/ingredient-details/ingredient-details";
 import MainPage from "../main-page/main-page";
@@ -15,21 +15,24 @@ export default function IngredientPage() {
 
   const location = useLocation();
 
-  return location.state?.from === "/" ? (
-    <MainPage />
-  ) : (
-    currentIngredient && (
-      <>        
-        <main className={style.main}>
-          <div className={style.container}>
-            <IngredientDetails
-              ingredient={currentIngredient}
-              titleClassName={style.title}
-              subtitleClassName={style.subtitle}
-            />
-          </div>
-        </main>
-      </>
-    )
+  return (
+    <>
+      {location.state?.from === "/" ? (
+        <MainPage />
+      ) : (
+        currentIngredient && (
+          <>
+            <main className={style.main}>
+              <div className={style.container}>
+                <IngredientDetails
+                  titleClassName={style.title}
+                  subtitleClassName={style.subtitle}
+                />
+              </div>
+            </main>
+          </>
+        )
+      )}
+    </>
   );
 }
