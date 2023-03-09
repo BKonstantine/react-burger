@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, FC } from "react";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { useParams } from "react-router-dom";
 import {
   wsConnectionStart,
@@ -10,7 +10,11 @@ import BurgerDetails from "../../components/burger-details/burger-details";
 import style from "./order-page.module.css";
 import { WS_URL_ALL, WS_URL_PROFILE } from "../../utils/variables";
 
-export default function OrderPage({ isAuth }) {
+interface IOrderPage {
+  isAuth: boolean;
+}
+
+const OrderPage: FC<IOrderPage> = ({ isAuth }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,10 +32,14 @@ export default function OrderPage({ isAuth }) {
   const order = orders.find((item) => item._id === id);
 
   return (
-    order && (
-      <main className={style.main}>
-        <BurgerDetails titleClassName={style.title} />
-      </main>
-    )
+    <>
+      {order && (
+        <main className={style.main}>
+          <BurgerDetails titleClassName={style.title} />
+        </main>
+      )}
+    </>
   );
-}
+};
+
+export default OrderPage;
