@@ -42,6 +42,7 @@ export const socketMiddleware = (wsActions: IWebSocket): Middleware => {
             restParsedData.message === "jwt expired"
           ) {
             dispatch({ type: onError, payload: restParsedData.message });
+            socket && socket.close(1000, "CLOSE_NORMAL");
           } else {
             dispatch({ type: onMessage, payload: restParsedData });
           }
