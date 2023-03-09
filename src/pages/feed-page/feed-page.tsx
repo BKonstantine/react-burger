@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import OrderFeedList from "../../components/order-feed-list/order-feed-list";
 import OrderCounters from "../../components/order-counters/order-counters";
 import {
@@ -15,11 +15,16 @@ export default function FeedPage() {
     (store) => store.socketReducer
   );
 
+  interface IOrderStatusSort {
+    doneList: Array<number>;
+    workList: Array<number>;
+  }
+
   const { doneList, workList } = useMemo(() => {
     if (!orders.length) {
       return { doneList: [], workList: [] };
     }
-    return orders.reduce(
+    return orders.reduce<IOrderStatusSort>(
       (count, item) => {
         // eslint-disable-next-line default-case
         switch (item.status) {
