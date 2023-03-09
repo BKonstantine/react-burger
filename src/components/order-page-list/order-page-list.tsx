@@ -1,9 +1,15 @@
+import { FC } from "react";
 import OrderPageElement from "../order-page-element/order-page-element";
 import { v4 as uuidv4 } from "uuid";
 import style from "./order-page-list.module.css";
+import { IIngredient } from "../../services/types/data";
 
-export default function OrderPageList({ ingredients }) {
-  function counter(ingredient) {
+interface IOrderPageList {
+  ingredients: Array<IIngredient>;
+}
+
+const OrderPageList: FC<IOrderPageList> = ({ ingredients }) => {
+  function counter(ingredient: IIngredient) {
     let counter = 0;
     ingredients.forEach((item) => {
       if (item._id === ingredient._id) {
@@ -13,7 +19,7 @@ export default function OrderPageList({ ingredients }) {
     return counter;
   }
 
-  const filteredList = Array.from(new Set(ingredients));  
+  const filteredList = Array.from(new Set(ingredients));
 
   return (
     <div className={style.container}>
@@ -31,4 +37,6 @@ export default function OrderPageList({ ingredients }) {
       </ul>
     </div>
   );
-}
+};
+
+export default OrderPageList;

@@ -1,7 +1,14 @@
+import { FC } from "react";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./order-page-element.module.css";
+import { IIngredient } from "../../services/types/data";
 
-export default function OrderPageElement({ ingredient, counter }) { 
+interface IOrderPageElement {
+  ingredient: IIngredient;
+  counter: number;
+}
+
+const OrderPageElement: FC<IOrderPageElement> = ({ ingredient, counter }) => {
   return (
     <li className={style.container}>
       <div className={style.container__element}>
@@ -22,4 +29,6 @@ export default function OrderPageElement({ ingredient, counter }) {
       </div>
     </li>
   );
-}
+};
+
+export default OrderPageElement;
