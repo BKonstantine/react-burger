@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, FC } from "react";
 import { useDispatch, useSelector } from "../../services/hooks";
 import OrderFeedList from "../../components/order-feed-list/order-feed-list";
 import OrderCounters from "../../components/order-counters/order-counters";
@@ -9,7 +9,7 @@ import {
 import style from "./feed-page.module.css";
 import { WS_URL_ALL } from "../../utils/variables";
 
-export default function FeedPage() {
+const FeedPage: FC = () => {
   const dispatch = useDispatch();
   const { orders, total, totalToday } = useSelector(
     (store) => store.socketReducer
@@ -64,4 +64,6 @@ export default function FeedPage() {
       </main>
     )
   );
-}
+};
+
+export default FeedPage;

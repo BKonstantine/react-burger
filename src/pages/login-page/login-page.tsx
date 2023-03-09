@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent, FC } from "react";
 import {
   EmailInput,
   PasswordInput,
@@ -12,7 +12,7 @@ import {
 } from "../../services/actions/userAction";
 import style from "./login-page.module.css";
 
-export default function LoginPage() {
+const LoginPage: FC = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -66,4 +66,6 @@ export default function LoginPage() {
       </main>
     </>
   );
-}
+};
+
+export default LoginPage;

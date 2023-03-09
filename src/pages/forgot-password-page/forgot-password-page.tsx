@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent, FC } from "react";
 import {
   EmailInput,
   Button,
@@ -11,7 +11,7 @@ import {
 } from "../../services/actions/userAction";
 import style from "./forgot-password-page.module.css";
 
-export default function ForgotPasswordPage() {
+const ForgotPasswordPage: FC = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -57,4 +57,6 @@ export default function ForgotPasswordPage() {
       </main>
     </>
   );
-}
+};
+
+export default ForgotPasswordPage;
