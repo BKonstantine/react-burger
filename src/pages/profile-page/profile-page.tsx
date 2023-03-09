@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent, FC } from "react";
 import { NavLink, useNavigate, Outlet, useLocation } from "react-router-dom";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../services/hooks";
 import style from "./profile-page.module.css";
 import { getCookie } from "../../utils/cookie";
 import { logoutUser, changeUserData } from "../../services/actions/userAction";
@@ -32,11 +32,11 @@ export default function ProfilePage() {
     setUserDate({ name: user.name, email: user.email });
   }
 
-  function onFormChange(e) {
+  function onFormChange(e: ChangeEvent<HTMLInputElement>) {
     setUserDate({ ...userData, [e.target.name]: e.target.value });
   }
 
-  function profileFormSubmit(e) {
+  function profileFormSubmit(e: FormEvent) {
     e.preventDefault();
     dispatch(changeUserData(userData));
   }
@@ -69,6 +69,7 @@ export default function ProfilePage() {
                 История заказов
               </NavLink>
               <NavLink
+                to="/login"
                 onClick={() =>
                   dispatch(logoutUser(refreshToken, () => navigate("/login")))
                 }
@@ -108,6 +109,7 @@ export default function ProfilePage() {
                 onIconClick={() => setInput({ ...input, email: !input.email })}
               />
               <Input
+                onChange={(e) => e.target}
                 icon="EditIcon"
                 disabled
                 placeholder="Пароль"

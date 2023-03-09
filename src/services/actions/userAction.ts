@@ -246,7 +246,10 @@ export function loginUser(userDate: ILoginUserRequest, callback: () => void) {
 }
 
 /* thunk выхода пользователя из аккаунта */
-export function logoutUser(refreshToken: string, callback: () => void) {
+export function logoutUser(
+  refreshToken: string | undefined,
+  callback: () => void
+) {
   return function (dispatch: AppDispatch) {
     logoutUserRequest(refreshToken).then(() => {
       dispatch(userAccessDenied());

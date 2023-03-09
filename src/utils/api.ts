@@ -66,7 +66,7 @@ function loginUserRequest(userDate: ILoginUserRequest) {
 }
 
 // TODO: Выход пользователя из аккаунта
-function logoutUserRequest(refreshToken: string) {
+function logoutUserRequest(refreshToken: string | undefined) {
   return fetch(LOGOUT_URL, {
     method: "POST",
     headers: {
