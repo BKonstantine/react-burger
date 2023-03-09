@@ -102,7 +102,7 @@ function refreshTokenRequest(refreshToken: string | undefined) {
 }
 
 // TODO: Запросы на восстановление пароля
-function forgotPasswordRequest(email: string) {
+function forgotPasswordRequest(email: { email: string }) {
   return fetch(FORGOT_PASSWORD_URL, {
     method: "POST",
     headers: {

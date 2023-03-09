@@ -1,9 +1,10 @@
+import { ChangeEvent, FormEvent } from "react";
 import {
   EmailInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import {
   setForgotPasswordFormValue,
   forgotPassword,
@@ -17,11 +18,11 @@ export default function ForgotPasswordPage() {
 
   const { forgotPasswordForm } = useSelector((store) => store.userReducer);
 
-  function onFormChange(e) {
+  function onFormChange(e: ChangeEvent<HTMLInputElement>) {
     dispatch(setForgotPasswordFormValue(e.target.name, e.target.value));
   }
 
-  function forgotPasswordFormSubmit(e) {
+  function forgotPasswordFormSubmit(e: FormEvent) {
     e.preventDefault();
     dispatch(
       forgotPassword(forgotPasswordForm, () => navigate("/reset-password"))
@@ -29,7 +30,7 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <>      
+    <>
       <main className={style.main}>
         <div className={style.container}>
           <p className="text text_type_main-medium mb-6">

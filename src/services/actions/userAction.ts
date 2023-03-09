@@ -284,7 +284,7 @@ export function refreshUserToken(refreshToken: string | undefined) {
 }
 
 /* thunks восстановления пароля */
-export function forgotPassword(email: string, callback: () => void) {
+export function forgotPassword(email: { email: string }, callback: () => void) {
   return function (dispatch: AppDispatch) {
     dispatch(forgotPasswordFormSubmit());
     forgotPasswordRequest(email)
