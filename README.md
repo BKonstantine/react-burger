@@ -1,6 +1,6 @@
 # Stellar burgers
 
-[Stellar burgers](https://react-burger-inky.vercel.app/) - это десктопная версия сайта бургерной. Сайт позволяет лично сконструировать бургер и офрмить заказ.
+[Stellar burgers](https://react-burger-inky.vercel.app/) - это десктопная версия сайта бургерной. Сайт позволяет лично сконструировать бургер и оформить заказ.
 
 ## Технологии
 * TypeScript
